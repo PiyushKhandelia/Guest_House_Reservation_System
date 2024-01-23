@@ -1,7 +1,13 @@
-* {
+/*Body C*/
+body {
+    margin: 0px;
+}
+
+/*For whole Body*/
+.right_div {
     height: auto;
     width: auto;
     background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit.jpg");
     background-repeat: no-repeat;
-    border: none;
-}
+    background-size: cover;
+} 
