@@ -1,7 +1,56 @@
-/*Body Css*/
+/*Body C*/
 body {
     margin: 0px;
-    width: auto;
-    height: auto;
+    padding: 0px;
     background-color: rgb(226, 232, 239);
+}
+/*For full Header Div*/
+.header_div {
+    width: 100%;
+    height: 125px;
+    background-color:rgb(255, 255, 255);
+}
+/*Left Div for Left side display*/
+.left_div {
+    width: 30vw;
+    height: 80%;
+    background-image: url("https://www.bitmesra.ac.in/SiteLogo/BIT-Mesra.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 50px;
+}
+/*Right Div for Right side display*/
+.right_div {
+    width: 60vw;
+    height: 120px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 50px;
+    float: right;
+}
+.nav {
+    width: 40vw;
+    height: 100%;
+    float: right;
+}
+button {
+    width: 8vw;
+    display: inline-block;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font: small-caps bold 20px/35px Georgia, serif;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-right: 5px black solid; 
+    cursor: pointer;
+    transition: color .5s;
+}
+button:hover {
+    color: #262525;
 }
