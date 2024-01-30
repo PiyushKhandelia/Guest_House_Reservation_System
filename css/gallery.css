@@ -1,0 +1,114 @@
+body {
+    margin-bottom: 50px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.pop {
+    text-align: center;
+    font: small-caps bold 75px/100px Georgia, serif;
+    margin-top: -100px;
+}
+input {
+    display: none;
+}
+.container {
+    width: 100%;
+    text-align: center;
+}
+.top-content {
+    background-color: rgb(38, 37, 37);
+    width: 93%;
+    margin-left: 70px;
+    margin-bottom: 10px;
+    padding: 5px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+h3 {
+    height: 90%;
+    background-color: #c5d9d8;
+    font: small-caps bold 25px/40px Georgia, serif;
+    line-height: 0 50px;
+    color: black;
+    padding: 5px;
+    position: relative;
+    margin: 40px 0;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px whitesmoke;
+}
+label {
+    display: inline-block;
+    height: 100%;
+    margin: 0 20px;
+    padding: 5px;
+    line-height: 60px;
+    font: small-caps bold 20px/35px Georgia, serif;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: color .5s;
+}
+label:hover {
+  color: rgb(195, 190, 190);
+}
+.photo-gallery {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+.pic {
+    position: relative;
+    height: 230px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px black;
+    cursor: pointer;
+    transition: .5s;
+}
+.pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: .5s;
+}
+/*For Hover Effect on Image*/
+.pic::before {
+    content: "Guest House";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: whitesmoke;
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: -100px;
+    opacity: 0;
+    transition: .3s;
+    transition-delay: .2s;
+    z-index: 1;
+}
+.pic::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    height: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: .3s;
+}
+.pic:hover::after {
+    height: 100%;
+}
+.pic:hover::before {
+    margin-top: 0;
+    opacity: 1;
+}
