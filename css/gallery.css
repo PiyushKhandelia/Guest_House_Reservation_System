@@ -10,7 +10,6 @@ body {
 .pop {
     text-align: center;
     font: small-caps bold 75px/100px Georgia, serif;
-    margin-top: -100px;
 }
 input {
     display: none;
