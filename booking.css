@@ -1,0 +1,90 @@
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      background: url("https://images.collegedunia.com/public/image/2c370bbb644c60aebf4f58a2a11d5c00.png?tr=w-700,h-400,c-force");
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  
+  .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+      text-align: center;
+  }
+  
+  .availability {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .availability label {
+      font-weight: bold;
+  }
+  
+  .availability input[type="text"],
+  .availability input[type="date"],
+  .availability select {
+      padding: 8px;
+      margin: 5px;
+  }
+  
+  .availability button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .room-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .room-list li {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+  }
+  
+  .room-list li:last-child {
+      margin-bottom: 0;
+  }
+  
+  .booking-form {
+      margin-top: 20px;
+  }
+  
+  .booking-form label {
+      font-weight: bold;
+  }
+  
+  .booking-form input[type="text"],
+  .booking-form input[type="email"],
+  .booking-form input[type="tel"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+  }
+  
+  .booking-form button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
