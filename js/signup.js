@@ -32,21 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         // If validation passes, return true
         return true;
-
-        //Fetching & Saving data at javascript
-        if (usersA == email) {
-            if(passA == password) {
-                alert('Login Successful');
-            }
-            else {
-                alert('Password Mismatch');
-            }
-        }
-        else {
-            
-            alert('Login Fail');
-        }
-
     }
 
     function validateSignup() {
@@ -78,13 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         // If validation passes, return true
         return true;
-
-        //Fetching & Saving data at javascript
-        var i = 0;
-        for (i; i <= 100; i++) {
-            usersA = " " .concat(emails = document.querySelector('.signup-box .email').value);
-            passA = " " .concat(passwords = document.querySelector('.signup-box .password').value);
-        }
     }
 
     // Email validation function
@@ -97,14 +75,32 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.login-box .clkbtn').addEventListener('click', function() {
         if (validateLogin()) {
             // Perform login action here
-            alert('Login successful!');
+            //Fetching & Saving data at javascript
+            if (usersA == email) {
+                if(passA == password) {
+                    alert('Login Successful');
+                }
+                else {
+                    alert('Password Mismatch');
+                }
+            }
+            else {
+                
+                alert('Login Fail');
+            }
         }
     });
 
     document.querySelector('.signup-box .clkbtn').addEventListener('click', function() {
         if (validateSignup()) {
             // Perform signup action here
-            alert('Signup successful!');
+            //Fetching & Saving data at javascript
+        var i = 0;
+        for (i; i <= 100; i++) {
+            usersA = " " .concat(emails = document.querySelector('.signup-box .email').value);
+            passA = " " .concat(passwords = document.querySelector('.signup-box .password').value);
+            alert('SignIn Successful');
+        }
         }
     });
 });
