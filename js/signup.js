@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
+    //Declaring Global Variables
+    const usersA = [];
+    const passA = [];
+    //Local Variable
     let signup = document.querySelector(".signup");
     let login = document.querySelector(".login");
     let slider = document.querySelector(".slider");
@@ -28,37 +32,59 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         // If validation passes, return true
         return true;
+
+        //Fetching & Saving data at javascript
+        if (usersA == email) {
+            if(passA == password) {
+                alert('Login Successful');
+            }
+            else {
+                alert('Password Mismatch');
+            }
+        }
+        else {
+            
+            alert('Login Fail');
+        }
+
     }
 
     function validateSignup() {
         var name = document.querySelector('.signup-box .name').value;
-        var email = document.querySelector('.signup-box .email').value;
-        var password = document.querySelector('.signup-box .password').value;
-        var confirmPassword = document.querySelectorAll('.signup-box .password')[1].value;
+        var emails = document.querySelector('.signup-box .email').value;
+        var passwords = document.querySelector('.signup-box .password').value;
+        var confirmPassword = document.querySelectorAll('.signup-box .passwords')[1].value;
         // Basic validation example (you can extend it as needed)
         if (name.trim() === '') {
             alert('Please enter your name');
             return false;
         }
-        if (email.trim() === '') {
+        if (emails.trim() === '') {
             alert('Please enter your email');
             return false;
         }
         // Email validation
-        if (!isValidEmail(email)) {
+        if (!isValidEmail(emails)) {
             alert('Please enter a valid email address');
             return false;
         }
-        if (password.trim() === '') {
+        if (passwords.trim() === '') {
             alert('Please enter your password');
             return false;
         }
-        if (password !== confirmPassword) {
+        if (passwords !== confirmPassword) {
             alert('Passwords do not match');
             return false;
         }
         // If validation passes, return true
         return true;
+
+        //Fetching & Saving data at javascript
+        var i = 0;
+        for (i; i <= 100; i++) {
+            usersA = " " .concat(emails = document.querySelector('.signup-box .email').value);
+            passA = " " .concat(passwords = document.querySelector('.signup-box .password').value);
+        }
     }
 
     // Email validation function

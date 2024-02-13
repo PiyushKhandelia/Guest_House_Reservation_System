@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-database.js"></script>
+
     <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/booking.css">
     <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
     <title>Room Booking System</title>
@@ -45,7 +51,7 @@
                 <input type="email" id="email" required>
                 <label for="phone">Phone:</label>
                 <input type="tel" id="phone" required>
-                <button type="submit">Book Now</button>
+                <button onclick="booknow()" type="submit">Book Now</button>
             </form>
         </div>
     </div>
