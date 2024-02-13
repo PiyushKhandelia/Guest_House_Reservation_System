@@ -18,18 +18,3 @@
               document.getElementById("booking-form").style.display = "none"; // Hide booking form
           }
       }
-
-      function booknow() {
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "https://guest-house-reservation-system-default-rtdb.firebaseio.com",
-            projectId: "guest-house-reservation-system",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "196552872269",
-            appId: "YOUR_APP_ID"
-          };
-          
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-      }
