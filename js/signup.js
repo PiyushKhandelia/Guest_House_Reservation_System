@@ -77,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
             function submitform(e) {
                 e.preventDefault();
 
-                var name = getElementVal('name');
-                var users = getElementVal('uname');
-                var passwords = getElementVal('pass');
+                var name = getElementVal('name ele');
+                var users = getElementVal('email ele');
+                var passwords = getElementVal('password ele');
 
                 console.log(name, users, passwords);
             }
