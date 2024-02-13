@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     //Declaring Global Variables
-    var usersA = [];
-    var passA = [];
-    var emails = [];
-    var passwords = [];
+    const usersA = [];
+    const passA = [];
+    const emails = [];
+    const passwords = [];
     //Local Variable
     let signup = document.querySelector(".signup");
     let login = document.querySelector(".login");
