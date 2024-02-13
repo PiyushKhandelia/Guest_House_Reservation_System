@@ -97,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function() {
             //Fetching & Saving data at javascript
             usersA = " " .concat(emails = document.querySelector('.signup-box .email').value);
             passA = " " .concat(passwords = document.querySelector('.signup-box .password').value);
-            alert('SignIn Successful');
+            login.addEventListener("click", () => {
+                slider.classList.remove("moveslider");
+                formSection.classList.remove("form-section-move");
+            });
+            alert('Sign-In Successful');
         }
     });
 });
