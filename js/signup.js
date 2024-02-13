@@ -14,22 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
         formSection.classList.remove("form-section-move");
     });
 
-    function validateLogin() {
-        var email = document.querySelector('.login-box .email').value;
-        var password = document.querySelector('.login-box .password').value;
-        // Basic validation example (you can extend it as needed)
-        if (email.trim() === '') {
-            alert('Please enter your email');
-            return false;
-        }
-        if (password.trim() === '') {
-            alert('Please enter your password');
-            return false;
-        }
-        // If validation passes, return true
-        return true;
-    }
-
     function validateSignup() {
         var name = document.querySelector('.signup-box .name').value;
         var email = document.querySelector('.signup-box .email').value;
@@ -68,15 +52,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Adding event listeners for form submission
-    document.querySelector('.login-box .clkbtn').addEventListener('click', function() {
-        if (validateLogin()) {
-            // Perform login action here
-            alert('Login successful!');
-        }
-    });
 
     document.querySelector('.signup-box .clkbtn').addEventListener('click', function() {
         if (validateSignup()) {
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyACLgTzxec6kUV1T__xQsOk_sL3SSbW81U",
+                authDomain: "guest-house-booking-4e024.firebaseapp.com",
+                projectId: "guest-house-booking-4e024",
+                storageBucket: "guest-house-booking-4e024.appspot.com",
+                messagingSenderId: "613303744507",
+                appId: "1:613303744507:web:5bb7c28f6bf02947e8bd5e"
+            };
+
+            //initalize firebase
+            firebase.initializeApp(firebaseConfig);
+            
+            //reference your database
+            var GHBDB = firebase.database().ref('GHB');
+
+            document.getElementById('signup-box').addEventListener("submit", submitform);
+
+            function submitform(e) {
+                e.preventDefault();
+
+                var name = getElementVal('name');
+                var users = getElementVal('uname');
+                var passwords = getElementVal('pass');
+
+                console.log(name, users, passwords);
+            }
+
+            const getElementVal = (id) => {
+                return document.getElementById(id).value;
+            }
             // Perform signup action here
             alert('Signup successful!');
         }
