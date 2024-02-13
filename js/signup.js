@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Email validation function
-    function isValidEmail(email) {
+    function isValidEmail(emails) {
         var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
+        return regex.test(emails);
     }
 
     // Adding event listeners for form submission
@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", function() {
         if (validateLogin()) {
             // Perform login action here
             //Fetching & Saving data at javascript
-            if (usersA == email) {
-                if(passA == password) {
+            if (usersA == emails) {
+                if(passA == passwords) {
                     alert('Login Successful');
                 }
                 else {
@@ -95,12 +95,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (validateSignup()) {
             // Perform signup action here
             //Fetching & Saving data at javascript
-        var i = 0;
-        for (i; i <= 100; i++) {
             usersA = " " .concat(emails = document.querySelector('.signup-box .email').value);
             passA = " " .concat(passwords = document.querySelector('.signup-box .password').value);
             alert('SignIn Successful');
-        }
         }
     });
 });
