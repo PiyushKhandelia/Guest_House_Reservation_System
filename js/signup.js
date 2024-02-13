@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firebase.initializeApp(firebaseConfig);
             
             //reference your database
-            var guesthousebookingDB = firebase.database().ref('guest-house-booking');
+            var bookingDB = firebase.database().ref('booking');
 
             document.getElementById('signup-box').addEventListener("submit", submitform);
 
