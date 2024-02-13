@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             const saveMessage = (name, users, passwords) => {
-                var newbooking = bookingDB.push();
+                var newGuestHouseBooking = GuestHouseBookingDB.push();
 
                 newbooking.set({
                     name: name,
