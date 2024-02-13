@@ -30,8 +30,6 @@
         password: document.getElementById("password").value
 
     });
-
         alert("Login Successful");
-
   })
 */
