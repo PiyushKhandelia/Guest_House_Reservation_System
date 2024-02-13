@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     //Declaring Global Variables
-    const usersA = [];
-    const passA = [];
+    var usersA = [];
+    var passA = [];
+    var emails = [];
+    var passwords = [];
     //Local Variable
     let signup = document.querySelector(".signup");
     let login = document.querySelector(".login");
@@ -36,8 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function validateSignup() {
         var name = document.querySelector('.signup-box .name').value;
-        var emails = document.querySelector('.signup-box .email').value;
-        var passwords = document.querySelector('.signup-box .password').value;
+        emails = document.querySelector('.signup-box .email').value;
+        passwords = document.querySelector('.signup-box .password').value;
         var confirmPassword = document.querySelectorAll('.signup-box .passwords')[1].value;
         // Basic validation example (you can extend it as needed)
         if (name.trim() === '') {
