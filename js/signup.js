@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const firebaseConfig = {
                 apiKey: "AIzaSyACLgTzxec6kUV1T__xQsOk_sL3SSbW81U",
                 authDomain: "guest-house-booking-4e024.firebaseapp.com",
+                databaseURl: "https://guest-house-booking-4e024-default-rtdb.firebaseio.com/",
                 projectId: "guest-house-booking-4e024",
                 storageBucket: "guest-house-booking-4e024.appspot.com",
                 messagingSenderId: "613303744507",
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firebase.initializeApp(firebaseConfig);
             
             //reference your database
-            var GHBDB = firebase.database().ref('GHB');
+            var guesthousebookingDB = firebase.database().ref('guest-house-booking');
 
             document.getElementById('signup-box').addEventListener("submit", submitform);
 
