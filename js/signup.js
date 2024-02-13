@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             firebase.initializeApp(firebaseConfig);
             
             //reference your database
-            var bookingDB = firebase.database().ref('booking');
+            var bookingDB = firebase.database().ref("booking");
 
             document.getElementById('signup-box').addEventListener("submit", submitform);
 
@@ -82,7 +82,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 var passwords = getElementVal('password ele');
 
                 console.log(name, users, passwords);
+
+                saveMessage(name, users, passwords);
             }
+            
+            const saveMessage = (name, users, passwords) => {
+                var newbooking = bookingDB.push();
+
+                newbooking.set({
+                    name: name,
+                    username: users,
+                    password: passwords,
+                })
+            };
 
             const getElementVal = (id) => {
                 return document.getElementById(id).value;
