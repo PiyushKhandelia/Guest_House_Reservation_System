@@ -1,0 +1,70 @@
+.contact { 
+				position: absolute;
+				top: 20%;
+				left: 20%;
+	            display: flex; 
+				padding: 20px;
+	            width: 80%; 
+	            max-width: 1500px; 
+	            background-color: #fff;
+	            overflow: hidden;
+	            flex-wrap: wrap; 
+            } 
+            .detail { 
+	            flex: 1; 
+	            padding: 20px; 
+				font-size: 22px;
+            } 
+			.contact .details {
+				text-align: center;
+			}
+			.mail {
+				color: #000;
+				text-decoration: none;
+			}
+            .detail label { 
+	            display: block; 
+	            margin-bottom: 8px; 
+            } 
+			.detail input {
+				height: 40px;
+			}
+            .detail input, 
+            .detail textarea { 
+	            width: 100%;
+	            padding: 8px; 
+	            margin-bottom: 16px; 
+	            box-sizing: border-box; 
+	            border-radius: 5px; 
+	            background-color: #dcdce1; 
+	            border: none; 
+            } 
+            .detail textarea { 
+	            resize: vertical; 
+            } 
+            .detail { 
+	            margin-bottom: 16px; 
+            } 
+            .detail label { 
+	            margin-right: 16px; 
+            } 
+            .map-div { 
+	            flex: 1;
+            } 
+            .submitBTN { 
+	            width: 100%; 
+	            padding: 8px; 
+	            margin-bottom: 12px; 
+	            box-sizing: border-box; 
+	            border-radius: 5px; 
+	            background-color: #000; 
+	            color: #fff; 
+	            font-size: 22px; 
+	            font-weight: 700;
+            } 
+            .submitBTN:hover { 
+	            background-color: rgb(52, 98, 58); 
+            } 
+            .map-div iframe { 
+	            border: 0;
+            }
