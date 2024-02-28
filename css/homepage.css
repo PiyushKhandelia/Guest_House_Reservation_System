@@ -6,9 +6,12 @@
             }
             /*For full Header Div*/
             .header_div {
+                position: fixed;
+                top: 0;
                 width: 100%;
                 height: 125px;
                 background-color:rgb(255, 255, 255);
+                z-index: 9999;
             }
             /*Left Div for Left side display*/
             .left_div {

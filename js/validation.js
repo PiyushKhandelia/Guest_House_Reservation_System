@@ -1,3 +1,12 @@
+function togglePassword(inputId) {
+    var x = document.getElementById(inputId);
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     let signup = document.querySelector(".signup");
     let login = document.querySelector(".login");
@@ -19,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var email = document.querySelector('.signup-box .email').value;
         var password = document.querySelector('.signup-box .password').value;
         var confirmPassword = document.querySelectorAll('.signup-box .password')[1].value;
+
         // Basic validation example (you can extend it as needed)
         if (name.trim() === '') {
             alert('Please enter your name');
@@ -41,6 +51,11 @@ document.addEventListener("DOMContentLoaded", function() {
             alert('Passwords do not match');
             return false;
         }
+        // Password validation
+        if (!validatePassword(password)) {
+            alert('Password must be between 8 and 16 characters and contain at least one uppercase letter, one lowercase letter, one number, and one special character');
+            return false;
+        }
         // If validation passes, return true
         return true;
     }
@@ -51,56 +66,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return regex.test(email);
     }
 
-    // Adding event listeners for form submission
+    // Password validation function
+    function validatePassword(password) {
+        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-\+={[}\]|:;"'<,>.?\/]).{8,16}$/;
+        return regex.test(password);
+    }
 
+    // Adding event listeners for form submission
     document.querySelector('.signup-box .clkbtn').addEventListener('click', function() {
         if (validateSignup()) {
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyACLgTzxec6kUV1T__xQsOk_sL3SSbW81U",
-                authDomain: "guest-house-booking-4e024.firebaseapp.com",
-                databaseURl: "https://guest-house-booking-4e024-default-rtdb.firebaseio.com/",
-                projectId: "guest-house-booking-4e024",
-                storageBucket: "guest-house-booking-4e024.appspot.com",
-                messagingSenderId: "613303744507",
-                appId: "1:613303744507:web:5bb7c28f6bf02947e8bd5e"
-            };
-
-            //initalize firebase
-            firebase.initializeApp(firebaseConfig);
-            
-            //reference your database
-            var GuestHouseBookingDB = firebase.database().ref("GuestHouseBooking");
-
-            document.getElementById('signup-box').addEventListener("submit", submitform);
-
-            function submitform(e) {
-                e.preventDefault();
-
-                var name = getElementVal('name ele');
-                var users = getElementVal('email ele');
-                var passwords = getElementVal('password ele');
-
-                console.log(name, users, passwords);
-
-                saveMessage(name, users, passwords);
-            }
-            
-            const saveMessage = (name, users, passwords) => {
-                var newGuestHouseBooking = GuestHouseBookingDB.push();
-
-                newbooking.set({
-                    name: name,
-                    username: users,
-                    password: passwords,
-                })
-            };
-
-            const getElementVal = (id) => {
-                return document.getElementById(id).value;
-            }
             // Perform signup action here
-            alert('Signup successful!');
+            //alert('Signup successful!');
         }
     });
 });
