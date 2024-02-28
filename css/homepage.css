@@ -37,7 +37,6 @@
                 float: right;
             }
             
-
             .nav {
                 width: 40vw;
                 height: 100%;
@@ -64,150 +63,41 @@
                 height: auto;
                 display: flex;
                 justify-content: center;
+                margin-top: 100px;
             }
             .seperator button {
-                flex: 1;
                 width: 500px;
                 display: inline-block;
                 border: none;
                 height: 500px;
                 margin: 225px;
                 background-color: whitesmoke;
+                padding: 0;
             }
             .IGH, .OGH {
                 width: 100%;
                 height: 100%;
-                opacity: 1;
-                font-size: 30px;
-                font-weight: bold;
-                top: 50%;
-                left: 50%;
-                color: red;
                 background-repeat: no-repeat;
                 background-size: cover;
-            }
-            .IGH {
+            }.IGH {
                 background-image: url("https://lh3.googleusercontent.com/p/AF1QipP1IxHqmWpxWmgtFss0A8gUONZOhxWyZHr8qNV2=s680-w680-h510");
-            }
+                color: rgb(255, 255, 255);
+                font: small-caps bold 30px/50px Georgia, serif;
+                text-align: center; /* Align text horizontally at the center */
+                display: flex; /* Use flexbox */
+                justify-content: center; /* Align horizontally at the center */
+                align-items: center; /* Align vertically at the center */
+            }                     
             .OGH {
                 background-image: url("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQKwRJHpbr2hv4cV1qMvQGEZEk2vnvEK6DUasJFhH7XfMsY-r7J");
+                color: rgb(255, 255, 255);
+                font: small-caps bold 30px/50px Georgia, serif;
+                text-align: center; /* Align text horizontally at the center */
+                display: flex; /* Use flexbox */
+                justify-content: center; /* Align horizontally at the center */
+                align-items: center; /* Align vertically at the center */
             }
             .IGH:hover, .OGH:hover {
                 opacity: 0.5;
                 background-color: whitesmoke;
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            /*
-            
-            
-            .nav {
-                width: 40vw;
-                height: 100%;
-                float: right;
-            }
-            .nav button {
-                width: 8vw;
-                display: inline-block;
-                height: 90%;
-                margin-top: auto;
-                margin-bottom: auto;
-                font: small-caps bold 20px/35px Georgia, serif;
-                background-color: rgb(255, 255, 255);
-                border: none;
-                border-right: 5px black solid; 
-                cursor: pointer;
-                transition: color .5s;
-            }
-            .nav button:hover {
-                color: #262525;
-            }
-            .seperator {
-                width: 100%;
-                height: 85%;
-            }
-            .seperator button {
-                width: 45vw;
-                display: inline-block;
-                height: 90%;
-                margin-top: auto;
-                margin-bottom: auto;
-                border: none;
-            }
-
-            */
-
-
-
-            /*
-            .seperator img:hover {
-                text-align: center;
-                top: 50%;
-                left: 50%;
-                opacity: 0.5;
-                transition: .3s;
-            }
-
-            
-            .IGH, .OGH {
-                top: 50%;
-                left: 50%;
-                color: red;
-                font-size: 30px;
-                font-weight: bold;
-            }
-            .IGH {
-                content: "IGH";
-            }
-            .OGH {
-                content: "OGH";
-            }
-
-
-            /*
-
-.seperator.IGH {
-                content: "IGH";
-            }
-
-
-            .pic::before {
-                content: "Krishna Tourisms";
-               
-                transform: translate(-50%, -50%);
-               
-                width: 100%;
-                margin-top: -100px;
-                opacity: 0;
-                transition: .3s;
-                transition-delay: .2s;
-                z-index: 1;
-            }
-            .pic::after {
-                content: "";
-                position: absolute;
-                width: 100%;
-                bottom: 0;
-                left: 0;
-                border-radius: 10px;
-                height: 0;
-                background-color: rgba(0, 0, 0, .4);
-                transition: .3s;
-            }
-            .pic:hover::after {
-                height: 100%;
-            }
-            .pic:hover::before {
-                margin-top: 0;
-                opacity: 1;
-            }
-
-
-*/
