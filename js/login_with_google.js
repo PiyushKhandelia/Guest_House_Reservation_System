@@ -23,13 +23,13 @@ Login.addEventListener("click", function (event) {
     event.preventDefault()
     
     //inputs
-    const username = document.getElementById('loginUsername').value;
+    const email = document.getElementById('loginemail').value;
     const password = document.getElementById('loginPassword').value;
 
-    signInWithEmailAndPassword(auth, username, password)
+    signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed up 
-            const useranme = userCredential.username;
+            const email = userCredential.email;
             alert("LogIn Successful");
             window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
         })

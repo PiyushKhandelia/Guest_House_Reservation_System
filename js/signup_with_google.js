@@ -16,18 +16,18 @@
         auth.languageCode = 'en';
         const googleProvider = new GoogleAuthProvider();
 
-        // username/Password Sign-up
-        const usernameSignUp = document.getElementById("google-signup-btn");
-        usernameSignUp.addEventListener("click", function (event) {
+        // email/Password Sign-up
+        const emailSignUp = document.getElementById("google-signup-btn");
+        emailSignUp.addEventListener("click", function (event) {
             event.preventDefault()
             alert("Pleast wait for some time. It may take upto 1 minutes.");
             //inputs
-            const username = document.getElementById('signupusername').value;
+            const email = document.getElementById('signupemail').value;
             const password = document.getElementById('signupPassword').value;
-            createUserWithEmailAndPassword(auth, username, password)
+            createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed up 
-                    const username = userCredential.user;
+                    const email = userCredential.user;
                     alert("SignUp Successful");
                 })
                 .catch((error) => {
