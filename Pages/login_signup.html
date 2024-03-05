@@ -1,8 +1,8 @@
 <html>
     <head>
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
-        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/login_signup.css">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/login_signup.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/signup.html"><button>Login/SignUp</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Login/SignUp</button></a>
                 </div>
             </div>
         </div>
@@ -33,12 +33,13 @@
                 <div class="form-section">
                     <!-- login form -->
                     <div class="login-box">
-                        <input type="email" class="email ele" placeholder="Username">
+                        <input type="username" class="username ele" id="loginUsername" placeholder="Username">
                         <div class="password-wrapper">
                             <input type="password" class="password ele" id="loginPassword" placeholder="Password">
                             <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('loginPassword')"></i>
                         </div>
-                        <button class="clkbtn">Login</button>
+                        <button class="clkbtn" id="google-login-btn">Login</button>
+                        <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/adminLogin.html"><button class="clkbtn">Admin Login</button></a>
                         <div class="input">
                             <button id="google-login-btns" class="google-button">
                             <i class="fab fa-google"></i>Login with Google
@@ -48,7 +49,7 @@
                     <!-- signup form -->
                     <div class="signup-box">
                         <input type="text" class="name ele" placeholder="Name">
-                        <input type="email" class="email ele" id="signupEmail" placeholder="Username">
+                        <input type="username" class="username ele" id="signupusername" placeholder="Username">
                         <div class="password-wrapper">
                             <input type="password" class="password ele" id="signupPassword" placeholder="Password">
                             <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('signupPassword')"></i>
@@ -57,19 +58,13 @@
                             <input type="password" class="password ele" id="confirmPassword" placeholder="Confirm Password">
                             <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('confirmPassword')"></i>
                         </div>
-                        <button class="clkbtn small-btn" style="height: 300px; width: 200px;background-color:aqua">SIGN UP</button>
-                        <div class="input">
-                            <button id="google-login-btn" class="google-button">
-                            <i class="fab fa-google"></i>Signup with Google
-                          </button>
-                        </div>
+                        <button class="clkbtn small-btn" id="google-signup-btn">SIGN UP</button>
                     </div>
-    
                 </div>
             </div>
         </div>
     </body>
     <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/validation.js"></script>
-    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/login_with_google.js" defer type="module"></script>
     <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/signup_with_google.js" defer type="module"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/login_with_google.js" defer type="module"></script>
 </html>
