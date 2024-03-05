@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function validateSignup() {
         var name = document.querySelector('.signup-box .name').value;
-        var username = document.querySelector('.signup-box .username').value;
+        var email = document.querySelector('.signup-box .email').value;
         var password = document.querySelector('.signup-box .password').value;
         var confirmPassword = document.querySelectorAll('.signup-box .password')[1].value;
 
@@ -34,13 +34,13 @@ document.addEventListener("DOMContentLoaded", function() {
             alert('Please enter your name');
             return false;
         }
-        if (username.trim() === '') {
-            alert('Please enter your username');
+        if (email.trim() === '') {
+            alert('Please enter your email');
             return false;
         }
-        // Username validation
-        if (!isValidUsername(username)) {
-            alert('Username must be at least 5 characters long');
+        // Email validation
+        if (!isValidEmail(email)) {
+            alert('Please enter a valid email address');
             return false;
         }
         if (password.trim() === '') {
@@ -60,9 +60,10 @@ document.addEventListener("DOMContentLoaded", function() {
         return true;
     }
 
-    // Username validation function
-    function isValidUsername(username) {
-        return username.length >= 5;
+    // Email validation function
+    function isValidEmail(email) {
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     }
 
     // Password validation function
