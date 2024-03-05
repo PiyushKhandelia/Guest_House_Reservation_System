@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,7 +18,7 @@ const auth = getAuth(app);
 auth.languageCode = 'en'
 const provider = new GoogleAuthProvider();
 
-const Login = document.getElementById("google-login-btn");
+const Login = document.getElementById("login-btn");
 Login.addEventListener("click", function (event) {
     event.preventDefault()
     
@@ -39,7 +39,7 @@ Login.addEventListener("click", function (event) {
         });
 })
 
-const googleLogin = document.getElementById("google-login-btns");
+const googleLogin = document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function() {
     signInWithPopup(auth, provider)
         .then((result) => {
