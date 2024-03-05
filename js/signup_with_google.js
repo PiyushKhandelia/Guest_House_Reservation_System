@@ -24,10 +24,10 @@
             //inputs
             const username = document.getElementById('signupusername').value;
             const password = document.getElementById('signupPassword').value;
-            createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, username, password)
                 .then((userCredential) => {
                     // Signed up 
-                    const user = userCredential.user;
+                    const username = userCredential.user;
                     alert("SignUp Successful");
                 })
                 .catch((error) => {
