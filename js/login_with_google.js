@@ -26,10 +26,10 @@ Login.addEventListener("click", function (event) {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
 
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             // Signed up 
-            const user = userCredential.user;
+            const useranme = userCredential.username;
             alert("LogIn Successful");
             window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
         })
