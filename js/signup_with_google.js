@@ -28,6 +28,7 @@
                 .then((userCredential) => {
                     // Signed up 
                     const email = userCredential.user;
+                    console.log("username: " + email + "& password: " + password);
                     alert("SignUp Successful");
                 })
                 .catch((error) => {
