@@ -1,90 +1,103 @@
-  body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-      background: url("https://images.collegedunia.com/public/image/2c370bbb644c60aebf4f58a2a11d5c00.png?tr=w-700,h-400,c-force");
-      background-repeat: no-repeat;
-      background-size: cover;
-  }
-  
-  .container {
-      max-width: 800px;
-      margin: 20px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-      text-align: center;
-  }
-  
-  .availability {
-      text-align: center;
-      margin-bottom: 20px;
-  }
-  
-  .availability label {
-      font-weight: bold;
-  }
-  
-  .availability input[type="text"],
-  .availability input[type="date"],
-  .availability select {
-      padding: 8px;
-      margin: 5px;
-  }
-  
-  .availability button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  }
-  
-  .room-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-  }
-  
-  .room-list li {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      padding: 10px;
-      background-color: #f9f9f9;
-  }
-  
-  .room-list li:last-child {
-      margin-bottom: 0;
-  }
-  
-  .booking-form {
-      margin-top: 20px;
-  }
-  
-  .booking-form label {
-      font-weight: bold;
-  }
-  
-  .booking-form input[type="text"],
-  .booking-form input[type="email"],
-  .booking-form input[type="tel"] {
-      width: 100%;
-      padding: 8px;
-      margin: 5px 0;
-  }
-  
-  .booking-form button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-  }
+.booking_form,
+.rules_section {
+    background-color: rgb(255, 255, 255); 
+    width: 75%;
+    margin: 150px auto; /* Center the form horizontally */
+    padding: 20px; /* Add some padding for better appearance */
+    color: #000;
+    border-radius: 10px; /* Optional: Add rounded corners to the for    m */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for better appearance */
+    font-size: x-large; 
+}
+
+.booking_form label {
+    font-weight: bold;
+}
+
+.booking_form input[type="text"],
+.booking_form input[type="email"],
+.booking_form input[type="tel"],
+.booking_form input[type="date"],
+.booking_form input[type="time"],
+.booking_form input[type="number"],
+.booking_form input[type="file"],
+.booking_form textarea,
+.booking_form select { /* Include select element */
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.booking_form button,
+.alert {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.booking_form button:hover, 
+.alert:hover {
+    background-color: #ff6666;
+}
+
+.heading {
+    text-align: center;
+    font: small-caps bold 40px/70px Georgia, serif;
+    margin: -10px;    
+}
+
+.guest_details {
+    display: none;
+}
+
+.capt {
+    width: calc(98% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.refresh {
+    width: calc(10% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+}
+
+.booking_form select {
+    width: calc(100%);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+sup {
+    color: red;
+    font-size: x-large;
+}
+
+.rules_section p{
+font: small-caps bold 25px/40px Georgia, serif;
+}
+
+.rules_section ul {
+    text-align: left;
+    padding-left: 50px;
+}

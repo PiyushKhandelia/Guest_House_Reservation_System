@@ -1,5 +1,7 @@
+/* Your existing styles */
 body {
     overflow-x: hidden;
+    margin: 0; /* Add this to reset default margin */
 }
 #background {
     background-image: url("https://lh3.googleusercontent.com/p/AF1QipP1IxHqmWpxWmgtFss0A8gUONZOhxWyZHr8qNV2=s680-w680-h510");
@@ -14,7 +16,6 @@ body {
 }
 #content {
     position: absolute;
-    padding-bottom: 250px; /* Height of the footer */
     top: 50%;
     opacity: 0.9;
     background-color: rgb(226, 232, 239);
@@ -48,20 +49,6 @@ body {
     margin: 0 auto;
     border-radius: 5px;
 }
-/*footer*/
-.footer { 
-    background-color: #000;
-    position: fixed;
-    height: 250px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex; 
-    padding: 20px;
-    width: auto; 
-    /*z-index: -1;*/
-    color: #fff;
-} 
 .detail {
     text-align: center; 
     flex: 1; 
@@ -90,4 +77,29 @@ body {
 }
 .map-div iframe { 
     border: 0;
+}
+/* Adjusted footer styles */
+.footer {
+    background-color: #000;
+    color: #fff;
+    width: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex; 
+    margin-top: 25px;
+}
+.book {
+margin: 0 auto;
+font: small-caps bold 20px/35px Georgia, serif;
+width: 45%;
+padding: 12px;
+background-color: #ff4d4d;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+.book:hover {
+    background-color: #ff6666;
 }

@@ -4,12 +4,12 @@ import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword } from "https:/
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBLHdQpcdEPBxHG8_pI49ctq7FfEDK9KmM",
-    authDomain: "guesthousereservationsystem.firebaseapp.com",
-    projectId: "guesthousereservationsystem",
-    storageBucket: "guesthousereservationsystem.appspot.com",
-    messagingSenderId: "324476262968",
-    appId: "1:324476262968:web:887539776c70257702e4cd"
+  apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
+  authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+  projectId: "guesthousebookingsystem-675c6",
+  storageBucket: "guesthousebookingsystem-675c6.appspot.com",
+  messagingSenderId: "979837493640",
+  appId: "1:979837493640:web:56a264b9fc7e8d94c31a3d"
 };
 
 // Initialize Firebase
