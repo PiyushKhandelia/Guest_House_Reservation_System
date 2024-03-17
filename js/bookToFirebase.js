@@ -1,13 +1,13 @@
-
             // Your web app's Firebase configuration
             const firebaseConfig = {
                 apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
                 authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+                databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
                 projectId: "guesthousebookingsystem-675c6",
                 storageBucket: "guesthousebookingsystem-675c6.appspot.com",
                 messagingSenderId: "979837493640",
                 appId: "1:979837493640:web:56a264b9fc7e8d94c31a3d"
-            };
+              };
 
             firebase.initializeApp(firebaseConfig);
             const database = firebase.database()
