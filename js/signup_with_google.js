@@ -1,16 +1,17 @@
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
             authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+            databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
             projectId: "guesthousebookingsystem-675c6",
             storageBucket: "guesthousebookingsystem-675c6.appspot.com",
             messagingSenderId: "979837493640",
-            appId: "1:979837493640:web:56a264b9fc7e8d94c31a3d"
+            appId: "1:979837493640:web:64745b6eefd825d4c31a3d"
         };
-        
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);

@@ -3,121 +3,11 @@
     <head>
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
-        
-
-        <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
-
-
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/booking.css">
         <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Booking</title>
-        <style>
-            .booking_form,
-            .rules_section {
-                background-color: rgb(255, 255, 255); 
-                width: 75%;
-                margin: 150px auto; /* Center the form horizontally */
-                padding: 20px; /* Add some padding for better appearance */
-                color: #000;
-                border-radius: 10px; /* Optional: Add rounded corners to the for    m */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for better appearance */
-                font-size: x-large; 
-            }
-        
-            .booking_form label {
-                font-weight: bold;
-            }
-
-            .booking_form input[type="text"],
-            .booking_form input[type="email"],
-            .booking_form input[type="tel"],
-            .booking_form input[type="date"],
-            .booking_form input[type="time"],
-            .booking_form input[type="number"],
-            .booking_form input[type="file"],
-            .booking_form textarea,
-            .booking_form select { /* Include select element */
-                width: calc(100% - 20px);
-                padding: 10px;
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: large;
-            }
-
-            .booking_form button,
-            .alert {
-                display: block;
-                margin: 0 auto;
-                margin-top: 20px;
-                font: small-caps bold 20px/35px Georgia, serif;
-                width: 45%;
-                padding: 12px;
-                background-color: #ff4d4d;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            .booking_form button:hover, 
-            .alert:hover {
-                background-color: #ff6666;
-            }
-
-            .heading {
-                text-align: center;
-                font: small-caps bold 40px/70px Georgia, serif;
-                margin: -10px;    
-            }
-
-            .guest_details {
-                display: none;
-            }
-            
-            .capt {
-                width: calc(98% - 20px);
-                padding: 10px;
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: large;
-            }
-
-            .refresh {
-                width: calc(10% - 20px);
-                padding: 10px;
-                margin-bottom: 15px;
-                height: auto;
-                background-color: transparent;
-                border: none;
-            }
-
-            .booking_form select {
-                width: calc(100%);
-                padding: 10px;
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                font-size: large;
-            }
-            
-            sup {
-                color: red;
-                font-size: x-large;
-            }
-
-            .rules_section p{
-            font: small-caps bold 25px/40px Georgia, serif;
-            }
-
-            .rules_section ul {
-                text-align: left;
-                padding-left: 50px;
-            }
-        </style>
     </head>
     <body>
         <!-- Rules section -->
@@ -148,7 +38,7 @@
         <!-- Booking form section -->
         <div id="booking_form" class="booking_form" style="display: none;">
             <p class="heading">Book Now</p>
-            <form id="bookingForm" class="bookingForm">
+            <form id="bookingForm" class="bookingForm" onsubmit="book_now(event)">
                 <!-- Existing form fields -->
                 <label for="name">Name:<sup>*</sup></label><br>
                 <input type="text" id="name" name="name" ><br>
@@ -157,13 +47,13 @@
                 <input type="email" id="email" name="email" ><br>
 
                 <label for="email">Institute Email:</label><br>
-                <input type="email" id="inst_email" name="email"><br>
+                <input type="email" id="inst_email" name="inst_email"><br>
 
                 <label for="phone">Phone:<sup>*</sup></label><br>
                 <input type="tel" id="phone" name="phone" placeholder="12345 67890" ><br>
 
                 <label for="phone">Alternate No.:</label><br>
-                <input type="tel" id="phone" name="phone" placeholder="12345 67890"><br>
+                <input type="tel" id="alt_phone" name="alt_phone" placeholder="12345 67890"><br>
 
                 <label for="category">Category:<sup>*</sup></label><br>
                 <select id="category" name="category" >
@@ -245,287 +135,173 @@
                 <button onclick="book_now()">Book Now</button>
             </form>
         </div>
-    </body>
-    <script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/booking.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
+        <!--<script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/bookToFirebase.js"></script>-->
+        <script>
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+            import { database } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"
 
-        function showBookingForm() {
-            document.getElementById('rules_section').style.display = 'none';
-            document.getElementById('booking_form').style.display = 'block';
-        }
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
+                authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+                databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
+                projectId: "guesthousebookingsystem-675c6",
+                storageBucket: "guesthousebookingsystem-675c6.appspot.com",
+                messagingSenderId: "979837493640",
+                appId: "1:979837493640:web:64745b6eefd825d4c31a3d"
+            };
 
-        document.getElementById('dateT').addEventListener('change', function() {
-            var dateF = new Date(document.getElementById('dateF').value);
-            var dateT = new Date(this.value);
-            var duration = Math.ceil((dateT - dateF) / (1000 * 60 * 60 * 24));
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database()
+            const ref = database.ref("bookings")
 
-            if (duration > 3) {
-                alert("You can only book for a maximum of 3 days.");
-                document.getElementById('dateT').value = ''; // Clear the input field
-                document.getElementById('duration').value = ''; // Clear the duration field
-            } else {
-                document.getElementById('duration').value = duration;
-            }
-        });
+            function book_now(event) {
+                event.preventDefault();
+                var name = document.getElementById("name").value.trim();
+                var email = document.getElementById("email").value.trim();
+                var inst_email = document.getElementById("inst_email").value.trim();
+                var phone = document.getElementById("phone").value.trim();
+                var alt_phone = document.getElementById("alt_phone").value.trim();
+                var category = document.getElementById("category").value.trim();
+                var idProof = document.getElementById("id_proof").value.trim();
+                var idProofNumber = document.getElementById("id_proof_number").value.trim();
+                var gender = document.getElementById("gender").value.trim();
+                var permanentAddressLocation = document.getElementById("permanent_address_location").value.trim();
+                var permanentAddressPin = document.getElementById("permanent_address_pin").value.trim();
+                var permanentAddressState = document.getElementById("permanent_address_state").value.trim();
+                var permanentAddressArea = document.getElementById("permanent_address_area").value.trim();
+                var enteredCaptcha = document.getElementById("textInput").value.trim();
+                var displayedCaptcha = document.getElementById("capt").value.trim();
+                var guestHouse = this.value;
+                var roomType = document.getElementById('room_type').value;
+                var bookedRoom = " ";
+                var roomNo = bookedRoom;
+                var dateFrom = new Date(document.getElementById('dateF').value);
+                var dateTo = new Date(document.getElementById('dateT').value);
+                var duration = document.getElementById('duration').value;
+                var dateTime = " ";
+                
+                // Initialize the arrays
+                var singleRoomAvailable_OGH = [101, 102, 103, 104, 201, 202, 203, 204];
+                var suitesAvailable_OGH = [1001, 1002, 2001, 2002];
+                var singleRoomAvailable_IGH = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 201, 202, 203, 204, 205, 206, 207, 214, 215, 216];
+                var mesaninAvailable_IGH = [208, 209, 210, 211, 212, 213];
+                var suitesAvailable_IGH = [1001, 1002, 2001, 2002];
+                var singleRoomBooked_OGH = [];
+                var suitesBooked_OGH = [];
+                var singleRoomBooked_IGH = [];
+                var mesaninBooked_IGH = [];
+                var suitesBooked_IGH = [];
+                
+                //Iniyalize the variables
+                var currentDate = new Date();
 
-        function updateRoomOptions() {
-            var guestHouse = document.getElementById('guest_house').value;
-            var roomTypeSelect = document.getElementById('room_type');
-            roomTypeSelect.innerHTML = ''; // Clear existing options
+                // Get the current date and time components
+                var year = currentDate.getFullYear();
+                var month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Months are zero based
+                var day = ('0' + currentDate.getDate()).slice(-2);
+                var hours = ('0' + currentDate.getHours()).slice(-2);
+                var minutes = ('0' + currentDate.getMinutes()).slice(-2);
+                var seconds = ('0' + currentDate.getSeconds()).slice(-2);
 
-            if (guestHouse === 'igh') {
-                // Add options for IGH Guest House
-                var singleOption = document.createElement('option');
-                singleOption.value = 'single';
-                singleOption.textContent = 'Single';
-                roomTypeSelect.appendChild(singleOption);
+                // Create a formatted string for date and time
+                dateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 
-                var mesaninOption = document.createElement('option');
-                mesaninOption.value = 'mesanin';
-                mesaninOption.textContent = 'Mesanin';
-                roomTypeSelect.appendChild(mesaninOption);
-
-                var suiteOption = document.createElement('option');
-                suiteOption.value = 'suite';
-                suiteOption.textContent = 'Suite';
-                roomTypeSelect.appendChild(suiteOption);
-            } else if (guestHouse === 'ogh') {
-                // Add options for OGH Guest House
-                var singleOption = document.createElement('option');
-                singleOption.value = 'single';
-                singleOption.textContent = 'Single';
-                roomTypeSelect.appendChild(singleOption);
-
-                var suiteOption = document.createElement('option');
-                suiteOption.value = 'suite';
-                suiteOption.textContent = 'Suite';
-                roomTypeSelect.appendChild(suiteOption);
-            }
-        }
-
-        // Attach event listener to guest_house select element
-        document.getElementById('guest_house').addEventListener('change', updateRoomOptions);
-
-        // Initial call to updateRoomOptions to set initial room options
-        updateRoomOptions();
-
-        /*Auto Captcha*/
-        var alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-                    '1','2','3','4','5','6','7','8','9','0']
-
-        var a = alpha[Math.floor(Math.random()*62)];
-        var b = alpha[Math.floor(Math.random()*62)];
-        var c = alpha[Math.floor(Math.random()*62)];
-        var d = alpha[Math.floor(Math.random()*62)];
-        var e = alpha[Math.floor(Math.random()*62)];
-        var f = alpha[Math.floor(Math.random()*62)];
-
-        var sum = a + b + c + d + e + f;
-
-        document.getElementById("capt").value = sum;
-    </script>
-    <script>
-        var cap = ()=> {
-        var alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-                    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-                    '1','2','3','4','5','6','7','8','9','0']
-
-        var a = alpha[Math.floor(Math.random()*62)];
-        var b = alpha[Math.floor(Math.random()*62)];
-        var c = alpha[Math.floor(Math.random()*62)];
-        var d = alpha[Math.floor(Math.random()*62)];
-        var e = alpha[Math.floor(Math.random()*62)];
-        var f = alpha[Math.floor(Math.random()*62)];
-            
-        var sum = a + b + c + d + e + f;
-
-        document.getElementById("capt").value = sum;
-    }
-    </script>
-    <script>
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-        import { getdatabase } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBLHdQpcdEPBxHG8_pI49ctq7FfEDK9KmM",
-            authDomain: "guesthousereservationsystem.firebaseapp.com",
-            databaseURL: "https://guesthousereservationsystem-default-rtdb.firebaseio.com",
-            projectId: "guesthousereservationsystem",
-            storageBucket: "guesthousereservationsystem.appspot.com",
-            messagingSenderId: "324476262968",
-            appId: "1:324476262968:web:887539776c70257702e4cd"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase();
-
-        function book_now() {
-            var name = document.getElementById("name").value.trim();
-            var email = document.getElementById("email").value.trim();
-            var phone = document.getElementById("phone").value.trim();
-            var category = document.getElementById("category").value.trim();
-            var idProof = document.getElementById("id_proof").value.trim();
-            var idProofNumber = document.getElementById("id_proof_number").value.trim();
-            var gender = document.getElementById("gender").value.trim();
-            var permanentAddressLocation = document.getElementById("permanent_address_location").value.trim();
-            var permanentAddressPin = document.getElementById("permanent_address_pin").value.trim();
-            var permanentAddressState = document.getElementById("permanent_address_state").value.trim();
-            var permanentAddressArea = document.getElementById("permanent_address_area").value.trim();
-            var enteredCaptcha = document.getElementById("textInput").value.trim();
-            var displayedCaptcha = document.getElementById("capt").value.trim();
-            var guestHouse = this.value;
-            var roomType = document.getElementById('room_type').value;
-
-            // Initialize the arrays
-            var singleRoomAvailable_OGH = [101, 102, 103, 104, 201, 202, 203, 204];
-            var suitesAvailable_OGH = [1001, 1002, 2001, 2002];
-            var singleRoomAvailable_IGH = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 201, 202, 203, 204, 205, 206, 207, 214, 215, 216];
-            var mesaninAvailable_IGH = [208, 209, 210, 211, 212, 213];
-            var suitesAvailable_IGH = [1001, 1002, 2001, 2002];
-            var singleRoomBooked_OGH = [];
-            var suitesBooked_OGH = [];
-            var singleRoomBooked_IGH = [];
-            var mesaninBooked_IGH = [];
-            var suitesBooked_IGH = [];
-            //Iniyalize the variables
-            var bookedRoom;
-            var roomNo = bookedRoom;
-            var currentDate = new Date();
-
-            // Get the current date and time components
-            var year = currentDate.getFullYear();
-            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Months are zero based
-            var day = ('0' + currentDate.getDate()).slice(-2);
-            var hours = ('0' + currentDate.getHours()).slice(-2);
-            var minutes = ('0' + currentDate.getMinutes()).slice(-2);
-            var seconds = ('0' + currentDate.getSeconds()).slice(-2);
-
-            // Create a formatted string for date and time
-            var dateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
-
-            if (enteredCaptcha === displayedCaptcha) {
-                // Check guest house and room type and book accordingly
-                if (guestHouse === 'ogh' && roomType === 'single') {
-                    if (singleRoomAvailable_OGH.length > 0) {
-                        // Shift one element from singleRoomAvailable to singleRoomBooked
-                        bookedRoom = singleRoomAvailable_OGH.shift();
-                        singleRoomBooked_OGH.push(bookedRoom);
-                    } else {
-                        alert("Room is unavailable");
-                        return false; // Prevent form submission
+                if (enteredCaptcha === displayedCaptcha) {
+                    // Check guest house and room type and book accordingly
+                    if (guestHouse === 'ogh' && roomType === 'single') {
+                        if (singleRoomAvailable_OGH.length > 0) {
+                            // Shift one element from singleRoomAvailable to singleRoomBooked
+                            bookedRoom = singleRoomAvailable_OGH.shift();
+                            singleRoomBooked_OGH.push(bookedRoom);
+                        } else {
+                            alert("Room is unavailable");
+                            return false; // Prevent form submission
+                        }   
+                    } else if (guestHouse === 'ogh' && roomType === 'suite') {
+                        if (suitesAvailable_OGH.length > 0) {
+                            // Shift one element from singleRoomAvailable to singleRoomBooked
+                            bookedRoom = suitesAvailable_OGH.shift();
+                            suitesBooked_OGH.push(bookedRoom);
+                        } else {
+                            alert("Room is unavailable");
+                            return false; // Prevent form submission
+                        }
+                    } else if (guestHouse === 'igh' && roomType === 'single') {
+                        if (singleRoomAvailable_IGH.length > 0) {
+                            // Shift one element from singleRoomAvailable to singleRoomBooked
+                            bookedRoom = singleRoomAvailable_IGH.shift();
+                            singleRoomBooked_IGH.push(bookedRoom);
+                        } else {
+                            alert("Room is unavailable");
+                            return false; // Prevent form submission
+                        }
+                    } else if (guestHouse === 'igh' && roomType === 'mesanin') {
+                        if (mesaninAvailable_IGH.length > 0) {
+                            // Shift one element from singleRoomAvailable to singleRoomBooked
+                            bookedRoom = mesaninAvailable_IGH.shift();
+                            mesaninBooked_IGH.push(bookedRoom);
+                        } else {
+                            alert("Room is unavailable");
+                            return false; // Prevent form submission
+                        }
+                    } else if (guestHouse === 'igh' && roomType === 'suite') {
+                        if (suitesAvailable_IGH.length > 0) {
+                            // Shift one element from singleRoomAvailable to singleRoomBooked
+                            bookedRoom = suitesAvailable_IGH.shift();
+                            suitesBooked_IGH.push(bookedRoom);
+                        } else {
+                            alert("Room is unavailable");
+                            return false; // Prevent form submission
+                        }
                     }
-                } else if (guestHouse === 'ogh' && roomType === 'suite') {
-                    if (suitesAvailable_OGH.length > 0) {
-                        // Shift one element from singleRoomAvailable to singleRoomBooked
-                        bookedRoom = suitesAvailable_OGH.shift();
-                        suitesBooked_OGH.push(bookedRoom);
-                    } else {
-                        alert("Room is unavailable");
-                        return false; // Prevent form submission
-                    }
-                } else if (guestHouse === 'igh' && roomType === 'single') {
-                    if (singleRoomAvailable_IGH.length > 0) {
-                        // Shift one element from singleRoomAvailable to singleRoomBooked
-                        bookedRoom = singleRoomAvailable_IGH.shift();
-                        singleRoomBooked_IGH.push(bookedRoom);
-                    } else {
-                        alert("Room is unavailable");
-                        return false; // Prevent form submission
-                    }
-                } else if (guestHouse === 'igh' && roomType === 'mesanin') {
-                    if (mesaninAvailable_IGH.length > 0) {
-                        // Shift one element from singleRoomAvailable to singleRoomBooked
-                        bookedRoom = mesaninAvailable_IGH.shift();
-                        mesaninBooked_IGH.push(bookedRoom);
-                    } else {
-                        alert("Room is unavailable");
-                        return false; // Prevent form submission
-                    }
-                } else if (guestHouse === 'igh' && roomType === 'suite') {
-                    if (suitesAvailable_IGH.length > 0) {
-                        // Shift one element from singleRoomAvailable to singleRoomBooked
-                        bookedRoom = suitesAvailable_IGH.shift();
-                        suitesBooked_IGH.push(bookedRoom);
-                    } else {
-                        alert("Room is unavailable");
-                        return false; // Prevent form submission
-                    }
+                    // Push data to Firebase
+                    ref.push({
+                        name: name,
+                        email: email,
+                        inst_email: inst_email,
+                        phone: phone,
+                        alt_phone: alt_phone,
+                        category: category,
+                        idProof: idProof,
+                        idProofNumber: idProofNumber,
+                        gender: gender,
+                        permanentAddressLocation: permanentAddressLocation,
+                        permanentAddressPin: permanentAddressPin,
+                        permanentAddressState: permanentAddressState,
+                        permanentAddressArea: permanentAddressArea,
+                        guestHouse: guestHouse,
+                        roomType: roomType,
+                        roomNo: roomNo,
+                        dateFrom: dateFrom,
+                        dateTo: dateTo,
+                        duration: duration,
+                        dateTime: dateTime
+
+                    }, function(error) {
+                        if (error) {
+                            alert("Error occurred while saving data: " + error.message);
+                        } else {
+                            alert("Booking Success");
+                        }
+                    });
+                    return true; // Form is valid
+                } else if (name === "" || email === "" || phone === "" || category === "" || idProof === "" ||
+                    idProofNumber === "" || gender === "" || permanentAddressLocation === "" ||
+                    permanentAddressPin === "" || permanentAddressState === "" || permanentAddressArea === "" ||
+                    roomType === "" || enteredCaptcha === "") {
+                            alert("Please fill in all mandatory fields.");
+                            return false; // Prevent form submission
+                } else if (enteredCaptcha !== displayedCaptcha) {
+                    // Display the "Invalid Captcha" alert
+                    var alertTimeout = setTimeout(function() {
+                        alert("Invalid Captcha");
+                    }, 500);
+                    return false; // Prevent form submission
                 }
-
-                // Save the booking details to Firebase
-                saveMessage(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, roomType, roomNo, dateTime);
-
-                alert("Booking Success");
-                return true; // Form is valid
-            } else if (name === "" || email === "" || phone === "" || category === "" || idProof === "" ||
-                idProofNumber === "" || gender === "" || permanentAddressLocation === "" ||
-                permanentAddressPin === "" || permanentAddressState === "" || permanentAddressArea === "" ||
-                roomType === "" || enteredCaptcha === "") {
-                        alert("Please fill in all mandatory fields.");
-                        return false; // Prevent form submission
-            } else if (enteredCaptcha !== displayedCaptcha) {
-                // Display the "Invalid Captcha" alert
-                var alertTimeout = setTimeout(function() {
-                    alert("Invalid Captcha");
-                }, 500);
-                return false; // Prevent form submission
             }
-        }
-
-        function saveMessage(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, roomType, roomNo, dateTime) {
-        try {
-            database.ref('bookings').push({
-                name: name,
-                email: email,
-                phone: phone,
-                category: category,
-                idProof: idProof,
-                idProofNumber: idProofNumber,
-                gender: gender,
-                permanentAddressLocation: permanentAddressLocation,
-                permanentAddressPin: permanentAddressPin,
-                permanentAddressState: permanentAddressState,
-                permanentAddressArea: permanentAddressArea,
-                guestHouse: guestHouse,
-                roomType: roomType,
-                roomNo: roomNo
-            });
-            alert("Data saved successfully!");
-        } catch (error) {
-            alert("Error occurred while saving data: " + error.message);
-        }
-    }   
-
-        /*
-        // Save message function
-        function saveMessage(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, roomType, roomNo) {
-            try {
-                database.ref('https://guesthousereservationsystem-default-rtdb.firebaseio.com/').push({
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    category: category,
-                    idProof: idProof,
-                    idProofNumber: idProofNumber,
-                    gender: gender,
-                    permanentAddressLocation: permanentAddressLocation,
-                    permanentAddressPin: permanentAddressPin,
-                    permanentAddressState: permanentAddressState,
-                    permanentAddressArea: permanentAddressArea,
-                    guestHouse: guestHouse,
-                    roomType: roomType,
-                    roomNo: roomNo
-                });
-                // If the data is successfully saved to the database, display success message
-                alert("Data saved successfully!");
-            } catch (error) {
-                // If there's an error, catch it and display in an alert box
-                alert("Error occurred while saving data: " + error.message);
-            }
-        }
-        */
-    </script>
+        </script>
+    </body>
 </html>
