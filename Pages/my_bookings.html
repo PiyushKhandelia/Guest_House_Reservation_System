@@ -4,12 +4,10 @@
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/my_bookings.css">
+        <link rel="stylesheet" href="http://127.0.0.1:5500/css/my_bookings.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Bookings</title>
-        <style>
-            
-        </style>
     </head>
     <body>
         <!--Header-->
@@ -73,32 +71,38 @@
             <p class="heading">Update Now</p>
             <form id="updateform">
                 <!-- Form Fields -->
-                <label for="changeL">Change:</label>
+                <label for="bookingID" id="bookingIDL">Booking ID:<sup>*</sup></label><br>
+                <input type="text" id="bookingID" name="bookingID"><br>
+
+                <label for="changeL">Update:</label>
                 <select id="change" name="change">
                     <option value="DateF&T">Check-In & Check-Out Date & Time</option>
                     <option value="guesthouse">Guest House</option>
                     <option value="Occupacy">Occupancy</option>
                 </select>
+
                 <div id="dateFields" style="display: none;">
                     <label for="fromDate">Date (From):</label>
                     <input type="datetime-local" id="fromDate" name="fromDate">
                     <label for="toDate">Date (To):</label>
                     <input type="datetime-local" id="toDate" name="toDate">
                 </div>
+                
                 <div id="guesthouseFields" style="display: none;">
-                    <label for="guesthouse">Guest House:</label>
-                    <select id="guesthouse" name="guesthouse">
+                    <label for="guest_house">Guest House:</label>
+                    <select id="guest_house" name="guest_house">
                         <!-- Populate options dynamically if needed -->
                         <option value="igh">IGH</option>
                         <option value="ogh">OGH</option>
                     </select>
-                    <label for="roomType">Room Type:</label>
-                    <select id="roomType" name="roomType">
+                    <label for="room_type">Room Type:</label>
+                    <select id="room_type" name="room_type">
                         <!-- Populate options dynamically if needed -->
                         <option value="Single">Single</option>
                         <option value="Double">Double</option>
                     </select>
                 </div>
+                
                 <div id="occupancyFields" style="display: none;">
                     <label for="occupancy">Occupancy:</label>
                     <select id="occupancy" name="occupancy">
@@ -106,17 +110,22 @@
                         <option value="Double">Double</option>
                     </select>
                 </div>
-                <button type="submit">Modify</button>
+                <button type="button" id="proceedButton">Proceed</button>
             </form>
-            <button id="cancelButton">Cancel</button>
+            <button type="submit" id="updateButton">Update</button>
+            <button type="button" id="cancelButton">Cancel</button>
         </div>
         <!-- Add Firebase scripts -->
-        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/search.js"></script>
-        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/user_modify.js"></script>
-        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
-        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
-        <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
+        <!--
+            <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
+            <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
+            <script src="http://127.0.0.1:5500/js/user_modify.js"></script>
+            <script src="http://127.0.0.1:5500/js/search.js"></script>
+        -->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/search.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/user_modify.js"></script>
     </body>
 </html>

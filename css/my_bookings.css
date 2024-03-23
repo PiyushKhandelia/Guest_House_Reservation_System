@@ -27,6 +27,63 @@ body {
     font-size: x-large;
 }
 
+ /* Label styling */
+ .updateForm label {
+    font-weight: bold;
+}
+
+/* Input, textarea, select styling */
+.updateForm input[type="text"],
+.updateForm select { /* Include select element */
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+/* Button and alert styling */
+.updateForm button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+sup {
+    color: red;
+    font-size: x-large;
+}
+
+/* Input styling for datetime-local */
+.updateForm input[type="datetime-local"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+/* Button and alert hover effects */
+.updateForm input[type="datetime-local"]:hover {
+    background-color: #f0f0f0; /* Adjust hover background color if needed */
+}
+
+/* Button and alert hover effects */
+.updateForm button:hover, 
+.alert:hover {
+    background-color: #ff6666;
+}
+
 .my_search_form label {
     font-weight: bold;
     width: calc(40% - 20px);
