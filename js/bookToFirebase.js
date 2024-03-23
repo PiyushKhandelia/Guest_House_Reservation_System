@@ -1,5 +1,29 @@
+// Function to get current date and time
+function getCurrentDateTime() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2);
+    const hours = ('0' + currentDate.getHours()).slice(-2);
+    const minutes = ('0' + currentDate.getMinutes()).slice(-2);
+    const seconds = ('0' + currentDate.getSeconds()).slice(-2);
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    return formattedDateTime;
+}
+
+// Get current date and time when the page loads
+document.getElementById('curr_date').value = getCurrentDateTime();
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('bookingform');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        bookNow();
+    });
+});
+
 const firebaseConfig = {
-    apiKey: "Your API Key",
+    apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
     authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
     databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
     projectId: "guesthousebookingsystem-675c6",
@@ -14,22 +38,44 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const ref = database.ref("bookings");
 
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('bookingform');
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        bookNow();
-    });
-});
-
 // Define global variable
 let enteredCaptcha;
 let displayedCaptcha;
 let captchaVerified;
 let guestHouse;
 
+// Function to generate a unique booking ID
+async function generateBookingID() {
+    try {
+        const snapshot = await ref.once("value");
+        let latestBookingID = snapshot.val();
+        if (latestBookingID === null || isNaN(latestBookingID)) {
+            latestBookingID = 1000;
+        }
+        return "BIT" + ++latestBookingID;
+    } catch (error) {
+        console.error("Error generating booking ID:", error);
+        return null;
+    }
+}
+
+// Update booking ID when the page loads
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const bookingId = await generateBookingID();
+        if (bookingId) {
+            document.getElementById('booking_id').value = bookingId;
+        } else {
+            console.error("Failed to generate booking ID.");
+        }
+    } catch (error) {
+        console.error("Error setting booking ID:", error);
+    }
+});
+
 function bookNow() {
     // Collect form data
+    const bookingID = document.getElementById('booking_id').value.trim();
     const name = document.getElementById('name').value.trim();
     const email =  document.getElementById('email').value.trim();
     const inst_email =  document.getElementById('inst_email').value.trim();
@@ -47,11 +93,14 @@ function bookNow() {
     displayedCaptcha = document.getElementById('capt').value.trim();
     const guestHouse = document.getElementById('guest_house').value.trim();
     const roomType = document.getElementById('room_type').value.trim();
+    const occupacy = document.getElementById('occupacy').value.trim();
     const dateFrom = new Date(document.getElementById('dateF').value);
-    const dateTo =  new Date(document.getElementById('dateT').value);
-    const duration = document.getElementById('duration').value.trim();
+    const dateTo = new Date(document.getElementById('dateTo').value);
 
-    function validateFields(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, dateF, dateT, roomType, enteredCaptcha) {
+    const duration = document.getElementById('duration').value.trim();
+    const status = "Upcoming";
+
+    function validateFields(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, dateF, dateTo, roomType, occupacy, enteredCaptcha, status) {
        // Your field validation logic goes here
         const emptyFields = [];
 
@@ -67,7 +116,12 @@ function bookNow() {
         if (permanentAddressState === "") emptyFields.push("State");
         if (permanentAddressArea === "") emptyFields.push("Area");
         if (roomType === "") emptyFields.push("Room Type");
+        if (occupacy === "") emptyFields.push("Occupacy");
         if (enteredCaptcha === "") emptyFields.push("Captcha");
+        if (guestHouse === "") emptyFields.push("Guest House");
+        if (dateF === "") emptyFields.push("Date From");
+        if (dateTo === "") emptyFields.push("Date To");
+        if (status === "") emptyFields.push("Status");
 
         if (emptyFields.length > 0) {
             const errorMessage = "Please fill in all mandatory fields: " + emptyFields.join(", ");
@@ -97,6 +151,7 @@ function bookNow() {
     // Proceed with booking
     // Push data to Firebase
     ref.push({
+        bookingID: bookingID,
         name: name,
         email: email,
         inst_email: inst_email,
@@ -112,16 +167,19 @@ function bookNow() {
         permanentAddressArea: permanentAddressArea,
         guestHouse: guestHouse,
         roomType: roomType,
+        occupacy: occupacy,
         dateFrom: dateFrom,
         dateTo: dateTo,
         duration: duration,
-        dateTime: dateTime
+        dateTime: dateTime,
+        status: status
         // Add other form fields here
     }, function (error) {
         if (error) {
             alert("Error occurred while saving data: " + error.message);
         } else {
             alert("Booking Success");
+            window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
         }
     });
 }
@@ -137,17 +195,4 @@ function verifyCaptcha() {
             }, 500);
             return false; // Prevent form submission
         }
-}
-
-// Function to get current date and time
-function getCurrentDateTime() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    const day = ('0' + currentDate.getDate()).slice(-2);
-    const hours = ('0' + currentDate.getHours()).slice(-2);
-    const minutes = ('0' + currentDate.getMinutes()).slice(-2);
-    const seconds = ('0' + currentDate.getSeconds()).slice(-2);
-    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    return formattedDateTime;
 }

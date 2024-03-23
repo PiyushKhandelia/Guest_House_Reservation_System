@@ -1,103 +1,155 @@
-.booking_form,
-.rules_section {
-    background-color: rgb(255, 255, 255); 
-    width: 75%;
-    margin: 150px auto; /* Center the form horizontally */
-    padding: 20px; /* Add some padding for better appearance */
-    color: #000;
-    border-radius: 10px; /* Optional: Add rounded corners to the for    m */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for better appearance */
-    font-size: x-large; 
-}
-
-.booking_form label {
-    font-weight: bold;
-}
-
-.booking_form input[type="text"],
-.booking_form input[type="email"],
-.booking_form input[type="tel"],
-.booking_form input[type="date"],
-.booking_form input[type="time"],
-.booking_form input[type="number"],
-.booking_form input[type="file"],
-.booking_form textarea,
-.booking_form select { /* Include select element */
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: large;
-}
-
-.booking_form button,
-.alert {
-    display: block;
-    margin: 0 auto;
-    margin-top: 20px;
-    font: small-caps bold 20px/35px Georgia, serif;
-    width: 45%;
-    padding: 12px;
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.booking_form button:hover, 
-.alert:hover {
-    background-color: #ff6666;
-}
-
-.heading {
-    text-align: center;
-    font: small-caps bold 40px/70px Georgia, serif;
-    margin: -10px;    
-}
-
-.guest_details {
-    display: none;
-}
-
-.capt {
-    width: calc(98% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: large;
-}
-
-.refresh {
-    width: calc(10% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    height: auto;
-    background-color: transparent;
-    border: none;
-}
-
-.booking_form select {
-    width: calc(100%);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: large;
-}
-
-sup {
-    color: red;
-    font-size: x-large;
-}
-
-.rules_section p{
-font: small-caps bold 25px/40px Georgia, serif;
-}
-
-.rules_section ul {
-    text-align: left;
-    padding-left: 50px;
-}
+            /* Default styles for form and rules section */
+            .booking_form,
+            .rules_section {
+                background-color: rgb(255, 255, 255); 
+                width: 75%;
+                margin: 150px auto; /* Center the form horizontally */
+                padding: 20px; /* Add some padding for better appearance */
+                color: #000;
+                border-radius: 10px; /* Optional: Add rounded corners to the form */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for better appearance */
+                font-size: x-large; 
+            }
+            
+            /* Label styling */
+            .booking_form label {
+                font-weight: bold;
+            }
+            
+            /* Input, textarea, select styling */
+            .booking_form input[type="text"],
+            .booking_form input[type="email"],
+            .booking_form input[type="tel"],
+            .booking_form input[type="date"],
+            .booking_form input[type="time"],
+            .booking_form input[type="number"],
+            .booking_form input[type="file"],
+            .booking_form input[type="booking_id"],
+            .booking_form textarea,
+            .booking_form select { /* Include select element */
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+            
+            /* Button and alert styling */
+            .booking_form button,
+            .alert {
+                display: block;
+                margin: 0 auto;
+                margin-top: 20px;
+                font: small-caps bold 20px/35px Georgia, serif;
+                width: 45%;
+                padding: 12px;
+                background-color: #ff4d4d;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            sup {
+                color: red;
+                font-size: x-large;
+            }
+            
+            /* Input styling for datetime-local */
+            .booking_form input[type="datetime-local"] {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+            
+            /* Button and alert hover effects */
+            .booking_form input[type="datetime-local"]:hover {
+                background-color: #f0f0f0; /* Adjust hover background color if needed */
+            }
+            
+            /* Button and alert hover effects */
+            .booking_form button:hover, 
+            .alert:hover {
+                background-color: #ff6666;
+            }
+            
+            /* Heading styling */
+            .heading {
+                text-align: center;
+                font: small-caps bold 40px/70px Georgia, serif;
+                margin: -10px;    
+            }
+            
+            /* Guest details and caption styling */
+            .guest_details {
+                display: none;
+            }
+            
+            .capt {
+                width: calc(98% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+            
+            /* Refresh button styling */
+            .refresh {
+                width: calc(10% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                height: auto;
+                background-color: transparent;
+                border: none;
+            }
+            
+            /* Additional select styling */
+            .booking_form select {
+                width: calc(100%);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+            
+            /* Styling for responsiveness */
+            @media screen and (max-width: 768px) { /* For tablets and smaller screens */
+                .booking_form,
+                .rules_section {
+                    width: 90%; /* Adjust width for smaller screens */
+                    margin: 50px auto; /* Adjust margin for smaller screens */
+                }
+            
+                .booking_form button,
+                .alert {
+                    width: 70%; /* Adjust button width for smaller screens */
+                }
+            
+                .heading {
+                    font-size: 30px; /* Adjust heading font size for smaller screens */
+                }
+            }
+            
+            @media screen and (max-width: 480px) { /* For mobile devices */
+                .booking_form,
+                .rules_section {
+                    width: 95%; /* Adjust width for smaller screens */
+                    margin: 30px auto; /* Adjust margin for smaller screens */
+                }
+            
+                .booking_form button,
+                .alert {
+                    width: 80%; /* Adjust button width for smaller screens */
+                    font-size: 16px; /* Adjust button font size for smaller screens */
+                }
+            
+                .heading {
+                    font-size: 24px; /* Adjust heading font size for smaller screens */
+                }
+            }

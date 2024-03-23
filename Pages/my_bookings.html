@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/my_bookings.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Bookings</title>
+        <style>
+            
+        </style>
+    </head>
+    <body>
+        <!--Header-->
+        <div class="header_div">
+            <div class="left_div"></div>
+            <div class="right_div">
+                <div class="nav">
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/booking.html"><button>Book Now</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html"><button>My Bookings</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/profile.html"><button>Profile</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Logout</button></a>
+                </div>
+            </div>
+        </div>
+        <!-- Booking form section -->
+        <div id="my_search_form" class="my_search_form">
+            <p class="heading">Search Now</p>
+            <form id="searchform">
+                <!-- Form Fields -->
+                <label for="searchType">Search By:</label>
+                <select id="searchType" name="searchType">
+                    <option value="phonenumber">Phone Number</option>
+                    <option value="bookingID">Booking ID</option>
+                </select>
+                <input type="text" id="searchField" name="searchField">
+                <button type="submit">Search</button>
+        
+                <label for="statusFilter">Filter By Status:</label>
+                <select id="statusFilter" name="statusFilter">
+                    <option value="">All</option>
+                    <option value="Upcoming">Upcoming</option>
+                    <option value="Active">Active</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </form>
+            <!-- Table to display search results -->
+            <table id="searchResults">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phonne Number</th>
+                        <th>Guest House</th>
+                        <th>Room Type</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Update Form section -->
+        <div id="updateForm" class="updateForm" style="display: none;">
+            <p class="heading">Update Now</p>
+            <form id="updateform">
+                <!-- Form Fields -->
+                <label for="changeL">Change:</label>
+                <select id="change" name="change">
+                    <option value="DateF&T">Check-In & Check-Out Date & Time</option>
+                    <option value="guesthouse">Guest House</option>
+                    <option value="Occupacy">Occupancy</option>
+                </select>
+                <div id="dateFields" style="display: none;">
+                    <label for="fromDate">Date (From):</label>
+                    <input type="datetime-local" id="fromDate" name="fromDate">
+                    <label for="toDate">Date (To):</label>
+                    <input type="datetime-local" id="toDate" name="toDate">
+                </div>
+                <div id="guesthouseFields" style="display: none;">
+                    <label for="guesthouse">Guest House:</label>
+                    <select id="guesthouse" name="guesthouse">
+                        <!-- Populate options dynamically if needed -->
+                        <option value="igh">IGH</option>
+                        <option value="ogh">OGH</option>
+                    </select>
+                    <label for="roomType">Room Type:</label>
+                    <select id="roomType" name="roomType">
+                        <!-- Populate options dynamically if needed -->
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                    </select>
+                </div>
+                <div id="occupancyFields" style="display: none;">
+                    <label for="occupancy">Occupancy:</label>
+                    <select id="occupancy" name="occupancy">
+                        <option value="Single">Single</option>
+                        <option value="Double">Double</option>
+                    </select>
+                </div>
+                <button type="submit">Modify</button>
+            </form>
+            <button id="cancelButton">Cancel</button>
+        </div>
+        <!-- Add Firebase scripts -->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/search.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/user_modify.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
+        <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+    </body>
+</html>

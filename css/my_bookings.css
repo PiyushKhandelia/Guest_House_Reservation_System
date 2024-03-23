@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    justify-content: center;
+    /* Align content horizontally at center */
+    padding: 0;
+    height: 100vh;
+    /* Set height to full screen height */
+    display: flex;
+    align-items: center;
+    /* Align content vertically at center */
+    background-color: #f4f4f4;
+}
+
+.my_search_form,
+.updateForm {
+    background-color: rgb(255, 255, 255);
+    width: 75%;
+    margin: 150px auto;
+    /* Center the form horizontally */
+    padding: 20px;
+    /* Add some padding for better appearance */
+    color: #000;
+    border-radius: 10px;
+    /* Optional: Add rounded corners to the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add box shadow for better appearance */
+    font-size: x-large;
+}
+
+.my_search_form label {
+    font-weight: bold;
+    width: calc(40% - 20px);
+    margin-right: 20px;
+}
+
+.my_search_form select {
+    font-size: large;
+    width: calc(20% - 20px);
+    margin-right: 20px;
+}
+
+.my_search_form input[type="text"] {
+    /* Include select element */
+    width: calc(50% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.my_search_form button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: auto;
+    padding: 5px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.my_search_form button:hover {
+    background-color: #ff6666;
+}
+
+.my_search_form .success {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.my_search_form .success:hover {
+    background-color: #ff6666;
+}
+
+.heading {
+    text-align: center;
+    font: small-caps bold 40px/70px Georgia, serif;
+    margin: -10px;
+}
+
+.capt {
+    width: calc(25% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: large;
+}
+
+.refresh {
+    width: calc(10% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    height: auto;
+    background-color: transparent;
+    border: none;
+}
+
+table {
+    margin-top: 25px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 3px;
+    text-align: center;
+    height: fit-content;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #505250;
+    color: white;
+}

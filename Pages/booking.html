@@ -38,6 +38,9 @@
             <p class="heading">Book Now</p>
             <form id="bookingform">
                 <!--Form Fields-->
+                <label for="booking_idL">Booking ID:</label>
+                <input type="booking_id" id="booking_id" name="booking_id" readonly>
+
                 <label for="name" id="nameL">Name:<sup>*</sup></label><br>
                 <input type="text" id="name" name="name"><br>
     
@@ -56,8 +59,8 @@
                 <label for="category" id="categoryL">Category:<sup>*</sup></label><br>
                 <select id="category" name="category">
                     <option value="">You are:</option>
-                    <option value="Aadhar Card">Student</option>
-                    <option value="Driving License">Teacher</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
                     <option value="Others">Others</option>
                     <!-- Add more options as needed -->
                 </select><br>
@@ -107,20 +110,27 @@
                 
                 <label for="room_type" id="room_typeL">Room Type:<sup>*</sup></label>
                 <select id="room_type" name="room_type">
-                    <option value="">Select Room Type</option>
-                    <option value="single">Single</option>
-                    <option value="double">Double</option>
-                    <option value="suite">Suite</option>
+                    
+                </select>
+
+                <label for="occupacy" id="occupacyL">Occupacy:<sup>*</sup></label>
+                <select id="occupacy" name="occupacy">
+                    <option value="Odouble">Double</option>  
+                    <option value="Osingle">Single</option>
                 </select>
                 
                 <label for="date" id="datefL">Date (From):<sup>*</sup></label><br>
-                <input type="date" id="dateF" name="date"><br>
-                
+                <input type="datetime-local" id="dateF" name="date"><br>
+
                 <label for="date" id="datetL">Date (To):<sup>*</sup></label><br>
-                <input type="date" id="dateT" name="date"><br>
+                <input type="datetime-local" id="dateTo" name="date"><br>
+
                 
                 <label for="duration" id="durationL">Duration (Days):</label><br>
                 <input type="text" id="duration" name="duration" readonly><br>
+
+                <label for="curr_date">Current Date and Time:</label>
+                <input type="datetime-local" id="curr_date" name="curr_date" readonly>
                 
                 <label for="room_type" id="captchaL">Captcha:<sup>*</sup></label><br>
                 <!--Inupt Visible Captch from Js-->
@@ -136,7 +146,9 @@
         <!-- Add Firebase scripts -->
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/booking.js"></script>
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/bookToFirebase.js"></script>
     </body>

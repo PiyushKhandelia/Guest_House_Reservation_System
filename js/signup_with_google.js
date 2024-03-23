@@ -32,6 +32,7 @@
                     const email = userCredential.user;
                     console.log("username: " + email + "& password: " + password);
                     alert("SignUp Successful");
+                    window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html";
                 })
                 .catch((error) => {
                     const errorMessage = error.message;
