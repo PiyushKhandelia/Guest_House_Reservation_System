@@ -26,32 +26,54 @@ if (!firebase.apps.length) {
     var database = firebase.database();
 
     // Function to search for data based on field type and field value
-    function searchByField(fieldType, fieldValue, statusFilter) {
-        var tableBody = document.querySelector("#searchResults tbody");
+function searchByField(fieldType, fieldValue, statusFilter) {
+    var tableBody = document.querySelector("#searchResults tbody");
 
-        // Clear existing rows
-        tableBody.innerHTML = "";
+    // Clear existing rows
+    tableBody.innerHTML = "";
 
-        // Reference to the "bookings" node in your database
-        var bookingsRef = firebase.database().ref('bookings');
+    // Reference to the "bookings" node in your database
+    var bookingsRef = firebase.database().ref('bookings');
 
-        // Query the database based on the selected field type and field value
-        if (fieldType === "phonenumber") {
-            // Search by phone number
-            bookingsRef.orderByChild('phone').equalTo(fieldValue).once('value', function (snapshot) {
+    // Query the database based on the selected field type and field value
+    if (fieldType === "bookingID") {
+        // Search by booking ID
+        bookingsRef.orderByChild('bookingID').equalTo(fieldValue).once('value', function (snapshot) {
+            if (snapshot.exists()) {
                 snapshot.forEach(function (childSnapshot) {
                     displayBookingData(childSnapshot, tableBody, statusFilter);
                 });
-            });
-        } else if (fieldType === "bookingID") {
-            // Search by booking ID
-            bookingsRef.orderByChild('bookingID').equalTo(fieldValue).once('value', function (snapshot) {
+            } else {
+                // Display error message if booking ID is not found
+                displayErrorMessage("Booking ID not found.");
+            }
+        });
+    } else if (fieldType === "phonenumber") {
+        // Search by phone number
+        bookingsRef.orderByChild('phone').equalTo(fieldValue).once('value', function (snapshot) {
+            if (snapshot.exists()) {
                 snapshot.forEach(function (childSnapshot) {
                     displayBookingData(childSnapshot, tableBody, statusFilter);
                 });
-            });
-        }
+            } else {
+                // Display error message if phone number is not found
+                displayErrorMessage("Phone number not found.");
+            }
+        });
     }
+}
+
+// Function to display error message
+function displayErrorMessage(message) {
+    var errorElement = document.createElement("p");
+    errorElement.textContent = message;
+    document.getElementById("searchResults").appendChild(errorElement);
+
+    // Remove error message after 4 seconds
+    setTimeout(function() {
+        errorElement.remove();
+    }, 4000); // 4 seconds (4000 milliseconds)
+}
 
 // Function to display booking data in the table based on status filter
 function displayBookingData(snapshot, tableBody, statusFilter) {
