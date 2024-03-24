@@ -1,19 +1,3 @@
-// Function to get current date and time
-function getCurrentDateTime() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    const day = ('0' + currentDate.getDate()).slice(-2);
-    const hours = ('0' + currentDate.getHours()).slice(-2);
-    const minutes = ('0' + currentDate.getMinutes()).slice(-2);
-    const seconds = ('0' + currentDate.getSeconds()).slice(-2);
-    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-    return formattedDateTime;
-}
-
-// Get current date and time when the page loads
-document.getElementById('curr_date').value = getCurrentDateTime();
-
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('bookingform');
     form.addEventListener('submit', function (e) {
@@ -47,12 +31,17 @@ let guestHouse;
 // Function to generate a unique booking ID
 async function generateBookingID() {
     try {
-        const snapshot = await ref.once("value");
-        let latestBookingID = snapshot.val();
-        if (latestBookingID === null || isNaN(latestBookingID)) {
-            latestBookingID = 1000;
-        }
-        return "BIT" + ++latestBookingID;
+        const snapshot = await ref.orderByChild('bookingID').limitToLast(1).once("value");
+        let latestBookingID = 1000; // Default starting value
+
+        snapshot.forEach(function(childSnapshot) {
+            latestBookingID = parseInt(childSnapshot.child('bookingID').val().substring(3)); // Extract the numeric part
+        });
+
+        // Increment the latest booking ID
+        latestBookingID++;
+
+        return "BIT" + latestBookingID;
     } catch (error) {
         console.error("Error generating booking ID:", error);
         return null;
@@ -96,6 +85,7 @@ function bookNow() {
     const occupacy = document.getElementById('occupacy').value.trim();
     const dateFrom = new Date(document.getElementById('dateF').value);
     const dateTo = new Date(document.getElementById('dateTo').value);
+    const dateTime = document.getElementById('curr_date').value;
 
     const duration = document.getElementById('duration').value.trim();
     const status = "Upcoming";
@@ -132,15 +122,6 @@ function bookNow() {
         }
     }
 
-    // Get current date and time
-    const dateTime = getCurrentDateTime();
-
-    // Check if booking date is after the current date
-    if (dateFrom <= dateTime) {
-        alert("Booking date should be after the current date.");
-        return false; // Prevent form submission
-    }
-
     // Verify Captcha
     captchaVerified = verifyCaptcha();
 
@@ -150,7 +131,7 @@ function bookNow() {
 
     // Proceed with booking
     // Push data to Firebase
-    ref.push({
+    ref.child(bookingID).set({
         bookingID: bookingID,
         name: name,
         email: email,
@@ -168,10 +149,10 @@ function bookNow() {
         guestHouse: guestHouse,
         roomType: roomType,
         occupacy: occupacy,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
+        dateFrom: dateFrom.toString(),
+        dateTo: dateTo.toString(),
         duration: duration,
-        dateTime: dateTime,
+        dateTime: dateTime.toString(),
         status: status
         // Add other form fields here
     }, function (error) {

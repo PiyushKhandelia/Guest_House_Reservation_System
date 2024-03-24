@@ -17,7 +17,6 @@
                 <div class="nav">
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/booking.html"><button>Book Now</button></a>
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html"><button>My Bookings</button></a>
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/profile.html"><button>Profile</button></a>
                     <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Logout</button></a>
                 </div>
             </div>
@@ -67,12 +66,13 @@
             </table>
         </div>
         <!-- Update Form section -->
+        <!-- Update Form section -->
         <div id="updateForm" class="updateForm" style="display: none;">
             <p class="heading">Update Now</p>
             <form id="updateform">
                 <!-- Form Fields -->
                 <label for="bookingID" id="bookingIDL">Booking ID:<sup>*</sup></label><br>
-                <input type="text" id="bookingID" name="bookingID"><br>
+                <input type="text" id="bookingIDInput" name="bookingID"><br>
 
                 <label for="changeL">Update:</label>
                 <select id="change" name="change">
@@ -84,25 +84,25 @@
                 <div id="dateFields" style="display: none;">
                     <label for="fromDate">Date (From):</label>
                     <input type="datetime-local" id="fromDate" name="fromDate">
+                    
                     <label for="toDate">Date (To):</label>
                     <input type="datetime-local" id="toDate" name="toDate">
                 </div>
-                
+
                 <div id="guesthouseFields" style="display: none;">
                     <label for="guest_house">Guest House:</label>
                     <select id="guest_house" name="guest_house">
-                        <!-- Populate options dynamically if needed -->
                         <option value="igh">IGH</option>
                         <option value="ogh">OGH</option>
                     </select>
+                    
                     <label for="room_type">Room Type:</label>
                     <select id="room_type" name="room_type">
-                        <!-- Populate options dynamically if needed -->
                         <option value="Single">Single</option>
                         <option value="Double">Double</option>
                     </select>
                 </div>
-                
+
                 <div id="occupancyFields" style="display: none;">
                     <label for="occupancy">Occupancy:</label>
                     <select id="occupancy" name="occupancy">
@@ -111,20 +111,14 @@
                     </select>
                 </div>
                 <button type="button" id="proceedButton">Proceed</button>
+                <button type="button" id="updateButton">Update</button> <!-- Change type to button -->
+                <button type="button" id="cancelButton">Cancel</button> <!-- Change type to button -->
             </form>
-            <button type="submit" id="updateButton">Update</button>
-            <button type="button" id="cancelButton">Cancel</button>
         </div>
         <!-- Add Firebase scripts -->
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
         <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
-        <!--
-            <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
-            <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
-            <script src="http://127.0.0.1:5500/js/user_modify.js"></script>
-            <script src="http://127.0.0.1:5500/js/search.js"></script>
-        -->
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/search.js"></script>
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/user_modify.js"></script>
     </body>

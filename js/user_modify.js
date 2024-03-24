@@ -9,11 +9,109 @@
         appId: "1:979837493640:web:64745b6eefd825d4c31a3d"
     };
 
-    firebase.initializeApp(firebaseConfig);
+    // Check if Firebase app is already initialized
+    if (!firebase.apps.length) {
+        // Firebase app is not initialized, so initialize it
+        firebase.initializeApp(firebaseConfig);
+    }
 
     const database = firebase.database();
     const reference = firebase.database().ref("bookings");
-    let updateOption;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const updateForm = document.getElementById('updateform');
+        const updateButton = document.getElementById('updateButton');
+        const cancelButton = document.getElementById('cancelButton');
+
+        updateButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            updateBooking();
+        });
+
+        cancelButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            cancelBooking();
+        });
+    });
+
+    function updateBooking() {
+        const bookingID = document.getElementById('bookingIDInput').value.trim(); // Get booking ID from the form
+        const bookingRef = reference.child(bookingID); // Reference to the specific booking using its ID
+        const updateOption = document.getElementById("change").value;
+    
+        if (bookingID) {
+            // Check if the booking ID exists in Firebase
+            bookingRef.once('value', function(snapshot) {
+                if (snapshot.exists()) {
+                    // Proceed with updating existing record
+                    if (updateOption === "DateF&T") {
+                        // Update date and time
+                        const dateFrom = new Date(document.getElementById('fromDate').value);
+                        const dateTo = new Date(document.getElementById('toDate').value());
+                
+                        bookingRef.update({
+                            dateFrom: dateFrom.toISOString(),
+                            dateTo: dateTo.toISOString()
+                        }).then(function () {
+                            alert("Modification Successful");
+                        }).catch(function (error) {
+                            console.error("Error updating date:", error);
+                            alert("Error occurred while updating date: " + error.message);
+                        });
+                    } else if (updateOption === "guesthouse") {
+                        // Update guesthouse and room type
+                        const selectedGuesthouse = document.getElementById("guest_house").value.trim();
+                        const selectedRoomType = document.getElementById("room_type").value.trim();
+                        bookingRef.update({
+                            guestHouse: selectedGuesthouse,
+                            roomType: selectedRoomType
+                        }).then(function () {
+                            alert("Modification Successful");
+                        }).catch(function (error) {
+                            console.error("Error updating guesthouse:", error);
+                            alert("Error occurred while updating guesthouse: " + error.message);
+                        });
+                    } else if (updateOption === "Occupacy") {
+                        // Update occupancy
+                        const selectedOccupancy = document.getElementById("occupancy").value.trim();
+                        bookingRef.update({
+                            occupancy: selectedOccupancy
+                        }).then(function () {
+                            alert("Modification Successful");
+                        }).catch(function (error) {
+                            console.error("Error updating occupancy:", error);
+                            alert("Error occurred while updating occupancy: " + error.message);
+                        });
+                    }
+                } else {
+                    alert("Booking ID does not exist.");
+                }
+            });
+        } else {
+            console.error("Element with ID 'bookingID' not found.");
+        }
+    }
+    
+    function cancelBooking() {
+        const bookingID = document.getElementById('bookingIDInput').value.trim();
+        const bookingRef = reference.child(bookingID);
+
+        bookingRef.once('value', function (snapshot) {
+            const bookingData = snapshot.val();
+            if (bookingData.status === "Upcoming") {
+                bookingRef.update({ status: "Cancelled" })
+                    .then(function () {
+                        alert("Booking canceled successfully.");
+                    })
+                    .catch(function (error) {
+                        alert("Error canceling booking: " + error);
+                    });
+            } else {
+                alert("Booking cannot be canceled.");
+            }
+        });
+    }
+
 
     function updateRoomOptions() {
         // Function to update room options based on selected guest house
@@ -51,87 +149,6 @@
         }
     }
 
-    document.getElementById('guest_house').addEventListener('change', updateRoomOptions);
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const updateForm = document.getElementById('updateform');
-        updateForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const bookingID = document.getElementById('booking_id').value.trim();
-            const bookingRef = reference.child(bookingID);
-            const updateOption = document.getElementById("change").value;
-
-            if (updateOption === "DateF&T") {
-                // Update date and time
-                const dateFrom = new Date(document.getElementById('fromDate').value);
-                    const dateTo = new Date(document.getElementById('toDate').value);
-        
-                    bookingRef.update({
-                        dateFrom: dateFrom.toISOString(),
-                        dateTo: dateTo.toISOString()
-                    }).then(function () {
-                        alert("Modification Successful");
-                        window.location.href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html";
-                    }).catch(function (error) {
-                        console.error("Error updating date:", error);
-                        alert("Error occurred while updating date: " + error.message);
-                    });
-            } else if (updateOption === "guesthouse") {
-                // Update guesthouse and room type
-                const selectedGuesthouse = document.getElementById("guest_house").value.trim();
-                    const selectedRoomType = document.getElementById("room_type").value.trim();
-                    bookingRef.update({
-                        guestHouse: selectedGuesthouse,
-                        roomType: selectedRoomType
-                    }).then(function () {
-                        alert("Modification Successful");
-                        window.location.href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html";
-                    }).catch(function (error) {
-                        console.error("Error updating guesthouse:", error);
-                        alert("Error occurred while updating guesthouse: " + error.message);
-                    });
-            } else if (updateOption === "Occupacy") {
-                // Update occupancy
-                const selectedOccupancy = document.getElementById("occupancy").value.trim();
-                    bookingRef.update({
-                        occupancy: selectedOccupancy
-                    }).then(function () {
-                        alert("Modification Successful");
-                        window.location.href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html";
-                    }).catch(function (error) {
-                        console.error("Error updating occupancy:", error);
-                        alert("Error occurred while updating occupancy: " + error.message);
-                    });
-            }
-        });
-    });
-
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        const bookingIDElement = document.getElementById('booking_id');
-        if (bookingIDElement) {
-            const bookingID = bookingIDElement.value.trim();
-            const bookingRef = reference.child(bookingID);
-            const updateOption = document.getElementById("change").value;
-
-            bookingRef.once('value', function (snapshot) {
-                const bookingData = snapshot.val();
-                if (bookingData.status === "Upcoming") {
-                    bookingRef.update({ status: "Cancelled" })
-                    .then(function () {
-                        alert("Booking canceled successfully.");
-                    })
-                    .catch(function (error) {
-                        alert("Error canceling booking: " + error);
-                    });
-                } else {
-                    alert("Booking cannot be canceled.");
-                }
-            });
-        } else {
-            console.error("Element with ID 'booking_id' not found.");
-        }
-    });
 
     document.getElementById('proceedButton').addEventListener('click', function () {
         proceedWithUpdate();

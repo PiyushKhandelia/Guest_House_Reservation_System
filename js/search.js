@@ -45,85 +45,83 @@ if (!firebase.apps.length) {
             });
         } else if (fieldType === "bookingID") {
             // Search by booking ID
-            bookingsRef.child(fieldValue).once('value', function (snapshot) {
-                if (snapshot.exists()) {
-                    displayBookingData(snapshot, tableBody, statusFilter);
-                } else {
-                    alert("Booking not found.");
-                }
+            bookingsRef.orderByChild('bookingID').equalTo(fieldValue).once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    displayBookingData(childSnapshot, tableBody, statusFilter);
+                });
             });
         }
     }
 
-    // Function to display booking data in the table
-    function displayBookingData(snapshot, tableBody, statusFilter) {
-        var bookingData = snapshot.val();
+// Function to display booking data in the table based on status filter
+function displayBookingData(snapshot, tableBody, statusFilter) {
+    var bookingData = snapshot.val();
 
-        // Check if status filter is applied and if it matches the booking status
-        if (!statusFilter || bookingData.status === statusFilter) {
-            var row = document.createElement("tr");
+    // Check if status filter matches the booking status
+    if (!statusFilter || statusFilter === 'All' || bookingData.status === statusFilter) {
+        var row = document.createElement("tr");
 
-            // Create cells for each column
-            var bookingIDCell = document.createElement("td");
-            bookingIDCell.textContent = bookingData.bookingID;
-            row.appendChild(bookingIDCell);
+        // Create cells for each column
+        var bookingIDCell = document.createElement("td");
+        bookingIDCell.textContent = bookingData.bookingID;
+        row.appendChild(bookingIDCell);
 
-            var nameCell = document.createElement("td");
-            nameCell.textContent = bookingData.name;
-            row.appendChild(nameCell);
+        var nameCell = document.createElement("td");
+        nameCell.textContent = bookingData.name;
+        row.appendChild(nameCell);
 
-            var emailCell = document.createElement("td");
-            emailCell.textContent = bookingData.email;
-            row.appendChild(emailCell);
+        var emailCell = document.createElement("td");
+        emailCell.textContent = bookingData.email;
+        row.appendChild(emailCell);
 
-            var phoneCell = document.createElement("td");
-            phoneCell.textContent = bookingData.phone;
-            row.appendChild(phoneCell);
+        var phoneCell = document.createElement("td");
+        phoneCell.textContent = bookingData.phone;
+        row.appendChild(phoneCell);
 
-            var guestHouseCell = document.createElement("td");
-            guestHouseCell.textContent = bookingData.guestHouse;
-            row.appendChild(guestHouseCell);
+        var guestHouseCell = document.createElement("td");
+        guestHouseCell.textContent = bookingData.guestHouse;
+        row.appendChild(guestHouseCell);
 
-            var roomTypeCell = document.createElement("td");
-            roomTypeCell.textContent = bookingData.roomType;
-            row.appendChild(roomTypeCell);
+        var roomTypeCell = document.createElement("td");
+        roomTypeCell.textContent = bookingData.roomType;
+        row.appendChild(roomTypeCell);
 
-            var checkInCell = document.createElement("td");
-            checkInCell.textContent = bookingData.dateF;
-            row.appendChild(checkInCell);
+        var checkInCell = document.createElement("td");
+        checkInCell.textContent = bookingData.dateFrom;
+        row.appendChild(checkInCell);
 
-            var checkOutCell = document.createElement("td");
-            checkOutCell.textContent = bookingData.dateT;
-            row.appendChild(checkOutCell);
+        var checkOutCell = document.createElement("td");
+        checkOutCell.textContent = bookingData.dateTo;
+        row.appendChild(checkOutCell);
 
-            var statusCell = document.createElement("td");
-            statusCell.textContent = bookingData.status;
-            row.appendChild(statusCell);
+        var statusCell = document.createElement("td");
+        statusCell.textContent = bookingData.status;
+        row.appendChild(statusCell);
 
-            // Create action buttons
-            var updateButton = document.createElement("button");
-            updateButton.textContent = "Update";
-            updateButton.onclick = function () {
-                showUpdateForm(); // Passing the booking ID to updateBooking
-            };
+        // Create action buttons
+        var updateButton = document.createElement("button");
+        updateButton.textContent = "Update";
+        updateButton.onclick = function () {
+            showUpdateForm(); // Passing the booking ID to updateBooking
+        };
 
-            var cancelButton = document.createElement("button");
-            cancelButton.textContent = "Cancel";
-            cancelButton.onclick = function () {
-                cancelBooking(snapshot.key); // Passing the booking ID to cancelBooking
-            };
+        var cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
+        cancelButton.onclick = function () {
+            cancelBooking(snapshot.key); // Passing the booking ID to cancelBooking
+        };
 
-            // Create a cell to hold the action buttons
-            var actionCell = document.createElement("td");
-            actionCell.appendChild(updateButton);
-            actionCell.appendChild(cancelButton);
+        // Create a cell to hold the action buttons
+        var actionCell = document.createElement("td");
+        actionCell.appendChild(updateButton);
+        actionCell.appendChild(cancelButton);
 
-            row.appendChild(actionCell);
+        row.appendChild(actionCell);
 
-            // Append row to the table body
-            tableBody.appendChild(row);
-        }
+        // Append row to the table body
+        tableBody.appendChild(row);
     }
+}
 
     // Function to cancel a booking
     function cancelBooking(bookingID) {
@@ -131,7 +129,7 @@ if (!firebase.apps.length) {
         bookingRef.once('value', function (snapshot) {
             var bookingData = snapshot.val();
             if (bookingData.status === "Upcoming") {
-                bookingRef.update({ status: "Cancel" })
+                bookingRef.update({ status: "Cancelled" })
                     .then(function () {
                         alert("Booking canceled successfully.");
                     })
