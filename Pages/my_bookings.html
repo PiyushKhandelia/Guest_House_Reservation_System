@@ -4,7 +4,6 @@
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/my_bookings.css">
-        <link rel="stylesheet" href="http://127.0.0.1:5500/css/my_bookings.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My Bookings</title>
@@ -47,10 +46,10 @@
             <table id="searchResults">
                 <thead>
                     <tr>
-                        <th>Sr. No.</th>
+                        <th>Booking ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phonne Number</th>
+                        <th>Gender</th>
+                        <th>Category</th>
                         <th>Guest House</th>
                         <th>Room Type</th>
                         <th>Check-In Date</th>
@@ -65,21 +64,25 @@
                 </tbody>
             </table>
         </div>
-        <!-- Update Form section -->
+        
         <!-- Update Form section -->
         <div id="updateForm" class="updateForm" style="display: none;">
             <p class="heading">Update Now</p>
             <form id="updateform">
                 <!-- Form Fields -->
+                
                 <label for="bookingID" id="bookingIDL">Booking ID:<sup>*</sup></label><br>
                 <input type="text" id="bookingIDInput" name="bookingID"><br>
+
+                <label for="email" id="useremailL">Email:<sup>*</sup></label><br>
+                <input type="email" id="useremailInput" name="email" required><br> <!-- Added email input field with 'required' attribute -->
 
                 <label for="changeL">Update:</label>
                 <select id="change" name="change">
                     <option value="DateF&T">Check-In & Check-Out Date & Time</option>
                     <option value="guesthouse">Guest House</option>
                     <option value="Occupacy">Occupancy</option>
-                </select>
+                </select>   
 
                 <div id="dateFields" style="display: none;">
                     <label for="fromDate">Date (From):</label>
@@ -95,7 +98,7 @@
                         <option value="igh">IGH</option>
                         <option value="ogh">OGH</option>
                     </select>
-                    
+            
                     <label for="room_type">Room Type:</label>
                     <select id="room_type" name="room_type">
                         <option value="Single">Single</option>
@@ -110,13 +113,16 @@
                         <option value="Double">Double</option>
                     </select>
                 </div>
+        
                 <button type="button" id="proceedButton">Proceed</button>
                 <button type="button" id="updateButton">Update</button> <!-- Change type to button -->
                 <button type="button" id="cancelButton">Cancel</button> <!-- Change type to button -->
             </form>
         </div>
+        
         <!-- Add Firebase scripts -->
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
         <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
         <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/search.js"></script>

@@ -4,23 +4,23 @@
     position: relative;
     transition: .5s;
 }
-#check2:checked ~ .container .photo-gallery .hotels {
+#check2:checked ~ .container .photo-gallery .igh {
     transform: scale(1);
     opacity: 1;
     position: relative;
 }
-#check2:checked ~ .container .photo-gallery .rooms {
+#check2:checked ~ .container .photo-gallery .ogh {
     transform: scale(0);
     opacity: 0;
     position: absolute;
     transition: 0s;
 }
-#check3:checked ~ .container .photo-gallery .rooms {
+#check3:checked ~ .container .photo-gallery .ogh {
     transform: scale(1);
     opacity: 1;
     position: relative;
 }
-#check3:checked ~ .container .photo-gallery .hotels {
+#check3:checked ~ .container .photo-gallery .igh {
     transform: scale(0);
     opacity: 0;
     position: absolute;

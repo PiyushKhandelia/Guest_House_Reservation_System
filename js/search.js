@@ -91,14 +91,14 @@ function displayBookingData(snapshot, tableBody, statusFilter) {
         var nameCell = document.createElement("td");
         nameCell.textContent = bookingData.name;
         row.appendChild(nameCell);
-
-        var emailCell = document.createElement("td");
-        emailCell.textContent = bookingData.email;
-        row.appendChild(emailCell);
-
-        var phoneCell = document.createElement("td");
-        phoneCell.textContent = bookingData.phone;
-        row.appendChild(phoneCell);
+        
+        var genderCell = document.createElement("td");
+        genderCell.textContent = bookingData.gender;
+        row.appendChild(genderCell);
+        
+        var categoryCell = document.createElement("td");
+        categoryCell.textContent = bookingData.category;
+        row.appendChild(categoryCell);
 
         var guestHouseCell = document.createElement("td");
         guestHouseCell.textContent = bookingData.guestHouse;

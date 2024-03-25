@@ -34,6 +34,7 @@ body {
 
 /* Input, textarea, select styling */
 .updateForm input[type="text"],
+.updateForm input[type="email"],
 .updateForm select { /* Include select element */
     width: calc(100% - 20px);
     padding: 10px;
