@@ -1,12 +1,15 @@
 /* Your existing styles */
-body {
+* {
+    padding: 0;
     overflow-x: hidden;
     margin: 0; /* Add this to reset default margin */
 }
+
 #background {
     background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/IGH/igh.jpg");
     height: 100%;
     width: 100%;
+    opacity: 1;
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
@@ -14,34 +17,61 @@ body {
     left: 0;
     z-index: -1;
 }
+
 #content {
     position: absolute;
     top: 50%;
-    opacity: 0.9;
-    background-color: rgb(226, 232, 239);
+    opacity: 0.8;
+    background-color: rgb(200, 221, 244);
     max-width: 100%;
     text-align: center;
     /*z-index: 1;*/
     padding-left: 25px;
     padding-right: 25px;
 }
+
 .heading {
     font: small-caps bold 50px/80px Georgia, serif;
 }
+
 .body {
-    font-size: 22px;
+    font-size: 24px;
     font-family: monospace;
-    font-weight: bold;
+    font-weight: bolder;
 }
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 }
+
+/* Updated styles for suites to center the Suites option */
+.suites {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Updated styles for suites .grid-item img to maintain image aspect ratio */
+.suites .grid-item img {
+    max-width: 75%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+/* Added new class for suites to adjust width and height */
+.suites .grid-item {
+    max-width: 75%; /* Adjust width as needed */
+}
+
 .grid-item {
     padding: 20px;
     text-align: center;
 }
+
 .grid-item img {
     max-width: 100%;
     height: auto;
@@ -49,35 +79,44 @@ body {
     margin: 0 auto;
     border-radius: 5px;
 }
+
 .detail {
     text-align: center; 
     flex: 1; 
     font-size: 22px;
 }
+
 .contact .details {
     text-align: center;
 }
+
 .mail {
     color: #fff;
     text-decoration: none;
 }
+
 .detail label { 
     display: block; 
     margin-bottom: 8px; 
 }
+
 .detail { 
     margin-bottom: 16px; 
 } 
+
 .detail label { 
     margin-right: 16px; 
 } 
+
 .map-div { 
     flex: 1; 
     background-color: #eee; 
 }
+
 .map-div iframe { 
     border: 0;
 }
+
 /* Adjusted footer styles */
 .footer {
     background-color: #000;
@@ -89,17 +128,19 @@ body {
     display: flex; 
     margin-top: 25px;
 }
+
 .book {
-margin: 0 auto;
-font: small-caps bold 20px/35px Georgia, serif;
-width: 45%;
-padding: 12px;
-background-color: #ff4d4d;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+    margin: 0 auto;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 .book:hover {
     background-color: #ff6666;
 }

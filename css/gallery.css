@@ -63,22 +63,36 @@ label:hover {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
 }
-.pic {
+.pic_igh {
     position: relative;
-    height: 230px;
+    height: 350px;
     border-radius: 10px;
     box-shadow: 3px 3px 5px black;
     cursor: pointer;
     transition: .5s;
 }
-.pic img {
+.pic_igh img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: .5s;
+}
+.pic_ogh {
+    position: relative;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px black;
+    cursor: pointer;
+    transition: .5s;
+}
+.pic_ogh img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
     transition: .5s;
 }
 /*For Hover Effect on Image*/
-.pic igh::before {
+.pic_igh::before {
     content: "International Guest House";
     position: absolute;
     top: 50%;
@@ -94,7 +108,25 @@ label:hover {
     transition-delay: .2s;
     z-index: 1;
 }
-.pic ogh::before {
+.pic_igh::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    height: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: .3s;
+}
+.pic_igh:hover::after {
+    height: 100%;
+}
+.pic_igh:hover::before {
+    margin-top: 0;
+    opacity: 1;
+}
+.pic_ogh::before {
     content: "Old Guest House";
     position: absolute;
     top: 50%;
@@ -110,7 +142,7 @@ label:hover {
     transition-delay: .2s;
     z-index: 1;
 }
-.pic::after {
+.pic_ogh::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -121,10 +153,10 @@ label:hover {
     background-color: rgba(0, 0, 0, .4);
     transition: .3s;
 }
-.pic:hover::after {
+.pic_ogh:hover::after {
     height: 100%;
 }
-.pic:hover::before {
+.pic_ogh:hover::before {
     margin-top: 0;
     opacity: 1;
 }

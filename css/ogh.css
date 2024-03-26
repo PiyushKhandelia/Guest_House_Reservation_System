@@ -1,5 +1,6 @@
- /* Your existing styles */
- body {
+/* Your existing styles */
+* {
+    padding: 0;
     overflow-x: hidden;
     margin: 0; /* Add this to reset default margin */
 }
@@ -17,8 +18,8 @@
 #content {
     position: absolute;
     top: 50%;
-    opacity: 0.9;
-    background-color: rgb(226, 232, 239);
+    opacity: 0.8;
+    background-color: rgb(200, 221, 244);
     max-width: 100%;
     text-align: center;
     /*z-index: 1;*/
@@ -29,9 +30,9 @@
     font: small-caps bold 50px/80px Georgia, serif;
 }
 .body {
-    font-size: 22px;
+    font-size: 24px;
     font-family: monospace;
-    font-weight: bold;
+    font-weight: bolder;
 }
 .grid-container {
     display: grid;
@@ -103,3 +104,4 @@ cursor: pointer;
 .book:hover {
     background-color: #ff6666;
 }
+ 
