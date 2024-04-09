@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/checkin-out.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Check-In & Check-Out</title>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>  
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Check-In & Check-Out</p>
+            <div class="checkin-out_form">
+                <form id="searchForm" class="checkin-out_form">
+                    <!-- Form Fields -->
+                    <div>
+                        <label for="searchType">Search By:</label>
+                        <select id="searchType" name="searchType">
+                            <option value="bookingID">Booking ID</option>
+                            <option value="name">Name</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Number</option>
+                        </select>
+                        <input type="text" id="searchField" name="searchField">
+                        <button type="button" id="searchBtn" class="clkbtn">Search</button>
+                    </div>  
+                </form>
+                <!-- Table to display search results -->
+                <table id="searchResults">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Guest House</th>
+                            <th>Room Type</th>
+                            <th>Occupancy</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody id="searchResultsBody">
+                        <!-- Table body will be populated dynamically -->
+                    </tbody>                    
+                </table>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <!-- Add Firebase Authentication script -->
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+        <!--Check In & Out Management-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/checkin-out.js"></script>
+    </body>
+</html>

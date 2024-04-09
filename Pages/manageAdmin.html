@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/manageAdmin.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Manage Admin</title>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Manage Admin</p>
+            <div class="login-box">
+                <div class="button-container">
+                    <button class="clkbtn" id="login-btn" onclick="showManageAdmin()">Manage Admin</button>
+                    <button class="addbtn" id="add-btn" onclick="showAddAdmin()">Add Admin</button>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/adminPanel.html">
+                        <button class="backbtn">Back</button>
+                    </a>
+                </div>
+                <!--Manage Admin Section-->
+                <div id="manageAdmin_form" class="manageAdmin_form">
+                    <form>
+                        <!-- Form Fields -->
+                        <label for="searchType">Search By:</label>
+                        <select id="searchType" name="searchType">
+                            <option value="adminID">Admin ID</option>
+                            <option value="email">Email</option>
+                            <option value="name">Name</option>
+                        </select>
+                        <input type="text" id="searchField" name="searchField">
+                        <button type="button">Search</button>
+                    </form>
+                    <!-- Table to display search results -->
+                    <table id="searchResults">
+                        <thead>
+                            <tr>
+                                <th>Admin ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                                <!-- Add more columns as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--Update & Delete Section-->
+                <div id="updateForm" class="updateForm">
+                    <p class="heading">Update Now</p>
+                    <form id="updateForm">
+                        <!-- Form Fields -->
+                        <label for="adminID" id="adminIDL">Admin ID:<sup>*</sup></label><br>
+                        <input type="text" id="adminIDInput" name="adminID"><br>
+
+                        <label for="changeL">Update:</label>
+                        <select id="change" name="change">
+                            <option value="email">Email</option>
+                            <option value="name">Name</option>
+                            <option value="password">Password</option>
+                            <option value="key">Key</option>
+                        </select>
+
+                        <input type="text" id="updateText" name="updateText"><br>
+
+                        <button type="button" id="updateButton" class="clkbtn" onclick="updateData()">Update</button>
+                        <!-- Change type to button -->
+                    </form>
+                </div>
+                <!---Add Admins Section-->
+                <div id="addAdmin_form" class="addAdmin_form">
+                    <form id="addAdmin_form">
+                        <!-- Form Fields -->
+                        <label for="admin_idL">Admin ID:</label>
+                        <input type="adminID" id="admin_id" name="admin_id" readonly><br>
+
+                        <label for="name" id="nameL">Name:<sup>*</sup></label>
+                        <input type="text" id="name" name="name"><br>
+
+                        <label for="email" id="emailL">Email:<sup>*</sup></label>
+                        <input type="email" id="email" name="email"><br>
+
+                        <label for="password" id="password">Password:<sup>*</sup></label>
+                        <div class="password-wrapper">
+                            <input type="password" class="password ele" id="passwordInput" placeholder="Password">
+                            <!-- Password toggle icon -->
+                            <i class="fas fa-eye-slash password-toggle-icon" id="passwordToggle" onclick="togglePassword()"></i>
+                        </div>
+
+                        <label for="key" id="keyL">Key:<sup>*</sup></label>
+                        <input type="text" id="key" name="key" class="ele" maxlength="4"><br>
+
+                        <button type="button" class="addbtn" onclick="addAdmin()">Add Admin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <!--Add Admins-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/addAdmin.js"></script>
+        <!--Search & Delete Admin Data from Admins-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/manageAdmin.js"></script>
+    </body>
+</html>

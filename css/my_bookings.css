@@ -149,24 +149,6 @@ sup {
     margin: -10px;
 }
 
-.capt {
-    width: calc(25% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: large;
-}
-
-.refresh {
-    width: calc(10% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    height: auto;
-    background-color: transparent;
-    border: none;
-}
-
 table {
     margin-top: 25px;
     width: 100%;

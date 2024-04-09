@@ -2,211 +2,31 @@
     <head>
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/adminLogin.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Login</title>
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: "Poppins", sans-serif;
-            }   
-
-            body {
-                height: 100vh;
-                width: 100vw;
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-                background-color: rgb(226, 232, 239);
-            }
-
-            .container {
-                height: 750px;
-                width: 500px;
-                left: 38%;
-                top: 30%;
-                background-color: white;
-                box-shadow: 8px 8px 20px rgb(128, 128, 128);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .login-box {
-                height: 100%;
-                width: 500px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 0px 40px;
-                gap: 50px;
-            }
-
-            input {
-                margin: 0;
-                padding: 0;
-                border: 1px solid #ccc;
-                box-sizing: border-box;
-            }
-
-            .ele {
-                height: 60px;
-                width: 100%;
-                /* Ensures full width */
-                outline: none;
-                border: none;
-                /* Remove default border from previous change */
-                color: rgb(77, 77, 77);
-                background-color: rgb(240, 240, 240);
-                border-radius: 50px;
-                padding: 10px 30px;
-                /* Adjust padding to account for border-radius */
-                font-size: 18px;
-                position: relative;
-            }
-
-            .password-wrapper {
-                position: relative;
-                height: 60px;
-                width: calc(100% - 50px);
-                /* Adjust width as needed */
-                margin-bottom: 20px;
-                /* Add margin bottom for spacing */
-            }
-
-            .password-wrapper input {
-                height: 60px;
-                width: calc(100% - 50px);
-            }
-
-            .password-wrapper i {
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                cursor: pointer;
-                height: 60px;
-            }
-
-            .ele i {
-                position: absolute;
-                right: 15px;
-                top: 50%;
-                transform: translateY(-50%);
-                cursor: pointer;
-            }
-
-            .clkbtn {
-                height: 75px;
-                width: 250px;
-                border-radius: 10px;
-                background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
-                border: none;
-                cursor: pointer;
-                margin-top: 10px;
-                font: small-caps 25px/45px Georgia, serif;
-            }
-
-            .google-button {
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font: small-caps bold 25px/45px Georgia, serif;
-                color: black;
-                /* Text color */
-            }
-
-            .google-button i {
-                font-size: 36px;
-                /* Adjust as needed */
-                color: #EA4335;
-                /* Google logo color */
-                margin-right: 10px;
-                /* Adjust spacing between icon and text */
-            }
-
-        </style>
     </head>
     <body>
         <div class="header_div">
             <div class="left_div"></div>
-            <div class="right_div">
-                <div class="nav">
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
-                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/signup.html"><button>Login/SignUp</button></a>
-                </div>
-            </div>
         </div>
-        <div class="background">
-            <!-- container div -->
-            <div class="container">
-                <div class="login-box">
-                    <input type="username" class="username ele" placeholder="Username">
-                    <div class="password-wrapper">
-                        <input type="password" class="password ele" id="loginPassword" placeholder="Password">
-                        <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('loginPassword')"></i>
-                    </div>
-                    <button class="clkbtn">Admin Login</button>
-                    <div class="input">
-                        <button id="google-login-btns" class="google-button">
-                            <i class="fab fa-google"></i>Login with Google
-                        </button>
-                    </div>
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Admin Login</p>
+            <div class="login-box">
+                <input type="text" class="adminId ele" id="adminId" placeholder="Admin ID">
+                <div class="password-wrapper">
+                    <input type="password" class="password ele" id="password" placeholder="Password">
+                    <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('password')"></i>
                 </div>
+                <button class="clkbtn" id="login-btn">Admin Login</button>
             </div>
         </div>
     </body>
-    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/validation.js"></script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBLHdQpcdEPBxHG8_pI49ctq7FfEDK9KmM",
-            authDomain: "guesthousereservationsystem.firebaseapp.com",
-            projectId: "guesthousereservationsystem",
-            storageBucket: "guesthousereservationsystem.appspot.com",
-            messagingSenderId: "324476262968",
-            appId: "1:324476262968:web:887539776c70257702e4cd"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        auth.languageCode = 'en'
-        const provider = new GoogleAuthProvider();
-
-        const Login = document.getElementById("google-login-btn");
-        Login.addEventListener("click", function() {
-            
-        })
-
-        const googleLogin = document.getElementById("google-login-btns");
-        googleLogin.addEventListener("click", function() {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const credential = GoogleAuthProvider.credentialFromResult(result);
-                    const user = result.user;
-                    alert("Login Successful");
-                    /*
-                    window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
-                    */
-                }).catch((error) => {
-                    // Handle Errors here.
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-            });
-        })
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/adminValidate.js"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/adminLogin.js" defer type="module"></script>
 </html>

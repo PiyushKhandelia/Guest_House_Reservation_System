@@ -1,9 +1,9 @@
 /* Your existing styles */
 * {
     padding: 0;
-    overflow-x: hidden;
-    margin: 0; /* Add this to reset default margin */
+    margin: 0;
 }
+
 #background {
     background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
     height: 100%;
@@ -15,34 +15,39 @@
     left: 0;
     z-index: -1;
 }
+
 #content {
     position: absolute;
-    top: 50%;
+    top: 100%;
     opacity: 0.8;
     background-color: rgb(200, 221, 244);
     max-width: 100%;
     text-align: center;
-    /*z-index: 1;*/
     padding-left: 25px;
     padding-right: 25px;
 }
+
 .heading {
-    font: small-caps bold 50px/80px Georgia, serif;
+    font: small-caps bold 40px/70px Georgia, serif;
 }
+
 .body {
     font-size: 24px;
     font-family: monospace;
     font-weight: bolder;
 }
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 }
+
 .grid-item {
     padding: 20px;
     text-align: center;
 }
+
 .grid-item img {
     max-width: 100%;
     height: auto;
@@ -50,35 +55,44 @@
     margin: 0 auto;
     border-radius: 5px;
 }
+
 .detail {
     text-align: center; 
     flex: 1; 
     font-size: 22px;
 }
+
 .contact .details {
     text-align: center;
 }
+
 .mail {
     color: #fff;
     text-decoration: none;
 }
+
 .detail label { 
     display: block; 
     margin-bottom: 8px; 
 }
+
 .detail { 
     margin-bottom: 16px; 
 } 
+
 .detail label { 
     margin-right: 16px; 
 } 
+
 .map-div { 
     flex: 1; 
     background-color: #eee; 
 }
+
 .map-div iframe { 
     border: 0;
 }
+
 /* Adjusted footer styles */
 .footer {
     background-color: #000;
@@ -90,18 +104,19 @@
     display: flex; 
     margin-top: 25px;
 }
+
 .book {
-margin: 0 auto;
-font: small-caps bold 20px/35px Georgia, serif;
-width: 45%;
-padding: 12px;
-background-color: #ff4d4d;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+    margin: 0 auto;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 .book:hover {
     background-color: #ff6666;
 }
- 

@@ -1,68 +1,74 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <link rel = "icon" type = "image/x-icon" href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
-        <link rel = "stylesheet" href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
-		<link rel = "stylesheet" href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/contact_us.css">
-    	<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--
+			<link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+			<link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/contact_us.css">
+		-->
+		<link rel="stylesheet" href="http://127.0.0.1:5500/css/homepage.css">
+		<link rel="stylesheet" href="http://127.0.0.1:5500/css/contact_us.css">
         <title>Contact Us</title>
     </head>
     <body>
-        <div class = " header_div ">  
-            <div class = "left_div"></div>
-            <div class = "right_div">
-                <div class = "nav">
-                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
-                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
-                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
-                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Login/SignUp</button></a>
+        <div class="header_div">  
+            <div class="left_div"></div>
+            <div class="right_div">
+                <div class="nav">
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Login/SignUp</button></a>
                 </div>
             </div>
         </div>
-        <div class = "contact"> 
-	        <div class = "detail">
+        <div class="contact"> 
+	        <div class="detail">
 		        <h1>Contact:</h1>
-					<div class = "details">
-						<label for = "emails"> 
-							<a href = "mailto: emailid@example.com" class="mail">
-								<i class = "fa fa-solid fa-envelope" style= "margin: 3px;"> </i> 
+					<div class="details">
+						<label for="emails"> 
+							<a href="mailto: emailid@example.com" class="mail">
+								<i class="fa fa-solid fa-envelope" style="margin: 3px;"></i> 
 								emailid@example.com
 							</a>
 						</label>
 						<label for="contact_no"> 
-							<i class="fa fa-solid fa-phone" style="margin: 3px;"> </i> 
+							<i class="fa fa-solid fa-phone" style="margin: 3px;"></i> 
 							1234567890
 						</label>
 						<label for="address"> 
-							<i class="fa fa-map-marker" style="margin: 3px;"> </i> 
+							<i class="fa fa-map-marker" style="margin: 3px;"></i> 
 							Mesra, Jharkhand - 835215 
 						</label>
 					</div>
-            		<form ction="mailto:emailid@example.com" method="post" enctype="text/plain"> 
+                    <h1>Feedback:</h1>
+            		<form id="feedbackForm"> 
             			<label for="fullName"> 
-				            <i class="fa fa-solid fa-user" style="margin: 2px;"> </i> 
-                            Full Name: 
+				            <i class="fa fa-solid fa-user" style="margin: 2px;"></i> 
+                            Full Name: <sup>*</sup>
                         </label> 
 		                <input type="text" id="fullName" name="fullName" required> 
                         
                         <label for="email"> 
-			                <i class="fa fa-solid fa-envelope" style="margin: 2px;"> </i> 
-				            Email Address: 
+			                <i class="fa fa-solid fa-envelope" style="margin: 2px;"></i> 
+				            Email Address: <sup>*</sup>
 			            </label> 
 			            <input type="email" id="email" name="email" required> 
 
 			            <label for="mobile"> 
-				            <i class=" fa fa-solid fa-phone" style="margin: 2px;"> </i> 
-				            Contact No: 
+				            <i class=" fa fa-solid fa-phone" style="margin: 2px;"></i> 
+				            Contact No: <sup>*</sup>
 			            </label> 
 				        <input type="tel" id="mobile" name="mobile" required> 
 
 				        <label for="msg"> 
-					        <i class=" fa fa-solid fa-comment" style="margin: 2px;"> </i> 
-					        Write Message: 
+					        <i class=" fa fa-solid fa-comment" style="margin: 2px;"></i> 
+					        Write Message: <sup>*</sup>
 				        </label> 
-				        <textarea id="msg" name="msg" rows="5" required> </textarea> 
+				        <textarea id="msg" name="msg" rows="5" required></textarea> 
 
 				        <button class="submitBTN" type="submit" value="Send"> 
 					        Submit 
@@ -70,7 +76,7 @@
 			        </form> 
 		        </div> 
 		        <div class="map-div"> 
-			        <iframe src= "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d915.3339010256345!2d85.4394906180006!3d23.412240982983676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4fb53f0c27be7%3A0x66180c1cf3c5e704!2sBirla%20Institute%20of%20Technology%20-%20Mesra!5e0!3m2!1sen!2sin!4v1711297665120!5m2!1sen!2sin"
+			        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d915.3339010256345!2d85.4394906180006!3d23.412240982983676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4fb53f0c27be7%3A0x66180c1cf3c5e704!2sBirla%20Institute%20of%20Technology%20-%20Mesra!5e0!3m2!1sen!2sin!4v1711297665120!5m2!1sen!2sin"
 						width="750"
 					    height="100%"
 					    allowfullscreen=""
@@ -80,5 +86,12 @@
 		        </div> 
 	        </div>
         </div>
+        <!-- Firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <!-- Firebase Authentication -->
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+        <!--Storing Feedback to firebase-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/feedback.js"></script>
     </body>
 </html>

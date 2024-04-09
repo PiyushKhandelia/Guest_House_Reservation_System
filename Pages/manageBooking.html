@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/manageBooking.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Manage Booking</title>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>  
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Manage Booking</p>
+            <div class="login-box">
+                <div class="button-container">
+                    <button class="clkbtn" id="login-btn" onclick="showManageBooking()">Manage Booking</button>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html">
+                        <button class="clkbtn">Add Booking</button>
+                    </a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/adminPanel.html">
+                        <button class="clkbtn">Back</button>
+                    </a>
+                </div>
+                <!--Manage Booking Section-->
+                <div id="manageBooking_form" class="manageBooking_form">
+                    <form>
+                        <!-- Form Fields -->
+                        <label for="searchType">Search By:</label>
+                        <select id="searchType" name="searchType">
+                            <option value="bookingID">Booking ID</option>
+                            <option value="email">Email</option>
+                            <option value="name">Name</option>
+                            <option value="guestHouse">Guest House</option>
+                        </select>
+                        <input type="text" id="searchField" name="searchField">
+                        <button type="button">Search</button>
+                    </form>
+                    <!-- Table to display search results -->
+                    <table id="searchResults">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Guest House</th>
+                                <th>Room Type</th>
+                                <th>Booking Date</th>
+                                <th>Date (From:)</th>
+                                <th>Check-In Date</th>
+                                <th>Actions</th>
+                                <!-- Add more columns as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <!--Update & Delete Section-->
+                <div id="updateBooking_Form" class="updateBooking_Form">
+                    <p class="heading">Update Booking</p>
+                    <form id="updateBooking_Form">
+                        <!-- Form Fields -->
+                        <label for="bookingID" id="bookingIDL">Booking ID:<sup>*</sup></label><br>
+                        <input type="text" id="bookingIDInput" name="bookingID"><br>
+
+                        <label for="changeL">Update:</label>
+                        <select id="change" name="change">
+                            <option value="guestHouse">Guest House</option>
+                            <option value="roomType">Room Type</option>
+                            <option value="occupacy">Occupacy</option>
+                            <option value="altEmail">Alternate Email</option>
+                            <option value="altPhone">Alternate Phone</option>
+                        </select>
+
+                        <input type="text" id="updateText" name="updateText"><br>
+
+                        <button type="button" id="updateButton" class="clkbtn" onclick="updateBookingData()">Update</button>
+                        <!-- Change type to button -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <!-- Add Firebase Authentication script -->
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+        <!--Booking Management-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/manageBooking.js"></script>
+    </body>
+</html>

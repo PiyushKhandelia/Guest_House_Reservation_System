@@ -88,7 +88,7 @@ function bookNow() {
     const dateTime = document.getElementById('curr_date').value;
 
     const duration = document.getElementById('duration').value.trim();
-    const status = "Upcoming";
+    const status = "upcoming";
 
     function validateFields(name, email, phone, category, idProof, idProofNumber, gender, permanentAddressLocation, permanentAddressPin, permanentAddressState, permanentAddressArea, guestHouse, dateF, dateTo, roomType, occupacy, enteredCaptcha, status) {
        // Your field validation logic goes here
@@ -159,8 +159,20 @@ function bookNow() {
         if (error) {
             alert("Error occurred while saving data: " + error.message);
         } else {
+            var form = document.getElementById("bookingform");
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://github.com/PiyushKhandelia/Guest_House_Reservation_System/blob/master/sendBookingConfirmation.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert(xhr.responseText); // You can handle response here
+                }
+            };
+            xhr.send(formData);
+
             alert("Booking Success");
-            window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
+            //window.location.href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html";
         }
     });
 }

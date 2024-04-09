@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Billing</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }   
+
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header_div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(255, 255, 255);
+                height: 125px;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                z-index: 9999;
+            }
+
+            .container {
+                margin-top: 100px;
+                height: 925px;
+                width: 2000px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                position: relative;
+                overflow: hidden;
+                padding: 25px;
+                border-radius: 10px;
+            }
+
+            .heading {
+                font: small-caps bold 50px/80px Georgia, serif;
+            }
+
+            .clkbtn {
+                flex: 1;
+                width: 450px;
+                height: 75px;
+                max-height: 100px;
+                padding: 15px;
+                border: 1px solid #000;
+                border-radius: 25px;
+                font-size: 20px;
+                font-weight: bolder;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgb(226, 232, 239);
+                outline: none;
+                color: #000;
+                max-width: 500px;
+                margin-top: 20px;
+            }
+
+            .billing {
+                height: 925px;
+                width: 1900px;
+                background-color: white;
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                overflow: hidden;
+                padding: 25px;
+                border-radius: 10px;
+            }
+
+            .pdfViewer {
+                margin: auto; 
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                display: none;
+                width: 950px; 
+                height: 700px; 
+            }   
+
+            /* Label styling */
+            label {
+                font-weight: bold;
+                text-align: center;
+                font: small-caps bold 30px/45px Georgia, serif;
+                margin-top: 10px; /* Add some space between lottie-player and label */
+            }
+
+            /* Input, textarea, select styling */
+            .container input[type="text"] { /* Include select element */
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>
+        <div class="container">
+            <p class="heading">Billing</p>
+            <div class="billing">
+                <label for="booking_idL">Booking ID:</label>
+                <input type="text" id="booking_id" name="booking_id">
+                <button class="clkbtn" id="generateInvoiceButton">Generate Bill</button>
+                <iframe id="pdfViewer" class="pdfViewer"></iframe>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-storage.js"></script>
+        <script>
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.min.js';
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
+                authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+                databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
+                projectId: "guesthousebookingsystem-675c6",
+                storageBucket: "guesthousebookingsystem-675c6.appspot.com",
+                messagingSenderId: "979837493640",
+                appId: "1:979837493640:web:64745b6eefd825d4c31a3d"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            // Function to generate PDF with booking data
+            async function generatePDF(bookingData) {
+                // Generate invoice number dynamically
+                const invoiceNo = generateInvoiceNumber();
+                // Calculate rate per day based on booking data
+                const ratePerDay = calculateRatePerDay(bookingData);
+                // Calculate amount based on booking data and rate per day
+                const amount = calculateAmount(bookingData, ratePerDay);
+                // Calculate subtotal
+                const subTotal = calculateSubTotal(amount);
+                // Calculate tax
+                const tax = calculateTax(subTotal);
+                // Calculate total
+                const total = calculateTotal(subTotal, tax);
+                // Import PDF using link
+                const pdfUrl = 'https://firebasestorage.googleapis.com/v0/b/guesthousebookingsystem-675c6.appspot.com/o/billing%2FInvoice_Template.pdf?alt=media&token=2c9b0014-0b7e-4c6f-9918-79a0d6218a5f';
+
+                try {
+                    // Fetch the PDF document using its URL
+                    const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+                    // Rest of your code for modifying and rendering the PDF
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                }
+
+                try {
+                    console.log('PDF URL:', pdfUrl);
+                    // Fetch the PDF document using its URL
+                    const pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+
+                    // Get the first page of the PDF document
+                    const pdfPage = await pdfDoc.getPage(1);
+
+                    // Extract text content from the PDF page
+                    const textContent = await pdfPage.getTextContent();
+                    const textItems = textContent.items;
+
+                    // Modify text items as needed
+                    textItems.forEach(item => {
+                        switch (item.str) {
+                        case "{{Invoice_No}}":
+                            item.str = invoiceNo;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{curr_Date}}":
+                            item.str = new Date().toLocaleString();
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{BookingID}}":
+                            item.str = bookingData.bookingID;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{dateTime}}":
+                            item.str = bookingData.dateTime;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{guestHouse}}":
+                            item.str = bookingData.guestHouse;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{room_No}}":
+                            item.str = bookingData.roomNo;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{type}}":
+                            item.str = bookingData.roomType;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{occupancy}}":
+                            item.str = bookingData.occupacy;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{dateFrom}}":
+                            item.str = bookingData.dateFrom;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{dateTo}}":
+                            item.str = bookingData.dateTo;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{check-InTime}}":
+                            item.str = bookingData.checkInTime;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{check-OutTime}}":
+                            item.str = bookingData.checkOnTime;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{duration}}":
+                            item.str = bookingData.duration;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{rentPerday}}":
+                            item.str = ratePerDay;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{amount}}":
+                            item.str = amount;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{sub_Total}}":
+                            item.str = subTotal;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{tax}}":
+                            item.str = tax;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{total}}":
+                            item.str = total;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{name}}":
+                            item.str = bookingData.name;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{email}}":
+                            item.str = bookingData.email;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{alt_email}}":
+                            item.str = bookingData.alt_email;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{phone}}":
+                            item.str = bookingData.phone;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{alt_phone}}":
+                            item.str = bookingData.alt_phone;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{category}}":
+                            item.str = bookingData.category;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{gender}}":
+                            item.str = bookingData.gender;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{permanent_Address_Area}}":
+                            item.str = bookingData.permanentAddressArea;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{permanent_Address_Location}}":
+                            item.str = bookingData.permanentAddressLocation;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{permanent_Address_Pin}}":
+                            item.str = bookingData.permanentAddressPin;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                        switch (item.str) {
+                        case "{{permanent_Address_State}}":
+                            item.str = bookingData.permanentAddressState;
+                            break;
+                            // Add more cases to replace other placeholders
+                        }
+                    });
+
+                /*    
+                    // Set modified text content (optional)
+                    pdfPage.cleanupTextContent();
+                    pdfPage.setTextContent(textContent);
+                */
+                   
+                    // Render the modified PDF
+                    const pdfCanvas = document.createElement("canvas");
+                    const pdfViewport = pdfPage.getViewport({ scale: 1.5 });
+                    pdfCanvas.height = pdfViewport.height;
+                    pdfCanvas.width = pdfViewport.width;
+                    const renderContext = {
+                        canvasContext: pdfCanvas.getContext('2d'),
+                        viewport: pdfViewport
+                    };
+                    await pdfPage.render(renderContext).promise;
+
+                    // Display or download the modified PDF
+                    // For example, you can display it in an iframe
+                    const pdfViewer = document.getElementById("pdfViewer");
+                    pdfViewer.src = pdfCanvas.toDataURL();
+                    pdfViewer.style.display = "block";
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                }
+            }
+                
+            /*    
+                // Calculate rate per day, amount, subtotal, tax, and total
+                const ratePerDay = calculateRatePerDay(bookingData);
+                const amount = calculateAmount(bookingData, ratePerDay);
+                const subTotal = calculateSubTotal(amount);
+                const tax = calculateTax(subTotal);
+                const total = calculateTotal(subTotal, tax);
+                const permanentAddress = `${bookingData.permanentAddressArea}, ${bookingData.permanentAddressLocation}, ${bookingData.permanentAddressPin}, ${bookingData.permanentAddressState}`;
+
+                // Placeholder PDF text
+                const replacedPDFText = `
+                    Invoice No: ${invoiceNo}
+                    Date: ${new Date().toLocaleString()}
+                    Booking ID: ${bookingData.bookingID}
+                    Guest House: ${bookingData.guestHouse}
+                    Room No: ${bookingData.roomNo}
+                    Type: ${bookingData.roomType}
+                    Rate Per Day: ${ratePerDay}
+                    Amount: ${amount}
+                    Subtotal: ${subTotal}
+                    Tax: ${tax}
+                    Total: ${total}
+                    Name: ${bookingData.name}
+                    Email: ${bookingData.email}
+                    Phone: ${bookingData.phone}
+                    Category: ${bookingData.category}
+                    Gender: ${bookingData.gender}
+                    Permanent Address: ${permanentAddress}
+                `;
+
+                // For simplicity, you can log the modified PDF text or further process it
+                console.log(replacedPDFText);
+            */
+                
+            // Event listener for the 'Generate Bill' button
+            document.getElementById('generateInvoiceButton').addEventListener('click', generateBill);
+
+            // Function to generate a bill based on the booking ID
+            function generateBill() {
+                const bookingId = document.getElementById('booking_id').value;
+                const bookingsRef = firebase.database().ref('bookings/' + bookingId);
+
+                bookingsRef.once('value', function (snapshot) {
+                    const bookingData = snapshot.val();
+                    if (bookingData) {
+                        generatePDF(bookingData); // Call function to generate PDF with booking data
+                    } else {
+                        // Show "Booking ID not found" message in the pdfViewer
+                        const pdfViewer = document.getElementById("pdfViewer");
+                        pdfViewer.style.display = "block";
+                        pdfViewer.textContent = "Booking ID not found";
+                    }
+                });
+            }
+
+            // Function to generate a unique invoice number
+            async function generateInvoiceNumber() {
+                const invoiceRef = firebase.database().ref('billing');
+                try {
+                    const snapshot = await invoiceRef.once('value');
+                    const lastInvoice = snapshot.val() ? Object.keys(snapshot.val()).pop() : null;
+                    if (lastInvoice) {
+                        const lastNumber = parseInt(lastInvoice.replace('BITIN', ''));
+                        return 'BITIN' + (lastNumber + 1);
+                    } else {
+                        return 'BITIN1001';
+                    }
+                } catch (error) {
+                    console.error('Error fetching invoice number:', error);
+                    return null;
+                }
+            }
+
+            // Function to calculate rate per day based on booking data
+            function calculateRatePerDay(bookingData) {
+                var ratePerDay = 0;
+                // Assuming 'bookingData' contains necessary information
+                if (bookingData.guestHouse === 'igh') {
+                    if (bookingData.roomType === 'suite') {
+                        ratePerDay = 2500;
+                    } else if (bookingData.roomType === 'mezzanine') {
+                        ratePerDay = bookingData.occupancy === 'single' ? 1200 : 1500;
+                    } else if (bookingData.roomType === 'small') {
+                        ratePerDay = bookingData.occupancy === 'single' ? 1000 : 1200;
+                    }
+                } else if (bookingData.guestHouse === 'ogh') {
+                    if (bookingData.roomType === 'suite') {
+                        ratePerDay = 3000;
+                    } else if (bookingData.roomType === 'small') {
+                        ratePerDay = bookingData.occupancy === 'single' ? 1200 : 1500;
+                    }
+                }
+                return ratePerDay;
+            }
+
+            // Function to calculate amount based on booking data
+            function calculateAmount(bookingData, ratePerDay) {
+                return bookingData.duration * ratePerDay;
+            }
+
+            // Function to calculate subtotal based on booking data
+            function calculateSubTotal(amount) {
+                return amount;
+            }
+
+            // Function to calculate tax based on booking data
+            function calculateTax(subTotal) {
+                return subTotal * 0.12;
+            }
+
+            // Function to calculate total based on booking data
+            function calculateTotal(subTotal, tax) {
+                return subTotal + tax;
+            }
+        </script>
+    </body>
+</html>

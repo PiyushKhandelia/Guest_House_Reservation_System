@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/Feedback.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Feedback</title>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>  
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Feedback</p>
+            <div class="feedback-box">
+                <form class="feedback_form">
+                    <!-- Form Fields -->
+                    <div>
+                        <label for="searchType">Search By:</label>
+                        <select id="searchType" name="searchType">
+                            <option value="all">All</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Number</option>
+                        </select>
+                        <input type="text" id="searchField" name="searchField">
+                        <button type="button" class="clkbtn">Search</button>
+                    </div>  
+                </form>
+                <!-- Table to display search results -->
+                <table id="searchResults">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                            <th>Actions</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table body will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Reply form -->
+            <div id="replyForm" class="replyForm">
+                <p class="heading">Reply to Feedback</p>
+                <form id="replyForm">
+                    <!-- Reply form fields -->
+                    <label for="email">Email:<sup>*</sup></label><br>
+                    <input type="email" id="useremailInput" name="email" readonly><br>
+
+                    <label for="msg">Write Message: <sup>*</sup></label> 
+                    <textarea id="msg" name="msg" rows="5" required></textarea> <br>
+
+                    <button type="button" class="clkbtn" id="replyButton">Send Reply</button>
+                </form>
+            </div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+        <!--Search Feedback-->
+        <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/manageFeedback.js"></script>
+    </body>
+</html>

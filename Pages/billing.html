@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <meta charset="utf-8">
+        <title>Invoice</title>
+        <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+        <link rel="stylesheet" href="http://127.0.0.1:5500/css/billing.css">
+    </head>
+    <body>
+    <header>
+        <h1>Invoice</h1>
+        <address>
+            <span><img alt="" src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png"><input type="file" accept="image/*"></span>
+			<div class="details">
+                <p>BIT MESRA </p>
+			    <p>GUEST HOUSE<br> Mesra, Jharkhand 835215</p>
+			    <p>0651 227 5444</p>
+            </div>
+		</address>
+    </header>
+    <article>
+        <h1>Recipient</h1>
+        <address>    
+			<p>Guest House Invoice</p>
+            <table class="meta">
+                <tr>
+                    <th><span>Invoice No.</span></th>
+                    <td><input type="text" class="invoiceNo" readonly></td>
+                </tr>
+                <tr>
+                    <th><span>Invoice Date</span></th>
+                    <td><input type="text" class="invoiceNo" readonly></td>
+                </tr>
+                <tr>
+                    <th><span>Booking Date</span></th>
+                    <td><span>January 1, 2012</span></td>
+                </tr>
+            </table>
+            <table class="inventory">
+                <thead>
+                    <tr>
+                        <th><span>Customer Name</span></th>
+                        <th><span>Booking id</span></th>
+                        <th><span>Check-In & Check-Out </span></th>
+                        <th><span>Rate/per day</span></th>
+                        <th><span>Amount</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="cut">-</a><span >bew</span></td>
+                        <td><span >12345</span></td>
+                        <td><span >123-45</span></td>
+                        <td><span >4</span></td>
+                        <td><span data-prefix>₹</span><span>600.00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="balance">
+                <tr>
+                    <th><span >Sub Total</span></th>
+                    <td><span data-prefix></span><span>600.00</span></td>
+                </tr>
+                <tr>
+                    <th><span >Tax(12%)</span></th>
+                    <td><span data-prefix>₹</span><span >0.00</span></td>
+                </tr>
+                <tr>
+                    <th><span >Total</span></th>
+                    <td><span data-prefix>₹</span><span>600.00</span></td>
+                </tr>
+            </table>
+        </article>    
+    </body>
+</html>

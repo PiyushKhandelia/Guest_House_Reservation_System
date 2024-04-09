@@ -1,15 +1,13 @@
 /* Your existing styles */
 * {
     padding: 0;
-    overflow-x: hidden;
-    margin: 0; /* Add this to reset default margin */
+    margin: 0;
 }
 
 #background {
     background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/IGH/igh.jpg");
     height: 100%;
     width: 100%;
-    opacity: 1;
     background-repeat: no-repeat;
     background-size: cover;
     position: fixed;
@@ -20,18 +18,17 @@
 
 #content {
     position: absolute;
-    top: 50%;
+    top: 100%;
     opacity: 0.8;
     background-color: rgb(200, 221, 244);
     max-width: 100%;
     text-align: center;
-    /*z-index: 1;*/
     padding-left: 25px;
     padding-right: 25px;
 }
 
 .heading {
-    font: small-caps bold 50px/80px Georgia, serif;
+    font: small-caps bold 40px/70px Georgia, serif;
 }
 
 .body {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Billing</title>
+        <link rel="stylesheet" href="http://127.0.0.1:5500/css/invoice.css">
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>
+        <!-- container div -->
+        <div class="container">
+            <p class="heading">Billing</p>
+            <div class="billing">
+                <label for="booking_idL">Booking ID:</label>
+                <input type="text" id="booking_id" name="booking_id">
+                <button class="clkbtn" id="generateInvoice">Generate Bill</button>
+            </div>
+        </div>
+        <script>
+            document.getElementById("generateInvoice").addEventListener("click", function() {
+                window.location.href = "http://127.0.0.1:5500/Pages/billing.html"; // Redirect to billing.html
+            });
+        </script>               
+    </body>
+</html>

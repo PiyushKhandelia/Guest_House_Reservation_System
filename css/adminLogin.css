@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }   
+
+            /* Center everything */
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center; /* Center content horizontally */
+                align-items: center; /* Center content vertically */
+            }
+
+            /* Centering the logo */
+            .header_div {
+                display: flex;
+                justify-content: center; /* Center horizontally */
+                align-items: center; /* Center vertically */
+                background-color: rgb(255, 255, 255); /* Add background color */
+                height: 125px; /* Set height */
+                width: 100%; /* Set width */
+                position: fixed; /* Fix position */
+                top: 0; /* Set position from top */
+                z-index: 9999; /* Ensure it stays above other elements */
+            }
+
+            /* Container */
+            .container {
+                margin-top: 200px;
+                height: 750px;
+                width: 600px;
+                background-color: white;
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                position: relative;
+                overflow: hidden;
+                padding: 50px; /* Add padding */
+                border-radius: 10px; /* Add border radius */
+            }
+
+            /* Login Box */
+            .login-box {
+                width: 100%; /* Adjust width */
+                max-width: 500px; /* Limit maximum width */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0px 40px;
+                gap: 50px;
+            }
+
+            /* Heading styling */
+            .heading {
+                margin-bottom: 50px;
+                text-align: center;
+                font: small-caps bold 50px/80px Georgia, serif;  
+            }
+
+            /* Input Fields */
+            .ele {
+                width: 100%; /* Adjust width */
+                padding: 15px; /* Adjust padding */
+                height: 75px; /* Adjust height */
+                border: 1px solid #000;
+                border-radius: 25px; /* Adjust border radius */
+                font-size: 20px; /* Adjust font size */
+                font-weight: bolder;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgb(226, 232, 239);
+                outline: none;
+                color: #000;
+                padding: 50px; /* Add padding */
+            }
+
+            /* Password Wrapper */
+            .password-wrapper {
+                position: relative;
+                width: 100%;
+            }
+
+            .password-wrapper input {
+                width: calc(100% - 50px); /* Adjust width */
+                margin-right: 15px;
+            }
+
+            .password-wrapper i {
+                right: 15px;
+            }
+
+            .ele i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+            /* Login Button */
+            .clkbtn {
+                width: 100%; /* Adjust width */
+                padding: 15px; /* Adjust padding */
+                border: 1px solid #000;
+                border-radius: 25px; /* Adjust border radius */
+                font-size: 20px; /* Adjust font size */
+                font-weight: bolder;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgb(226, 232, 239);
+                outline: none;
+                color: #000;
+                max-width: 250px; /* Limit maximum width */
+                height: 75px; /* Adjust height */
+                margin-top: 20px; /* Adjust margin top */
+            }

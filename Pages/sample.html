@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Billing</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }   
+
+            body, html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header_div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(255, 255, 255);
+                height: 125px;
+                width: 100%;
+                position: fixed;
+                top: 0;
+                z-index: 9999;
+            }
+
+            .container {
+                margin-top: 100px;
+                height: 925px;
+                width: 2000px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                position: relative;
+                overflow: hidden;
+                padding: 25px;
+                border-radius: 10px;
+            }
+
+            .heading {
+                font: small-caps bold 50px/80px Georgia, serif;
+            }
+
+            .clkbtn {
+                flex: 1;
+                width: 450px;
+                height: 75px;
+                max-height: 100px;
+                padding: 15px;
+                border: 1px solid #000;
+                border-radius: 25px;
+                font-size: 20px;
+                font-weight: bolder;
+                font-family: 'Courier New', Courier, monospace;
+                background-color: rgb(226, 232, 239);
+                outline: none;
+                color: #000;
+                max-width: 500px;
+                margin-top: 20px;
+            }
+
+            .billing {
+                height: 925px;
+                width: 1900px;
+                background-color: white;
+                box-shadow: 8px 8px 20px rgb(128, 128, 128);
+                overflow: hidden;
+                padding: 25px;
+                border-radius: 10px;
+            }
+
+            /* Label styling */
+            label {
+                font-weight: bold;
+                text-align: center;
+                font: small-caps bold 30px/45px Georgia, serif;
+                margin-top: 10px; /* Add some space between lottie-player and label */
+            }
+
+            /* Input, textarea, select styling */
+            .container input[type="text"] { /* Include select element */
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: large;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+        </div>
+        <div class="container">
+            <p class="heading">Billing</p>
+            <div class="billing">
+                <label for="booking_idL">Booking ID:</label>
+                <input type="text" id="booking_id" name="booking_id">
+                <button class="clkbtn" id="generateInvoiceButton">Generate Bill</button>
+            </div>
+            <!-- Placeholder for displaying generated PDF content -->
+            <div id="pdfContent"></div>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-storage.js"></script>
+        <!--Cloud Convert Personal Access Token-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyBRI8aRPiHrQL9fWgNH9JgWpBtD8GTPuv8",
+                authDomain: "guesthousebookingsystem-675c6.firebaseapp.com",
+                databaseURL: "https://guesthousebookingsystem-675c6-default-rtdb.firebaseio.com",
+                projectId: "guesthousebookingsystem-675c6",
+                storageBucket: "guesthousebookingsystem-675c6.appspot.com",
+                messagingSenderId: "979837493640",
+                appId: "1:979837493640:web:64745b6eefd825d4c31a3d"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+
+            async function generateInvoice() {
+                try {
+                    // Prompt the user to enter the booking ID
+                    const bookingId = prompt('Please enter the booking ID:');
+                    if (!bookingId) {
+                        return; // If no booking ID is provided, exit the function
+                    }
+
+                    // Fetch booking details from Firebase database
+                    const bookingSnapshot = await firebase.database().ref('bookings').child(bookingId).once('value');
+                    const bookingData = bookingSnapshot.val();
+
+                    if (!bookingData) {
+                        throw new Error('Booking not found');
+                    }
+
+                    // Fetch last used invoice number from Firebase database
+                    let lastInvoiceNumberRef = firebase.database().ref('billing');
+                    // Fetch last used invoice number from Firebase database
+                    const lastInvoiceSnapshot = await lastInvoiceNumberRef.once('value');
+                    let lastInvoiceNumber = lastInvoiceSnapshot.val();
+
+                    if (typeof lastInvoiceNumber === 'string') {
+                        lastInvoiceNumber = 'BITIN' + (parseInt(lastInvoiceNumber.substring(5)) + 1);
+                    } else {
+                        // Handle the case where lastInvoiceNumber is not a string
+                        // For example, set it to a default value
+                        lastInvoiceNumber = 'BITIN101';
+                    }
+
+                    // Update invoice number in the database
+                    await lastInvoiceNumberRef.set(lastInvoiceNumber);
+
+                    // Generate PDF invoice based on booking data
+                    const pdfUrl = `https://piyushkhandelia.github.io/Guest_House_Reservation_System/Invoice_Template.pdf`;
+                    const response = await fetch(pdfUrl);
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch PDF invoice');
+                    }
+
+                    const pdfBlob = await response.blob();
+
+                    // Display PDF in iframe
+                    const pdfViewer = document.getElementById('pdfViewer');
+                    pdfViewer.src = URL.createObjectURL(pdfBlob);
+                    pdfViewer.style.display = 'block';
+
+                    // Save a copy to local storage
+                    const reader = new FileReader();
+                    reader.onloadend = function() {
+                        localStorage.setItem('generatedPdf', reader.result);
+                    };
+                    reader.readAsDataURL(pdfBlob);
+
+                    // Save the generated invoice to Firebase storage
+                    const storageRef = firebase.storage().ref().child(`billingx/${lastInvoiceNumber}.pdf`);
+                    await storageRef.put(pdfBlob);
+
+                    // Save invoice details to Firebase database
+                    await saveInvoiceToDatabase(lastInvoiceNumber, bookingId, bookingData);
+
+                    console.log('Invoice generated:', lastInvoiceNumber);
+                } catch (error) {
+                    console.error('Error generating invoice:', error);
+                    alert('Error generating invoice. Please try again later.');
+                }
+            }
+
+            // Function to save the generated invoice to Firebase database
+            async function saveInvoiceToDatabase(invoiceNumber, bookingId, bookingData) {
+                try {
+                    const databaseRef = firebase.database().ref('billing').child(invoiceNumber);
+                    await databaseRef.set({
+                        invoiceNumber: invoiceNumber,
+                        bookingId: bookingId,
+                        bookingData: bookingData
+                    });
+                    console.log('Invoice saved to database:', invoiceNumber);
+                } catch (error) {
+                    console.error('Error saving invoice to database:', error);
+                }
+            }
+
+            // Event listener for the "Generate Bill" button
+            document.addEventListener('DOMContentLoaded', () => {
+                const generateInvoiceButton = document.getElementById('generateInvoiceButton');
+                if (generateInvoiceButton) {
+                    generateInvoiceButton.addEventListener('click', async () => {
+                        await generateInvoice();
+                    });
+                } else {
+                    console.error('Element with id "generateInvoiceButton" not found.');
+                }
+            });
+    </script>
+</body>
+</html>
