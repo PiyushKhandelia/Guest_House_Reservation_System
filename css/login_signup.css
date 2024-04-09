@@ -7,25 +7,33 @@
 }   
 
 body {
-    display: flex;
-    flex-direction: column;
     background-color: rgb(226, 232, 239);
-}
-
-.title {
-    font-weight: 400;
-    letter-spacing: 1.5px;
 }
 
 .container {
     height: 560px;
     width: 500px;
     left: 35%;
-    top: 30%;
+    margin-top: 175px;
     background-color: white;
     box-shadow: 8px 8px 20px rgb(128, 128, 128);
     position: relative;
     overflow: hidden;
+}
+
+.slider {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    transition: all 0.5s ease-in-out;
+}
+
+.moveslider {
+    left: 250px;
 }
 
 .btn {
@@ -46,21 +54,6 @@ body {
     background-color: transparent;
     position: relative;
     cursor: pointer;
-}
-
-.slider {
-    height: 60px;
-    width: 150px;
-    border-radius: 50px;
-    background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
-    position: absolute;
-    top: 20px;
-    left: 100px;
-    transition: all 0.5s ease-in-out;
-}
-
-.moveslider {
-    left: 250px;
 }
 
 .form-section {
@@ -185,9 +178,90 @@ input {
 
 .google-button i {
     font-size: 36px;
-    /* Adjust as needed */
     color: #EA4335;
-    /* Google logo color */
     margin-right: 10px;
-    /* Adjust spacing between icon and text */
+}
+
+/* For mobile phones */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    
+    .container {
+        height: 600px;
+        width: 300px;
+        margin-top: 175px;
+        margin-left: -100px;
+        background-color: white;
+        box-shadow: 8px 8px 20px rgb(128, 128, 128);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn {
+        height: 60px;
+        width: 120px;
+        box-shadow: 10px 10px 30px rgb(250, 4, 4);
+        border-radius: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .login, .signup {
+        font: small-caps 15px/30px Georgia, serif;
+        border: none;
+        outline: none;
+        margin-right: 100px;
+        background-color: transparent;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .slider {
+        height: 60px;
+        width: 120px;
+        border-radius: 50px;
+        background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
+        position: absolute;
+        top: 20px;
+        margin: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .moveslider {
+        left: 120px;
+    }
+    
+    .form-section {
+        margin-top: -50px;
+        height: 550px;
+        width: 1500px;
+        padding: 20px 0;
+        display: flex;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+        left: 0px;
+    }
+    
+    .form-section-move {
+        left: -500px;
+    }
+    
+    .login-box, .signup-box {
+        height: 100%;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 40px;
+    }
+    
+    .login-box {
+        gap: 20px;
+    }
+    
+    .signup-box {
+        gap: 10px;
+    }
+
 }
