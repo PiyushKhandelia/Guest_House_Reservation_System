@@ -12,19 +12,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
-// Initialize Firebase Authentication
-var auth = firebase.auth();
-
-// Add event listener for authentication state change
-auth.onAuthStateChanged(function(user) {
-    if (user) {
-        // User is signed in, enable check-in and check-out functionality
-        document.getElementById("searchBtn").disabled = false;
-    } else {
-        // No user is signed in, disable check-in and check-out functionality
-        document.getElementById("searchBtn").disabled = true;
-    }
-});
 
 // Search button click event
 document.getElementById("searchBtn").addEventListener("click", function() {
@@ -48,7 +35,7 @@ document.getElementById("searchBtn").addEventListener("click", function() {
                 <td>${data.phone}</td>
                 <td>${data.guestHouse}</td>
                 <td>${data.roomType}</td>
-                <td>${data.occupacy}</td>
+                <td>${data.occupancy}</td>
                 <td>${data.status}</td>
                 <td>
                     <button onclick="checkIn('${childSnapshot.key}')">Check-In</button>
