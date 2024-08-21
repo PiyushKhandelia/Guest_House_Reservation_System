@@ -1,8 +1,0 @@
-[
-    {
-        "origin": ["http://127.0.0.1:5500", "https://piyushkhandelia.github.io/Guest_House_Reservation_System"],
-        "method": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "responseHeader": ["Content-Type"],
-        "maxAgeSeconds": 3600
-    }
-]
