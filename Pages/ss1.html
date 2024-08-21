@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <!--<link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/ogh.css">-->
+        <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>OGH</title>
+        <style>
+            /* Your existing styles */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#background {
+    background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#content {
+    position: absolute;
+    top: 70%;
+    opacity: 0.8;
+    background-color: rgb(200, 221, 244);
+    max-width: 100%;
+    text-align: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.heading {
+    font: small-caps bold 40px/70px Georgia, serif;
+}
+
+.body {
+    font-size: 24px;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.grid-item {
+    padding: 20px;
+    text-align: center;
+}
+
+.grid-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.detail {
+    text-align: center; 
+    flex: 1; 
+    font-size: 22px;
+}
+
+.contact .details {
+    text-align: center;
+}
+
+.mail {
+    color: #fff;
+    text-decoration: none;
+}
+
+.detail label { 
+    display: block; 
+    margin-bottom: 8px; 
+}
+
+.detail { 
+    margin-bottom: 16px; 
+} 
+
+.detail label { 
+    margin-right: 16px; 
+} 
+
+.map-div { 
+    flex: 1; 
+    background-color: #eee; 
+}
+
+.map-div iframe { 
+    border: 0;
+}
+
+/* Adjusted footer styles */
+.footer {
+    background-color: #000;
+    color: #fff;
+    width: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex; 
+    margin-top: 25px;
+}
+
+.book {
+    margin: 0 auto;
+    font: small-caps bold 20px/35px Georgia, serif;
+    width: 45%;
+    padding: 12px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.book:hover {
+    background-color: #ff6666;
+}
+        </style>
+    </head>
+    <body>
+        <div class="header_div">
+            <div class="left_div"></div>
+            <div class="right_div">
+                <div class="nav">
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
+                    <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Login/SignUp</button></a>
+                </div>
+            </div>
+        </div>
+        <div id="background"></div>
+        <div id="content">
+            <p class = "heading">Old Guest House (OGH) at BIT Mesra:</p>
+            <p class = "body">
+                The Old Guest House at BIT Mesra seamlessly blends colonial and indigenous design elements, offering guests a nostalgic yet comfortable retreat. Each room exudes timeless elegance with antique furnishings, while attentive staff uphold the principle of 'Atithi Devo Bhava' to ensure a memorable stay. Culinary offerings feature a fusion of traditional and modern flavors. Surrounded by lush gardens, ponds, and tranquil lakesides, OGH provides a serene escape for introspection and relaxation. It embodies the institute's rich history and culture, inviting guests on a journey of discovery and nostalgia.
+            </p>
+            <p class = "heading">Types of Rooms:</p>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <img src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/16.jpg" alt="Image 1">
+                    <p class="body">Single Room</p>
+                </div>
+                <div class="grid-item">
+                    <img src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/14.jpg" alt="Image 2">
+                    <p class="body">Suites</p>
+                </div>
+            </div>
+            <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button class="book">Book Now</button></a>
+            <div class="footer">
+                <div class="detail">
+                    <h1>Contact:</h1>
+                    <div class="details">
+                        <label for="emails">
+                            <a href="mailto: emailid@example.com" class="mail">
+                                <i class="fa fa-solid fa-envelope" style="margin: 3px;"></i>
+                                emailid@gmail.com
+                            </a>
+                        </label>
+                        <label for="contact_no">
+                            <i class="fa fa-solid fa-phone" style="margin: 3px;"></i>
+                            1234567890
+                        </label>
+                        <label for="address">
+                            <i class="fa fa-map-marker" style="margin: 3px;"></i>
+                            Mesra, Jharkhand - 835215
+                        </label>
+                    </div>
+                </div>
+                <div class="map-div">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1830.6084739295106!2d85.44063353881113!3d23.416528994724946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDI0JzU5LjUiTiA4NcKwMjYnMzAuOSJF!5e0!3m2!1sen!2sin!4v1712573783888!5m2!1sen!2sin"
+                            width="100%"
+                            height="100%"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
