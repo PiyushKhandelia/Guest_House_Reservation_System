@@ -111,24 +111,21 @@
             </select><br>
 
             <label for="date" id="datefL">Date (From):<sup>*</sup></label><br>
-            <input type="datetime-local" id="dateF" name="date"><br>
+            <input type="datetime-local" id="dateF" name="date" required><br>
 
             <label for="date" id="datetL">Date (To):<sup>*</sup></label><br>
-            <input type="datetime-local" id="dateTo" name="date"><br>
+            <input type="datetime-local" id="dateTo" name="date" required><br>
 
             <label for="duration" id="durationL">Duration (Days):</label><br>
-                <input type="text" id="duration" name="duration" readonly><br>
+            <input type="text" id="duration" name="duration" readonly><br>
 
-                <label for="curr_date">Current Date and Time:</label>
-                <input type="datetime-local" id="curr_date" name="curr_date" readonly>
-                
-                <label for="room_type" id="captchaL">Captcha:<sup>*</sup></label><br>
-                <!--Inupt Visible Captch from Js-->
-                <input type="text" id="textInput" placeholder="Enter Captcha">
-                <!--Load Captch-->
-                <input class="capt" id="capt" readonly="readonly">
-                <!--Refresh-->
-                <span id="refresh"><i class="fa-solid fa-rotate" onclick="cap()"></i></span>
+            <label for="curr_date">Current Date and Time:</label>
+            <input type="datetime-local" id="curr_date" name="curr_date" readonly>
+
+            <label for="captcha" id="captchaL">Captcha:<sup>*</sup></label><br>
+            <input type="text" id="textInput" placeholder="Enter Captcha" required>
+            <input class="capt" id="capt" readonly="readonly">
+            <span id="refresh"><i class="fa-solid fa-rotate" onclick="cap()"></i></span>
 
             <button type="submit">Book Now</button>
         </form>
@@ -157,37 +154,31 @@
 
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                const bookingID = document.getElementById('booking_id').value;
                 const formData = new FormData(form);
-                const data = Object.fromEntries(formData);
-                data.bookingID = bookingID;
+                const data = Object.fromEntries(formData.entries());
 
-                await bookNow(data);
+                try {
+                    const response = await fetch('http://localhost:3000/api/bookings', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+                    if (response.ok) {
+                        alert('Booking successful! Your Booking ID is ' + result.bookingID);
+                        form.reset();
+                    } else {
+                        alert('Booking failed: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error("Error submitting booking:", error);
+                    alert("An error occurred during booking.");
+                }
             });
         });
-
-        async function bookNow(data) {
-            try {
-                const response = await fetch('http://localhost:3000/api/bookings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
-                    location.reload();
-                } else {
-                    alert('Failed to book: ' + result.message);
-                }
-            } catch (error) {
-                console.error("Error while booking:", error);
-                alert("Error while booking.");
-            }
-        }
     </script>
 </body>
 </html>
