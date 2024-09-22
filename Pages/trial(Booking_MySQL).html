@@ -111,10 +111,10 @@
             </select><br>
 
             <label for="date" id="datefL">Date (From):<sup>*</sup></label><br>
-                <input type="datetime-local" id="dateF" name="date"><br>
+            <input type="datetime-local" id="dateF" name="date"><br>
 
-                <label for="date" id="datetL">Date (To):<sup>*</sup></label><br>
-                <input type="datetime-local" id="dateTo" name="date"><br>
+            <label for="date" id="datetL">Date (To):<sup>*</sup></label><br>
+            <input type="datetime-local" id="dateTo" name="date"><br>
 
             <label for="duration" id="durationL">Duration (Days):</label><br>
                 <input type="text" id="duration" name="duration" readonly><br>
@@ -183,27 +183,27 @@
         });
 
         async function bookNow(data) {
-            try {
-                const response = await fetch('http://localhost:3000/api/bookings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
+    try {
+        const response = await fetch('http://localhost:3000/api/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
 
-                const result = await response.json();
-                if (result.success) {
-                    alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
-                    // Optionally, reset the form or redirect
-                } else {
-                    alert('Failed to book: ' + result.message);
-                }
-            } catch (error) {
-                console.error("Error while booking:", error);
-                alert("Error while booking.");
-            }
+        const result = await response.json();
+        if (result.success) {
+            alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
+            location.reload(); // Refresh the page after successful booking
+        } else {
+            alert('Failed to book: ' + result.message);
         }
+    } catch (error) {
+        console.error("Error while booking:", error);
+        alert("Error while booking.");
+    }
+}
     </script>
 </body>
 </html>
