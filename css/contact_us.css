@@ -82,3 +82,12 @@
 .map-div iframe {
 	border: 0;
 }
+
+/* For mobile phones */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    .contact {
+        top: 100%;
+	    display: flex;
+	    width: 80%;
+    }
+}

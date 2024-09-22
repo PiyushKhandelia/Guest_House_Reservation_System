@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Favicon (Logo in Tab Bar)-->
+  <link rel = "icon" type = "image/x-icon" href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/Mesro-logo.png">
+  <title>Mesro - Virtual Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/Mesro-bg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .chatbox {
+      width: 50%;
+      height: 80%;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0.9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: rgba(226, 232, 239, 0.95);
+      font: small-caps bold 15px/30px Georgia, serif;
+    }
+
+    .chat-output {
+      flex-grow: 1;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    .chat-input-section {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background-color: #f8f8f8;
+      justify-content: space-around;
+    }
+
+    .chat-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .chat-buttons button {
+      padding: 10px;
+      background-color: white;
+      color: black;
+      border: 2px solid #007bff;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font: small-caps bold 15px/30px Georgia, serif;
+      transition: background-color 0.3s ease;
+    }
+
+    .chat-buttons button:hover {
+      background-color: #f0f0f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chatbox">
+      <div id="chat-output" class="chat-output"></div>
+      <div id="chat-buttons" class="chat-buttons">
+        <!-- Dynamic buttons will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let chatOutput = document.getElementById('chat-output');
+    let chatButtons = document.getElementById('chat-buttons');
+
+    let guestHouses = {
+      "IGH": {
+        rooms: [
+          { type: "Small", description: "One Queen size Bed", occupancy: {single: 1000, double: 1200} },
+          { type: "Mezzanine", description: "Two single beds", occupancy: {single: 1200, double: 1500} },
+          { type: "Large", description: "Two single beds", occupancy: {single: 1500, double: 2000} },
+          { type: "Suites", description: "Luxury suite", occupancy: {double: 2500} }
+        ]
+      },
+      "OGH": {
+        rooms: [
+          { type: "Large", description: "Double Bed Room", occupancy: {single: 1200, double: 1500} },
+          { type: "Suites", description: "Luxury suite", occupancy: {double: 2500} }
+        ]
+      }
+    };
+
+    let chatbotState = 0;
+    let userPreferences = {};
+    let filteredRooms = [];
+
+    function addButton(text, onClickHandler) {
+      let button = document.createElement('button');
+      button.innerText = text;
+      button.onclick = onClickHandler;
+      chatButtons.appendChild(button);
+    }
+
+    function addRestartButton() {
+      chatButtons.innerHTML = '';
+      addButton('Restart Chat', () => restartChat());
+    }
+
+    function addBookNowButton() {
+      chatButtons.innerHTML = '';
+      addButton('Book Now', () => confirmBooking());
+    }
+
+    function restartChat() {
+      chatOutput.innerHTML = '';
+      chatButtons.innerHTML = '';
+      userPreferences = {};
+      filteredRooms = [];
+      askForGuestHouse(); // Restart the conversation
+    }
+
+    function displayUserInput(input) {
+      chatOutput.innerHTML += `<div><strong>You:</strong> ${input}</div>`;
+    }
+
+    function showLoading() {
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Processing your request...</div>`;
+    }
+
+    function askForGuestHouse() {
+      chatButtons.innerHTML = ''; // Clear previous buttons
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Hi, I'm Mesro! Let's help you find a room. Please choose a guest house (IGH or OGH).</div>`;
+      addButton('IGH', () => handleGuestHouse('IGH'));
+      addButton('OGH', () => handleGuestHouse('OGH'));
+    }
+
+    function handleGuestHouse(guestHouse) {
+      userPreferences.guestHouse = guestHouse;
+      displayUserInput(guestHouse);
+      askForRoomType();
+    }
+
+    function askForRoomType() {
+      chatButtons.innerHTML = '';
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Choose a room type.</div>`;
+      
+      let availableRooms = guestHouses[userPreferences.guestHouse].rooms;
+      
+      availableRooms.forEach(room => {
+        addButton(room.type, () => handleRoomType(room.type));
+      });
+    }
+
+    function handleRoomType(roomType) {
+      userPreferences.roomType = roomType;
+      displayUserInput(roomType);
+      askForOccupancy();
+    }
+
+    function askForOccupancy() {
+      chatButtons.innerHTML = '';
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Choose occupancy (Single or Double).</div>`;
+      addButton('Single', () => handleOccupancy('single'));
+      addButton('Double', () => handleOccupancy('double'));
+    }
+
+    function handleOccupancy(occupancy) {
+      if (userPreferences.roomType === 'Suites' && occupancy === 'single') {
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Suites can only be booked with double occupancy.</div>`;
+        return; // Don't proceed with Single occupancy for Suites
+      }
+
+      userPreferences.occupancy = occupancy;
+      displayUserInput(occupancy.charAt(0).toUpperCase() + occupancy.slice(1)); // Capitalize 'single' or 'double'
+      askForPriceRange();
+    }
+
+    function askForPriceRange() {
+      chatButtons.innerHTML = '';
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Choose your price range.</div>`;
+      addButton('Below 1000', () => handlePriceRange('below1000'));
+      addButton('1000 - 2000', () => handlePriceRange('1000-2000'));
+      addButton('2000 - 3000', () => handlePriceRange('2000-3000'));
+      addButton('Above 3000', () => handlePriceRange('above3000'));
+    }
+
+    function handlePriceRange(priceRange) {
+      userPreferences.priceRange = priceRange;
+      displayUserInput(priceRange.replace(/([0-9]+)/g, ' $1 ').replace('-', ' to ')); // Format the range nicely
+      showLoading();
+      setTimeout(() => displayRoomOptions(), 1000); // Simulate processing delay
+    }
+
+    function displayRoomOptions() {
+      filteredRooms = suggestRoom(userPreferences);
+
+      if (filteredRooms.length > 0) {
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Here are your options:</div>`;
+        displayTable(filteredRooms);
+        addBookNowButton(); // Add Book Now button
+      } else {
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> There is no room matching your preferences.</div>`;
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Please adjust your preferences.</div>`;
+        addRestartButton();
+      }
+    }
+
+    function suggestRoom(preferences) {
+      let rooms = guestHouses[preferences.guestHouse].rooms;
+      return rooms.filter(room => {
+        let price = room.occupancy[preferences.occupancy];
+        if (!price) return false;
+
+        switch (preferences.priceRange) {
+          case 'below1000':
+            return price < 1000;
+          case '1000-2000':
+            return price >= 1000 && price <= 2000;
+          case '2000-3000':
+            return price > 2000 && price <= 3000;
+          case 'above3000':
+            return price > 3000;
+          default:
+            return true;
+        }
+      });
+    }
+
+    function displayTable(rooms) {
+      let table = '<table><thead><tr><th>Type</th><th>Description</th><th>Single Occupancy</th><th>Double Occupancy</th></tr></thead><tbody>';
+      rooms.forEach(room => {
+        table += `<tr>
+          <td>${room.type}</td>
+          <td>${room.description}</td>
+          <td>${room.occupancy.single || '-'}</td>
+          <td>${room.occupancy.double || '-'}</td>
+        </tr>`;
+      });
+      table += '</tbody></table>';
+      chatOutput.innerHTML += table;
+    }
+
+    function confirmBooking() {
+      chatButtons.innerHTML = '';
+      if (filteredRooms.length === 1) {
+        let room = filteredRooms[0];
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Are you sure you want to book the ${room.type} room at ${userPreferences.guestHouse} for ${room.occupancy[userPreferences.occupancy]}?</div>`;
+        addButton('Yes', () => showBookingForm(room));
+        addButton('No', () => restartChat());
+      } else {
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Please select a room to book:</div>`;
+        filteredRooms.forEach(room => {
+          addButton(`${room.type} - ${room.occupancy[userPreferences.occupancy]}`, () => showBookingForm(room));
+        });
+      }
+    }
+
+    function showBookingForm(room) {
+      chatOutput.innerHTML = `
+        <div><strong>Mesro:</strong> Please provide your booking details:</div>
+        <form id="booking-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required><br>
+          <label for="mobile">Mobile No:</label>
+          <input type="text" id="mobile" required><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" required><br>
+          <label for="address">Address:</label>
+          <input type="text" id="address" required><br>
+          <label for="checkin">Check-In Date:</label>
+          <input type="date" id="checkin" required><br>
+          <label for="checkout">Check-Out Date:</label>
+          <input type="date" id="checkout" required><br>
+          <input type="button" value="Submit" onclick="processBookingDetails('${room.type}', '${room.occupancy[userPreferences.occupancy]}')">
+        </form>
+      `;
+      chatButtons.innerHTML = '';
+    }
+
+    function processBookingDetails(roomType, price) {
+      let name = document.getElementById('name').value;
+      let mobile = document.getElementById('mobile').value;
+      let email = document.getElementById('email').value;
+      let address = document.getElementById('address').value;
+      let checkin = document.getElementById('checkin').value;
+      let checkout = document.getElementById('checkout').value;
+
+      // Validate form inputs
+      if (!name || !mobile || !email || !address || !checkin || !checkout) {
+        chatOutput.innerHTML += `<div><strong>Mesro:</strong> Please fill out all fields.</div>`;
+        return;
+      }
+
+      // Display confirmation message
+      chatOutput.innerHTML = `
+        <div><strong>Mesro:</strong> Thank you for your booking! Here are the details:</div>
+        <div><strong>Name:</strong> ${name}</div>
+        <div><strong>Mobile No:</strong> ${mobile}</div>
+        <div><strong>Email:</strong> ${email}</div>
+        <div><strong>Address:</strong> ${address}</div>
+        <div><strong>Check-In Date:</strong> ${checkin}</div>
+        <div><strong>Check-Out Date:</strong> ${checkout}</div>
+        <div><strong>Room Type:</strong> ${roomType}</div>
+        <div><strong>Guest House:</strong> ${userPreferences.guestHouse}</div>
+        <div><strong>Occupancy:</strong> ${userPreferences.occupancy.charAt(0).toUpperCase() + userPreferences.occupancy.slice(1)}</div>
+        <div><strong>Price:</strong> ${price}</div>
+      `;
+      chatOutput.innerHTML += `<div><strong>Mesro:</strong> Your booking is now confirmed. We look forward to your stay!</div>`;
+      addRestartButton();
+    }
+
+    // Start the chatbot interaction
+    askForGuestHouse();
+  </script>
+</body>
+</html>

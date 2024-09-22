@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+    <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
+    <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/booking.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+</head>
+<body>
+    <!-- Rules section -->
+    <div id="rules_section" class="rules_section" style="display: block;">
+        <p>Please read the rules before proceeding:</p>
+        <ul>
+            <li>Rule 1: A maximum of 2 guests is allowed in 1 room.</li>
+            <li>Rule 2: You can book a room for not more than 3 days.</li>
+            <li>Rule 3: You have to either Check-In or inform us for delay within 3 hours of Checking-In Time or your booking will be discarded.</li>
+        </ul>
+        <p>Guest House Policies: <a href="https://www.bitmesra.ac.in/UploadedDocuments/pratyush_869/files/Guest_House/guest_house_policy.pdf">Click here</a></p>
+        <button onclick="showBookingForm()" class="alert">Continue</button>
+    </div>
+    <!-- Header -->
+    <div class="header_div">
+        <div class="left_div"></div>
+        <div class="right_div">
+            <div class="nav">
+                <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/booking.html"><button>Book Now</button></a>
+                <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/my_bookings.html"><button>My Bookings</button></a>
+                <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Logout</button></a>
+            </div>
+        </div>
+    </div>
+    <!-- Booking form section -->
+    <div id="booking_form" class="booking_form" style="display: none;">
+        <p class="heading">Book Now</p>
+        <form id="bookingform">
+            <label for="booking_id">Booking ID:</label>
+            <input type="text" id="booking_id" name="booking_id" readonly>
+
+            <label for="name">Name:<sup>*</sup></label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:<sup>*</sup></label><br>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="inst_email">Institute Email:</label><br>
+            <input type="email" id="inst_email" name="inst_email"><br>
+
+            <label for="phone">Phone:<sup>*</sup></label><br>
+            <input type="tel" id="phone" name="phone" placeholder="12345 67890" required><br>
+
+            <label for="alt_phone">Alternate No.:</label><br>
+            <input type="tel" id="alt_phone" name="alt_phone" placeholder="12345 67890"><br>
+
+            <label for="category">Category:<sup>*</sup></label><br>
+            <select id="category" name="category" required>
+                <option value="">You are:</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Others">Others</option>
+            </select><br>
+
+            <label for="college_id">College Unique ID No.:</label><br>
+            <input type="text" id="college_id" name="college_id"><br>
+
+            <label for="id_proof">ID Proof:<sup>*</sup></label><br>
+            <select id="id_proof" name="id_proof" required>
+                <option value="">Select ID Proof</option>
+                <option value="Aadhar Card">Aadhar Card</option>
+                <option value="Driving License">Driving License</option>
+            </select><br>
+
+            <label for="id_proof_number">ID Proof No.:<sup>*</sup></label><br>
+            <input type="text" id="id_proof_number" name="id_proof_number" required><br>
+
+            <label for="gender">Gender:<sup>*</sup></label><br>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Rather not to Say">Rather not to Say</option>
+            </select><br>
+
+            <label for="permanent_address_location">Permanent Address Location:<sup>*</sup></label><br>
+            <input type="text" id="permanent_address_location" name="permanent_address_location" required><br>
+
+            <label for="permanent_address_pin">PIN Code:<sup>*</sup></label><br>
+            <input type="text" id="permanent_address_pin" name="permanent_address_pin" required><br>
+
+            <label for="permanent_address_state">State:<sup>*</sup></label><br>
+            <input type="text" id="permanent_address_state" name="permanent_address_state" required><br>
+
+            <label for="permanent_address_area">Area:<sup>*</sup></label><br>
+            <input type="text" id="permanent_address_area" name="permanent_address_area" required><br>
+
+            <label for="guest_house">Select Guest House:<sup>*</sup></label>
+            <select id="guest_house" name="guest_house" required>
+                <option value="">Guest House</option>
+                <option value="igh">IGH</option>
+                <option value="ogh">OGH</option>
+            </select><br>
+
+            <label for="room_type">Room Type:<sup>*</sup></label>
+            <select id="room_type" name="room_type" required></select><br>
+
+            <label for="occupancy">Occupancy:<sup>*</sup></label>
+            <select id="occupancy" name="occupancy" required>
+                <option value="double">Double</option>
+                <option value="single">Single</option>
+            </select><br>
+
+            <label for="date" id="datefL">Date (From):<sup>*</sup></label><br>
+                <input type="datetime-local" id="dateF" name="date"><br>
+
+                <label for="date" id="datetL">Date (To):<sup>*</sup></label><br>
+                <input type="datetime-local" id="dateTo" name="date"><br>
+
+            <label for="duration" id="durationL">Duration (Days):</label><br>
+                <input type="text" id="duration" name="duration" readonly><br>
+
+                <label for="curr_date">Current Date and Time:</label>
+                <input type="datetime-local" id="curr_date" name="curr_date" readonly>
+                
+                <label for="room_type" id="captchaL">Captcha:<sup>*</sup></label><br>
+                <!--Inupt Visible Captch from Js-->
+                <input type="text" id="textInput" placeholder="Enter Captcha">
+                <!--Load Captch-->
+                <input class="capt" id="capt" readonly="readonly">
+                <!--Refresh-->
+                <span id="refresh"><i class="fa-solid fa-rotate" onclick="cap()"></i></span>
+
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+    <script src="https://kit.fontawesome.com/a81980af38.js" crossorigin="anonymous"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/updateRooms.js"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/refresh_captcha.js"></script>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/booking.js"></script>
+    <script>
+        function showBookingForm() {
+            document.getElementById('rules_section').style.display = 'none';
+            document.getElementById('booking_form').style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            const form = document.getElementById('bookingform');
+
+            // Fetch last booking ID on page load
+            try {
+                const response = await fetch('http://localhost:3000/api/lastBookingID');
+                const result = await response.json();
+                document.getElementById('booking_id').value = result.bookingID; // Set the booking ID
+            } catch (error) {
+                console.error("Error fetching last booking ID:", error);
+                alert("Error fetching booking ID.");
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const bookingID = document.getElementById('booking_id').value; // Get booking ID from the form
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                data.bookingID = bookingID; // Add booking ID to the data
+
+                await bookNow(data); // Pass the data including booking ID
+            });
+
+            // Populate room type based on guest house selection
+            document.getElementById('guest_house').addEventListener('change', function () {
+                const roomTypeSelect = document.getElementById('room_type');
+                roomTypeSelect.innerHTML = ''; // Clear existing options
+
+                const guestHouse = this.value;
+                if (guestHouse === 'igh') {
+                    roomTypeSelect.innerHTML += `<option value="Single Room">Single Room</option>`;
+                    roomTypeSelect.innerHTML += `<option value="Double Room">Double Room</option>`;
+                } else if (guestHouse === 'ogh') {
+                    roomTypeSelect.innerHTML += `<option value="Deluxe Room">Deluxe Room</option>`;
+                    roomTypeSelect.innerHTML += `<option value="Standard Room">Standard Room</option>`;
+                }
+            });
+        });
+
+        async function bookNow(data) {
+            try {
+                const response = await fetch('http://localhost:3000/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
+                    // Optionally, reset the form or redirect
+                } else {
+                    alert('Failed to book: ' + result.message);
+                }
+            } catch (error) {
+                console.error("Error while booking:", error);
+                alert("Error while booking.");
+            }
+        }
+    </script>
+</body>
+</html>

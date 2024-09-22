@@ -1,0 +1,315 @@
+<html>
+    <head>
+        <title>Guest House Reservation System</title>
+        <!--Favicon (Logo in Tab Bar)-->
+        <link rel = "icon" type = "image/x-icon" href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
+        <!--Imorting Viewport settings-->
+        <meta charset = "utf-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <!--Imorting Body CSS File-->
+        <style>
+            /* Base styles for all screen sizes */
+
+/* Body styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(226, 232, 239);
+}
+
+/* Header Division Styles */
+.header_div {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 125px;
+    background-color: rgb(255, 255, 255);
+    z-index: 9999;
+}
+
+/* Left Division Styles */
+.left_div {
+    width: 25vw;
+    height: 80%;
+    background-image: url("https://www.bitmesra.ac.in/SiteLogo/BIT-Mesra.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+/* Right Division Styles */
+.right_div {
+    width: 58vw;
+    height: 120px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 10px;
+    float: right;
+}
+
+/* Navigation Styles */
+.nav {
+display: flex;
+justify-content: space-around;
+align-items: center;
+height: 100%;
+}
+
+/* Navigation Button Styles */
+.nav button {
+            width: 12vw;
+            height: 90%;
+            font: small-caps bold 20px/35px Georgia, serif;
+            background-color: rgb(255, 255, 255);
+            border: none;
+            border-right: 5px black solid;
+            cursor: pointer;
+            transition: color .5s;
+        }
+
+/* Hover Effect for Navigation Buttons */
+.nav button:hover {
+            color: #262525;
+        }
+
+/*Mesro*/
+.nav .mesro {
+            width: 70px;
+            height: 70px;
+            background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/Mesro-logo.png");
+            background-size: cover;
+            background-position: center;
+            border: none;
+            cursor: pointer;
+            transition: opacity .5s;
+        }
+
+        .nav .mesro:hover {
+            opacity: 0.8;
+        }
+
+/* Seperator Styles */
+.seperator {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 125px;
+}
+
+/* Button Styles in Seperator Section */
+.seperator section {
+    width: 500px;
+    display: inline-block;
+    border: none;
+    height: 500px;
+    margin: 25px;
+    background-color: whitesmoke;
+    padding: 0;
+}
+
+/* Button Styles in Seperator Section */
+.seperator section a {
+    text-decoration: none;
+}
+
+/* Styles for Images in Guest House Sections */
+.IGH, .OGH {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.IGH {
+    background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/IGH/igh.jpg");
+    color: rgb(255, 255, 255);
+    font: small-caps bold 30px/50px Georgia, serif;
+    text-align: center; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}                     
+
+.OGH {
+    background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
+    color: rgb(255, 255, 255);
+    font: small-caps bold 30px/50px Georgia, serif;
+    text-align: center; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* Hover Effect for Guest House Sections */
+.IGH:hover, .OGH:hover {
+    opacity: 0.5;
+    background-color: whitesmoke;
+}
+
+/* For mobile phones */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    
+    .left_div {
+        width: 32%;
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+
+    .right_div {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+        width: 100vw;
+        height: 35%;
+        float: none;
+    }
+
+    /* Navigation Button Styles */
+    .nav button {
+        width: 24vw;
+        padding-bottom: 45px;
+        font: small-caps bold 12px/22px Georgia, serif;
+        border-right: 3px black solid; 
+        border-bottom: 3px black solid;
+        cursor: pointer;
+        transition: color .5s;
+    }
+
+    .seperator {
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+        margin-top: 150px;
+    }
+    
+    .seperator section {
+        width: 275px;
+        display: inline;
+        border: none;
+        height: 275px;
+        margin: 25px;
+        background-color: whitesmoke;
+        padding: 0;
+    }
+
+    .seperator section a {
+        text-decoration: none;
+    }
+    
+    /* Styles for Images in Guest House Sections */
+    .IGH, .OGH {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: rgb(255, 255, 255);
+        font: small-caps bold 30px/50px Georgia, serif;
+    }
+    
+    .IGH {
+        background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/IGH/igh.jpg");
+    }
+    
+    .OGH {
+        background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
+    }
+}
+
+/* For Tablets */
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+
+    .left_div {
+        width: 17vw;
+        margin-left: 5px;
+        margin-right: 0;
+    }
+
+    .right_div {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+        width: 81vw;
+        float: right;
+    }
+
+    /* Navigation Button Styles */
+    .nav button {
+        width: 20vw;
+        height: 45%;
+        font: small-caps bold 12px/22px Georgia, serif;
+        border-right: 3px black solid; 
+        border-bottom: 3px black solid;
+        cursor: pointer;
+        transition: color .5s;
+    }
+
+    .seperator {
+        display: flex;
+        flex-direction: column;
+        text-align: center; 
+        margin-top: 150px;
+    }
+    
+    .seperator section {
+        width: 500px;
+        display: inline;
+        border: none;
+        height: 500px;
+        margin: 25px;
+        background-color: whitesmoke;
+        padding: 0;
+    }
+    
+    /* Styles for Images in Guest House Sections */
+    .IGH, .OGH {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: rgb(255, 255, 255);
+        font: small-caps bold 30px/50px Georgia, serif;
+    }
+    
+    .IGH {
+        background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/IGH/igh.jpg");
+    }
+    
+    .OGH {
+        background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
+    }
+}
+        </style>
+    </head>
+    <body>
+        <div class = " header_div ">  
+            <div class = "left_div"></div>
+            <div class = "right_div">
+                <div class = "nav">
+                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/index.html"><button>Home</button></a>
+                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/gallery.html"><button>Gallery</button></a>
+                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/contact_us.html"><button>Contact Us</button></a>
+                    <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button>Login - SignUp</button></a>
+                    <a href="http://127.0.0.1:5500/Pages/trial.html"><button class="mesro"></button></a>
+                </div>
+            </div>
+        </div>
+        <div class = "seperator">
+            <section>
+                <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/ogh.html">
+                    <div class = "OGH">OGH<br>(Old Guest House)</div>
+                </a>    
+            </section>
+            <section>
+                <a href = "https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/igh.html">
+                    <div class = "IGH">IGH<br>(International Guest House)</div>
+                </a>
+            </section>
+        </div>
+    </body>
+</html>

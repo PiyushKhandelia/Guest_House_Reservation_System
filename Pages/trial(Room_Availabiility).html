@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest House Room Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+        }
+        select, input[type="text"], input[type="email"], input[type="tel"], input[type="date"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        .room-calendar {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #00acc1;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calendar-header {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Guest House Room Reservation</h2>
+
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="guest-house">Select Guest House:</label>
+                <select id="guest-house" required>
+                    <option value="IGH">International Guest House (IGH)</option>
+                    <option value="OGH">Old Guest House (OGH)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="room-type">Select Room Type:</label>
+                <select id="room-type" required>
+                    <option value="Single"><Small></Small></option>
+                    <option value="Double">Double</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="occupancy">Select Occupancy:</label>
+                <select id="occupancy" required>
+                    <option value="Single">Single</option>
+                    <option value="Double">Double</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="booking-date">Select Booking Date:</label>
+                <input type="date" id="booking-date" required>
+            </div>
+
+            <h3 class="calendar-header">Available Rooms</h3>
+            <div id="calendar" class="room-calendar"></div>
+
+            <button type="submit">Make Reservation</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const bookingData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                guestHouse: document.getElementById('guest-house').value,
+                roomType: document.getElementById('room-type').value,
+                occupancy: document.getElementById('occupancy').value,
+                bookingDate: document.getElementById('booking-date').value,
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(bookingData),
+                });
+                const data = await response.json();
+                document.getElementById('result').innerText = data.success ? 
+                    "Booking Successful! Booking ID: " + data.bookingID : 
+                    "Booking Failed.";
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = "Error occurred while booking.";
+            }
+        });
+    </script>
+</body>
+</html>

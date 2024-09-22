@@ -1,137 +1,279 @@
-<!DOCTYPE html>
 <html>
     <head>
         <link rel="icon" type="image/x-icon" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/bit_logo.png">
-        <!--<link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/ogh.css">-->
         <link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/homepage.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>OGH</title>
+        <!--<link rel="stylesheet" href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/css/login_signup.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LOGIN/SIGNUP</title>
         <style>
-            /* Your existing styles */
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}   
+
+body {
+    background-color: rgb(226, 232, 239);
 }
 
-#background {
-    background-image: url("https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/ogh.jpg");
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+.container {
+    height: 560px;
+    width: 500px;
+    left: 35%;
+    margin-top: 175px;
+    background-color: white;
+    box-shadow: 8px 8px 20px rgb(128, 128, 128);
+    position: relative;
+    overflow: hidden;
 }
 
-#content {
+.slider {
+    height: 60px;
+    width: 150px;
+    border-radius: 50px;
+    background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
     position: absolute;
-    top: 70%;
-    opacity: 0.8;
-    background-color: rgb(200, 221, 244);
-    max-width: 100%;
-    text-align: center;
-    padding-left: 25px;
-    padding-right: 25px;
+    top: 20px;
+    left: 100px;
+    transition: all 0.5s ease-in-out;
 }
 
-.heading {
-    font: small-caps bold 40px/70px Georgia, serif;
+.moveslider {
+    left: 250px;
 }
 
-.body {
-    font-size: 24px;
-    font-family: monospace;
-    font-weight: bolder;
+.btn {
+    height: 60px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 10px 10px 30px rgb(250, 4, 4);
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-}
-
-.grid-item {
-    padding: 20px;
-    text-align: center;
-}
-
-.grid-item img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 5px;
-}
-
-.detail {
-    text-align: center; 
-    flex: 1; 
-    font-size: 22px;
-}
-
-.contact .details {
-    text-align: center;
-}
-
-.mail {
-    color: #fff;
-    text-decoration: none;
-}
-
-.detail label { 
-    display: block; 
-    margin-bottom: 8px; 
-}
-
-.detail { 
-    margin-bottom: 16px; 
-} 
-
-.detail label { 
-    margin-right: 16px; 
-} 
-
-.map-div { 
-    flex: 1; 
-    background-color: #eee; 
-}
-
-.map-div iframe { 
-    border: 0;
-}
-
-/* Adjusted footer styles */
-.footer {
-    background-color: #000;
-    color: #fff;
-    width: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex; 
-    margin-top: 25px;
-}
-
-.book {
-    margin: 0 auto;
-    font: small-caps bold 20px/35px Georgia, serif;
-    width: 45%;
-    padding: 12px;
-    background-color: #ff4d4d;
-    color: white;
+.login, .signup {
+    font: small-caps 25px/45px Georgia, serif;
     border: none;
-    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    position: relative;
     cursor: pointer;
 }
 
-.book:hover {
-    background-color: #ff6666;
+.form-section {
+    margin-top: -50px;
+    height: 550px;
+    width: 1500px;
+    padding: 20px 0;
+    display: flex;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    left: 0px;
+}
+
+.form-section-move {
+    left: -500px;
+}
+
+.login-box, .signup-box {
+    height: 100%;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 40px;
+}
+
+.login-box {
+    gap: 20px;
+}
+
+.signup-box {
+    gap: 10px;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.ele {
+    height: 60px;
+    width: 100%;
+    /* Ensures full width */
+    outline: none;
+    border: none;
+    /* Remove default border from previous change */
+    color: rgb(77, 77, 77);
+    background-color: rgb(240, 240, 240);
+    border-radius: 50px;
+    padding: 10px 30px;
+    /* Adjust padding to account for border-radius */
+    font-size: 18px;
+    position: relative;
+}
+
+.password-wrapper {
+    position: relative;
+    height: 60px;
+    width: calc(100% - 50px);
+    /* Adjust width as needed */
+    margin-bottom: 20px;
+    /* Add margin bottom for spacing */
+}
+
+.password-wrapper input {
+    height: 60px;
+    width: calc(100% - 50px);
+}
+
+.password-wrapper i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 60px;
+}
+
+.ele i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.clkbtn {
+    height: 75px;
+    width: 250px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    font: small-caps 25px/45px Georgia, serif;
+}
+
+.small-btn {
+    height: 75px;
+    width: 250px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
+    font: small-caps 25px/45px Georgia, serif;
+    border: none;
+    margin-top: 10px;
+}
+
+.google-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: small-caps bold 25px/45px Georgia, serif;
+    color: black;
+    /* Text color */
+}
+
+.google-button i {
+    font-size: 36px;
+    color: #EA4335;
+    margin-right: 10px;
+}
+
+/* For mobile phones */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    
+    .container {
+        height: 600px;
+        width: 300px;
+        margin-top: 175px;
+        margin-left: -100px;
+        background-color: white;
+        box-shadow: 8px 8px 20px rgb(128, 128, 128);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn {
+        height: 60px;
+        width: 120px;
+        box-shadow: 10px 10px 30px rgb(250, 4, 4);
+        border-radius: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .login, .signup {
+        font: small-caps 15px/30px Georgia, serif;
+        border: none;
+        outline: none;
+        margin-right: 100px;
+        background-color: transparent;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .slider {
+        height: 60px;
+        width: 120px;
+        border-radius: 50px;
+        background-image: linear-gradient(to right, rgb(250, 4, 4), rgb(250, 4, 4));
+        position: absolute;
+        top: 20px;
+        margin: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .moveslider {
+        left: 120px;
+    }
+    
+    .form-section {
+        margin-top: -50px;
+        height: 550px;
+        width: 1500px;
+        padding: 20px 0;
+        display: flex;
+        position: relative;
+        transition: all 0.5s ease-in-out;
+        left: 0px;
+    }
+    
+    .form-section-move {
+        left: -500px;
+    }
+    
+    .login-box, .signup-box {
+        height: 100%;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 40px;
+    }
+    
+    .login-box {
+        gap: 20px;
+    }
+    
+    .signup-box {
+        gap: 10px;
+    }
+
 }
         </style>
     </head>
@@ -147,54 +289,52 @@
                 </div>
             </div>
         </div>
-        <div id="background"></div>
-        <div id="content">
-            <p class = "heading">Old Guest House (OGH) at BIT Mesra:</p>
-            <p class = "body">
-                The Old Guest House at BIT Mesra seamlessly blends colonial and indigenous design elements, offering guests a nostalgic yet comfortable retreat. Each room exudes timeless elegance with antique furnishings, while attentive staff uphold the principle of 'Atithi Devo Bhava' to ensure a memorable stay. Culinary offerings feature a fusion of traditional and modern flavors. Surrounded by lush gardens, ponds, and tranquil lakesides, OGH provides a serene escape for introspection and relaxation. It embodies the institute's rich history and culture, inviting guests on a journey of discovery and nostalgia.
-            </p>
-            <p class = "heading">Types of Rooms:</p>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <img src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/16.jpg" alt="Image 1">
-                    <p class="body">Single Room</p>
+        <div class="background">
+            <!-- container div -->
+            <div class="container">
+                <!-- upper button section to select the login or signup form -->
+                <div class="slider"></div>
+                <div class="btn">
+                    <button class="login">Login</button>
+                    <button class="signup">Signup</button>
                 </div>
-                <div class="grid-item">
-                    <img src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Images/OGH/14.jpg" alt="Image 2">
-                    <p class="body">Suites</p>
-                </div>
-            </div>
-            <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/login_signup.html"><button class="book">Book Now</button></a>
-            <div class="footer">
-                <div class="detail">
-                    <h1>Contact:</h1>
-                    <div class="details">
-                        <label for="emails">
-                            <a href="mailto: emailid@example.com" class="mail">
-                                <i class="fa fa-solid fa-envelope" style="margin: 3px;"></i>
-                                emailid@gmail.com
-                            </a>
-                        </label>
-                        <label for="contact_no">
-                            <i class="fa fa-solid fa-phone" style="margin: 3px;"></i>
-                            1234567890
-                        </label>
-                        <label for="address">
-                            <i class="fa fa-map-marker" style="margin: 3px;"></i>
-                            Mesra, Jharkhand - 835215
-                        </label>
+                <!-- Form section that contains the login and the signup form -->
+                <div class="form-section">
+                    <!-- login form -->
+                    <div class="login-box">
+                        <input type="email" class="email ele" id="loginemail" placeholder="Email">
+                        <div class="password-wrapper">
+                            <input type="password" class="password ele" id="loginPassword" placeholder="Password">
+                            <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('loginPassword')"></i>
+                        </div>
+                        <button class="clkbtn" id="login-btn">Login</button>
+                        <a href="https://piyushkhandelia.github.io/Guest_House_Reservation_System/Pages/adminLogin.html"><button class="clkbtn">Admin Login</button></a>
+                        <div class="input">
+                            <button id="google-login-btn" class="google-button">
+                            <i class="fab fa-google"></i>Login with Google
+                          </button>
+                        </div>
                     </div>
-                </div>
-                <div class="map-div">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1830.6084739295106!2d85.44063353881113!3d23.416528994724946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDI0JzU5LjUiTiA4NcKwMjYnMzAuOSJF!5e0!3m2!1sen!2sin!4v1712573783888!5m2!1sen!2sin"
-                            width="100%"
-                            height="100%"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+                    <!-- signup form -->
+                    <div class="signup-box">
+                        <input type="text" class="name ele" placeholder="Name">
+                        <input type="email" class="email ele" id="signupemail" placeholder="Email">
+                        <div class="password-wrapper">
+                            <input type="password" class="password ele" id="signupPassword" placeholder="Password">
+                            <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('signupPassword')"></i>
+                        </div>
+                        <div class="password-wrapper">
+                            <input type="password" class="password ele" id="confirmPassword" placeholder="Confirm Password">
+                            <i class="fas fa-eye password-toggle-icon" onclick="togglePassword('confirmPassword')"></i>
+                        </div>
+                        <button class="clkbtn small-btn" id="google-signup-btn">SIGN UP</button>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
+    <script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/validation.js"></script>
+    <!--<script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/signup_with_google.js" defer type="module"></script>-->
+    <!--<script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/login_with_google.js" defer type="module"></script>-->
+    <!--<script src="https://piyushkhandelia.github.io/Guest_House_Reservation_System/js/login_using_google.js" defer type = "module"></script>-->
 </html>
