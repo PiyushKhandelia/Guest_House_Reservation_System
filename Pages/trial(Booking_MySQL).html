@@ -146,11 +146,10 @@
         document.addEventListener('DOMContentLoaded', async function () {
             const form = document.getElementById('bookingform');
 
-            // Fetch last booking ID on page load
             try {
                 const response = await fetch('http://localhost:3000/api/lastBookingID');
                 const result = await response.json();
-                document.getElementById('booking_id').value = result.bookingID; // Set the booking ID
+                document.getElementById('booking_id').value = result.bookingID;
             } catch (error) {
                 console.error("Error fetching last booking ID:", error);
                 alert("Error fetching booking ID.");
@@ -158,52 +157,37 @@
 
             form.addEventListener('submit', async function (e) {
                 e.preventDefault();
-                const bookingID = document.getElementById('booking_id').value; // Get booking ID from the form
+                const bookingID = document.getElementById('booking_id').value;
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData);
-                data.bookingID = bookingID; // Add booking ID to the data
+                data.bookingID = bookingID;
 
-                await bookNow(data); // Pass the data including booking ID
-            });
-
-            // Populate room type based on guest house selection
-            document.getElementById('guest_house').addEventListener('change', function () {
-                const roomTypeSelect = document.getElementById('room_type');
-                roomTypeSelect.innerHTML = ''; // Clear existing options
-
-                const guestHouse = this.value;
-                if (guestHouse === 'igh') {
-                    roomTypeSelect.innerHTML += `<option value="Single Room">Single Room</option>`;
-                    roomTypeSelect.innerHTML += `<option value="Double Room">Double Room</option>`;
-                } else if (guestHouse === 'ogh') {
-                    roomTypeSelect.innerHTML += `<option value="Deluxe Room">Deluxe Room</option>`;
-                    roomTypeSelect.innerHTML += `<option value="Standard Room">Standard Room</option>`;
-                }
+                await bookNow(data);
             });
         });
 
         async function bookNow(data) {
-    try {
-        const response = await fetch('http://localhost:3000/api/bookings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+            try {
+                const response = await fetch('http://localhost:3000/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
 
-        const result = await response.json();
-        if (result.success) {
-            alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
-            location.reload(); // Refresh the page after successful booking
-        } else {
-            alert('Failed to book: ' + result.message);
+                const result = await response.json();
+                if (result.success) {
+                    alert(`Booking successful! Your Booking ID is ${result.bookingID}`);
+                    location.reload();
+                } else {
+                    alert('Failed to book: ' + result.message);
+                }
+            } catch (error) {
+                console.error("Error while booking:", error);
+                alert("Error while booking.");
+            }
         }
-    } catch (error) {
-        console.error("Error while booking:", error);
-        alert("Error while booking.");
-    }
-}
     </script>
 </body>
 </html>
