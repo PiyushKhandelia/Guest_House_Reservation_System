@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
-import nltk
-from feedback_analyzer import FeedbackAnalyzer  # Ensure this is correctly implemented in feedback_analyzer.py
-from flask_cors import CORS
 import os
+from flask_cors import CORS
+from feedback_analyzer import FeedbackAnalyzer  # Ensure this is correctly implemented
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-# Path to the pickle file (relative path for portability)
-pickle_file_path = os.path.join(os.path.dirname(__file__), 'feedback_analyzer.pkl')
+# Path to the pickle file (local file path)
+pickle_file_path = os.path.join(os.path.dirname(__file__), 'models', 'feedback_analyzer.pkl')
 
 # Load the model from the pickle file
 try:
